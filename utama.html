@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>riyad store</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/magnific-popup.js/1.1.0/magnific-popup.min.css">
+    
+    <link rel="icon" href="assets/img/logo1.png">
+</head>
+    <style>
+        html {
+            height: 100%;
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            min-height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .content {
+            flex: 1;
+        }
+
+        .active {
+            color: #003281; /* Warna biru untuk menu aktif */
+        }
+        .nav-hidden {
+            transform: translateY(100%);
+            transition: transform 0.3s ease-in-out;
+        }
+        .nav-visible {
+            transform: translateY(0);
+            transition: transform 0.3s ease-in-out;
+        }
+
+        .transparent-input {
+            background: transparent;
+            border: 1px solid #ccc;
+            padding-right: 2.5rem;
+        }
+       
+        .amelia-text {
+            font-size: 1rem;
+            font-weight: bold;
+        }
+        .store-text {
+            font-size: 1rem;
+            font-weight: bold;
+            color: lightseagreen;
+        }
+        .button:hover .svg-icon {
+  animation: spin 2s linear infinite;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+}
+    </style>
+</head>
+
+<body class="bg-gray-900 text-white ">
+
+<!-- Header -->
+<header class="bg-gray-800 p-4 shadow-md">
+    <div class="container mx-auto flex justify-between items-center">
+        <div class="amelia-text neon-text">RIYAD <span class="store-text">STORE</span></div>
+        <input id="searchBar" type="text" class=" w-1/2 p-2 pl-2 text-xs border bg-gray-700 border-gray-800 rounded-md" placeholder="Cari aplikasi...">           
+    </div>
+</header>
+ <!-- Hasil Pencarian -->
+ <div class="p-4">
+ <div id="searchResults" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 hidden">
+                      
+ </div>
+</div>
+
+<!-- Navigasi di bagian bawah -->
+<div  style="z-index: 9999;" id="navMenu" class="fixed bottom-0 left-0 z-50 w-full h-16 bg-gray-800 border-t border-gray-600 nav-visible">
+    <div class="grid h-full max-w-lg grid-cols-4 mx-auto font-medium">
+        <button type="button" onclick="navigateTo('home')" id="homeMenu" class="inline-flex flex-col items-center justify-center px-5 border-gray-600 border-x hover:bg-gray-700 group">
+            <i class="fas fa-home w-5 h-5 mb-2 text-gray-400 group-hover:text-blue-500"></i>
+            <span class="text-sm text-gray-400 group-hover:text-blue-500">Tool</span>
+        </button>
+        <button type="button" onclick="navigateTo('about')" id="aboutMenu" class="inline-flex flex-col items-center justify-center px-5 border-e border-gray-600 hover:bg-gray-700 group">
+            <i class="fas fa-info-circle w-5 h-5 mb-2 text-gray-400 group-hover:text-blue-500"></i>
+            <span class="text-sm text-gray-400 group-hover:text-blue-500">Layanan</span>
+        </button>
+        <button type="button" onclick="navigateTo('services')" id="servicesMenu" class="inline-flex flex-col items-center justify-center px-5 hover:bg-gray-700 group">
+            <i class="fas fa-cogs w-5 h-5 mb-2 text-gray-400 group-hover:text-blue-500"></i>
+            <span class="text-sm text-gray-400 group-hover:text-blue-500">Servis</span>
+        </button>
+        <button type="button" onclick="navigateTo('contact')" id="contactMenu" class="inline-flex flex-col items-center justify-center px-5 border-gray-600 hover:bg-gray-700 group border-x">
+            <i class="fas fa-envelope w-5 h-5 mb-2 text-gray-400 group-hover:text-blue-500"></i>
+            <span class="text-sm text-gray-400 group-hover:text-blue-500">Kontak</span>
+        </button>
+    </div>
+</div>
+
+<script>
+    let lastScrollY = window.scrollY;
+
+    function navigateTo(page) {
+        // Hapus kelas aktif dari semua tombol
+        document.querySelectorAll('button').forEach(button => {
+            button.querySelector('i').classList.remove('text-blue-500');
+            button.querySelector('span').classList.remove('text-blue-500');
+        });
+        // Tambahkan kelas aktif ke tombol yang diklik
+        const activeButton = document.getElementById(page);
+        activeButton.querySelector('i').classList.add('text-blue-500');
+        activeButton.querySelector('span').classList.add('text-blue-500');
+
+        // Logika navigasi (ganti ini dengan logika navigasi aktual Anda)
+        alert("Navigasi ke " + page);
+    }
+
+    // Tambahkan kelas aktif ke halaman pertama saat dimuat
+    document.addEventListener('DOMContentLoaded', (event) => {
+        navigateTo('home');
+    });
+
+    window.addEventListener('scroll', () => {
+        const navMenu = document.getElementById('navMenu');
+        if (window.scrollY > lastScrollY) {
+            // Scroll ke bawah
+            navMenu.classList.remove('nav-visible');
+            navMenu.classList.add('nav-hidden');
+        } else {
+            // Scroll ke atas
+            navMenu.classList.remove('nav-hidden');
+            navMenu.classList.add('nav-visible');
+        }
+        lastScrollY = window.scrollY;
+    });
+</script>
+
+
+
+
+
+    <div id="app" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 content mt-2">
+        <div id="homePage" class="page">
+
+ <!-- Jumbotron -->
+ <div class="relative  flex items-center justify-center mt-8 mb-6">
+    <img src="assets/img/jumborey.png" alt="Background Image" class="absolute  h-full object-cover">
+    <div class="absolute inset-0 "></div>
+    <div class="relative z-10 text-center lg:text-left max-w-2xl lg:max-w-full lg:flex lg:items-center lg:justify-between p-6 bg-gray-800 bg-opacity-70 rounded-lg shadow-lg">
+        <img src="assets/img/jumborey.png" alt="Promo Image" class="hidden lg:block lg:w-1/2 lg:max-w-sm rounded-lg">
+        <div>
+        
+            <div class="flex items-center justify-center mt-2.5 mb-5">
+                <div class="flex items-center space-x-1 rtl:space-x-reverse">
+                   <svg class="w-4 h-4 text-yellow-300" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 22 20">
+                       <path d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z"/>
+                   </svg>
+                   <svg class="w-4 h-4 text-yellow-300" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 22 20">
+                       <path d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z"/>
+                   </svg>
+                   <svg class="w-4 h-4 text-yellow-300" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 22 20">
+                       <path d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z"/>
+                   </svg>
+                   <svg class="w-4 h-4 text-yellow-300" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 22 20">
+                       <path d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z"/>
+                   </svg>
+                   <svg class="w-4 h-4 text-gray-200 dark:text-gray-600" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 22 20">
+                       <path d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z"/>
+                   </svg>
+                </div>
+                   <span class="bg-blue-100 text-blue-800 text-xs font-semibold px-2.5 py-0.5 rounded dark:bg-blue-200 dark:text-blue-800 ms-3">5.0</span>
+               </div>
+           
+               <div class="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-4 text-base">
+                <div class="bg-gray-700 bg-opacity-60 border border-gray-600 p-4 rounded-lg">
+                    <div class="font-bold text-md sm:text-base text-white">TASBIH</div>
+                    <div class="text-yellow-300 text-base text-xs">GET</div>
+                </div>
+                <div class="bg-gray-700 bg-opacity-60 border border-gray-600 p-4 rounded-lg">
+                    <div class="font-bold text-md sm:text-base text-white">EDIT TEKS</div>
+                    <div class="text-yellow-300 text-base text-xs">GET</div>
+                </div>
+                <div class="bg-gray-700 bg-opacity-60 border border-gray-600 p-4 rounded-lg">
+                    <div class="font-bold text-md sm:text-base text-white">CODE EDITOR</div>
+                    <div class="text-yellow-300 text-base text-xs">GET</div>
+                </div>
+                <div class="bg-gray-700 bg-opacity-60 border border-gray-600 p-4 rounded-lg">
+                    <div class="font-bold text-md sm:text-base text-white">NOTE</div>
+                    <div class="text-yellow-300 text-base text-xs">GET</div>
+                </div>
+            </div>
+            
+        </div>
+    </div>
+</div>
+
+            <div class="container mx-auto  mb-4">
+                <div id="myGrid" class="grid grid-cols-2 xl:grid-cols-4 gap-4">
+
+                 
+
+                    <div id="card1"  onclick="window.location.href='tasbihh.html'"  class="card cursor-pointer bg-gray-800 rounded-lg overflow-hidden shadow-lg max-w-xs mx-auto flex flex-col border border-gray-700 ">
+                        <img src="assets/img/tasbih.png" alt="Product" class="w-full ">
+                        <div class="p-4 flex-grow flex flex-col items-center">
+                            <h1 class="font-bold text-md mb-2 text-white">TASBIH</h1>
+                            <div class="text-gray-400 text-center  text-sm mb-2">aplikasi tasbih dengan mengklik layar</div>
+                        </div>
+                        <footer  class=" mb-4 justify-center flex items-center ">
+                            <button onclick="window.location.href='tasbihh.html'" class="bg-green-500 hover:bg-green-700 font-medium text-sm px-2 py-1 text-white rounded shadow-lg w-1/2 mt-4">
+                                Lihat
+                            </button>
+                            
+                        </footer>
+                      </div>
+
+                    <div id="card2" onclick="window.location.href='textarea.html'" class="card cursor-pointer bg-gray-800 rounded-lg overflow-hidden shadow-lg max-w-xs mx-auto flex flex-col border border-gray-700 ">
+                     <img src="assets/img/logo1.png" alt="Product" class="w-full ">
+                     <div class="p-4 flex-grow flex flex-col items-center">
+                     <h1 class="font-bold text-md mb-2 text-white">TEXRAREA REY</h1>
+                     
+                    <div class="text-gray-400 text-center text-sm mb-2">Hitung huruf al-quran, suara to text, dll.</div>
+                    </div>
+                   <footer class=" mb-4 justify-center flex items-center " >
+                   <button  onclick="window.location.href='textarea.html'"
+                          class="btn-buy bg-green-500 hover:bg-green-700 font-medium  text-sm px-2 py-1 text-white  rounded shadow-lg w-1/2">Lihat
+                   </button>
+                   </footer>
+                  </div>
+
+
+                  <div id="card3" onclick="window.location.href='latihan-mengetik.html'" class="card cursor-pointer bg-gray-800 col-span-2 sm:col-span-1 lg:col-span-1 rounded-lg overflow-hidden shadow-lg max-w-xs mx-auto flex flex-col border border-gray-700 ">
+                    <img src="assets/img/typing.png" alt="Product" class="w-full ">
+                    <div class="p-4 flex-grow flex flex-col items-center">
+                        <h1 class="font-bold text-md mb-2 text-white">Latihan mengetik</h1>
+                        <div class="text-gray-400 text-center mb-2">Mengetik dengan 10 jari tanpa lihat</div>
+                    </div>
+                    <footer class=" mb-4 justify-center flex items-center ">
+                        <button onclick="window.location.href='latihan-mengetik.html'"
+                        class="btn-buy bg-green-500 hover:bg-green-700 font-medium  text-sm px-2 py-1 text-white  rounded shadow-lg w-1/2">Lihat
+                        </button>
+                    </footer>
+                  </div>
+
+                  <div id="card4"  onclick="window.location.href='code.html'" class="card cursor-pointer bg-gray-800 rounded-lg overflow-hidden shadow-lg max-w-xs mx-auto flex flex-col border border-gray-700 ">
+                    <img src="assets/img/v.png" alt="Product" class="w-full ">
+                    <div class="p-4 flex-grow flex flex-col items-center">
+                        <h1 class="font-bold text-md mb-2 text-white">CODE EDITOR</h1>
+                        <div class="text-gray-400 text-center text-sm mb-2">untuk mengedit HTML CSS dan JAVASCRIPT</div>
+                    </div>
+                    <footer class=" mb-4 justify-center flex items-center ">
+                        <button   onclick="window.location.href='code.html'"
+                        class="btn-buy bg-green-500 hover:bg-green-700 font-medium  text-sm px-2 py-1 text-white  rounded shadow-lg w-1/2">Lihat
+                        </button>
+                    </footer>
+                </div>
+
+                <div id="card5" onclick="window.location.href='edit-teks.html'" class="card cursor-pointer bg-gray-800 rounded-lg overflow-hidden shadow-lg max-w-xs mx-auto flex flex-col border border-gray-700 ">
+                    <img src="assets/img/editteks.png" alt="Product" class="w-full ">
+                    <div class="p-4 flex-grow flex flex-col items-center">
+                        <h1 class="font-bold text-md mb-2 text-white">EDIT TULISAN</h1>
+                        <div class="text-gray-400 text-center text-sm mb-2">ubah teks besar,kecil,bulak balik, teks ke kode binary</div>
+                    </div>
+                    <footer class=" mb-4 justify-center flex items-center ">
+                        <button onclick="window.location.href='edit-teks.html'"
+                        class="btn-buy bg-green-500 hover:bg-green-700 font-medium  text-sm px-2 py-1 text-white  rounded shadow-lg w-1/2">Beli
+                        </button>
+                    </footer>
+                </div>
+
+                <div onclick="window.location.href='calculator.html'" id="card6"  class="card cursor-pointer bg-gray-800 rounded-lg overflow-hidden shadow-lg max-w-xs mx-auto flex flex-col border border-gray-700 ">
+                    <img src="assets/img/kalkulator.png" alt="Product" class="w-full ">
+                    <div class="p-4 flex-grow flex flex-col items-center">
+                        <h1 class="font-bold text-md mb-2 text-white">KALKULATOR</h1>
+                        <div class="text-gray-400 text-center text-sm mb-2">5 fitur tambahan, cocok untuk dagang</div>
+                    </div>
+                    <footer class=" mb-4 justify-center flex items-center ">
+                        <button onclick="window.location.href='calculator.html'"
+                        class="btn-buy bg-green-500 hover:bg-green-700 font-medium  text-sm px-2 py-1 text-white  rounded shadow-lg w-1/2">Lihat
+                        </button>
+                    </footer>
+                </div>
+
+               
+
+             
+  
+  
+                </div>
+            </div>
+            
+
+
+   
+
+
+
+
+
+        </div>
+
+ 
+
+
+
+        <div id="aboutPage" class="page hidden">
+
+            <div class="container mx-auto  mb-4">
+                <div id="myGrid" class="grid grid-cols-2 xl:grid-cols-4 gap-4">
+            
+                    <div id="card7" onclick="window.location.href='ujicoba.html'" class="card bg-gray-800 rounded-lg overflow-hidden shadow-lg max-w-xs mx-auto flex flex-col border border-gray-700 ">
+                        <img src="assets/img/kalkulator.png" alt="Product" class="w-full ">
+                        <div class="p-4 flex-grow flex flex-col items-center">
+                            <h1 class="font-bold text-md mb-2 text-white">AMT</h1>
+                            <div class="text-gray-400 font-bold text-sm mb-2">Rp 25.000</div>
+                        </div>
+                        <footer class=" mb-4 justify-center flex items-center ">
+                            <button onclick="window.location.href='ujicoba.html'" data-title="AMT" data-options='[{"durasi": " 3 jam", "harga": "Rp 25.000"}]'
+                            class="btn-buy bg-green-500 hover:bg-green-700 font-medium  text-sm px-2 py-1 text-white  rounded shadow-lg w-1/2">Beli
+                            </button>
+                        </footer>
+                    </div>
+        
+        </div>
+    </div>
+            
+        </div>
+
+        <div id="servicesPage" class="page hidden">
+          
+        </div>
+
+        <div id="contactPage" class="page hidden">
+            <div class="p-8 rounded-lg shadow-lg">
+                <h2 class="text-2xl font-bold mb-4">Kontak Kami</h2>
+                <p class="mb-4">Jika Anda memiliki pertanyaan, komentar, atau membutuhkan bantuan, jangan ragu untuk menghubungi kami melalui informasi kontak di bawah ini.</p>
+                
+                <div class="grid gap-8 md:grid-cols-2">
+                    <!-- Contact Information -->
+                    <div>
+                        <h3 class="text-xl font-bold mb-2">Informasi Kontak</h3>
+                        <ul class="list-disc pl-5">
+                            <li class="mb-2"><strong>Email:</strong> textarearey@gmail.com</li>
+                            <li class="mb-2"><strong>Telepon:</strong> 087848777976</li>
+                            <li class="mb-2"><strong>Alamat:</strong> Indonesia</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+  
+
+    
+ <!-- Footer -->
+ <footer class="bg-gray-800 text-gray-400 hover:text-white py-8">
+    <div class="container mx-auto px-4">
+        <div class="flex flex-wrap justify-between">
+            <!-- Navigation Links -->
+            <div class="w-full sm:w-1/2 md:w-1/4 mb-4">
+                <h2 class="text-lg text-white font-semibold mb-2">Navigation</h2>
+                <ul class="space-y-2">
+                    <li><a href="#" onclick="navigateTo('home')" class="hover:underline">Home</a></li>
+                    <li><a href="#" onclick="navigateTo('about')" class="hover:underline">About</a></li>
+                    <li><a href="#" onclick="navigateTo('services')" class="hover:underline">Services</a></li>
+                    <li><a href="#" onclick="navigateTo('contact')" class="hover:underline">Contact</a></li>
+                </ul>
+            </div>
+   
+            <!-- Social Media Links -->
+            <div class="w-full sm:w-1/2 md:w-1/4 mb-4">
+                <h2 class="text-lg text-white font-semibold mb-2">Follow Us</h2>
+                <div class="flex space-x-4">
+                    <a href="#" class="text-gray-400 hover:text-white">
+                        <i class="fab fa-facebook-f fa-lg"></i>
+                    </a>
+                    <a href="#" class="text-gray-400 hover:text-white">
+                        <i class="fab fa-youtube fa-lg"></i>
+                    </a>
+                    <a href="#" class="text-gray-400 hover:text-white">
+                        <i class="fab fa-instagram fa-lg"></i>
+                    </a>
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<script>
+    document.getElementById('searchBar').addEventListener('input', function () {
+        let filter = this.value.toUpperCase();
+        let cards = document.getElementsByClassName('card');
+        let searchResults = document.getElementById('searchResults');
+        searchResults.innerHTML = ''; // Kosongkan hasil pencarian sebelumnya
+
+        if (filter === '') {
+            searchResults.classList.add('hidden');
+            return;
+        }
+
+        let hasResults = false;
+
+        for (let i = 0; i < cards.length; i++) {
+            let title = cards[i].getElementsByTagName('h1')[0];
+            if (title.innerHTML.toUpperCase().indexOf(filter) > -1) {
+                hasResults = true;
+                let clone = document.createElement('div');
+                clone.className = 'bg-gray-700 hover:bg-blue-500 p-4 rounded-lg shadow-md cursor-pointer';
+                clone.innerHTML = `
+                    <img src="${cards[i].getElementsByTagName('img')[0].src}" alt="${title.innerHTML}" class="mb-2 w-16 h-16 object-cover rounded">
+                    <h1 class="text-sm font-bold mb-2">${title.innerHTML}</h1>
+                `;
+                clone.addEventListener('click', function () {
+                    let pageId = cards[i].closest('.page').id.replace('Page', '');
+                    navigateTo(pageId);
+                    setTimeout(function() {
+                        document.getElementById(cards[i].id).scrollIntoView({ behavior: 'smooth', block: 'center' });
+                    }, 300); // Tambahkan penundaan singkat agar halaman bisa berganti terlebih dahulu
+                });
+                searchResults.appendChild(clone);
+            }
+        }
+
+        if (hasResults) {
+            searchResults.classList.remove('hidden');
+        } else {
+            searchResults.classList.add('hidden');
+        }
+    });
+
+    document.querySelectorAll('.card button').forEach(button => {
+        button.addEventListener('click', function () {
+            let cardId = this.closest('.card').id;
+            console.log(`Anda mengklik produk di ${cardId}`);
+        });
+    });
+
+    // Fungsi untuk menampilkan halaman berdasarkan ID
+    function navigateTo(pageId) {
+        // Semua halaman disembunyikan
+        document.querySelectorAll('.page').forEach(function(page) {
+            page.classList.add('hidden');
+        });
+
+        // Tampilkan halaman yang dipilih
+        document.getElementById(pageId + 'Page').classList.remove('hidden');
+
+        // Menghapus kelas active dari semua menu
+        document.querySelectorAll('#navMenu button').forEach(function(button) {
+            button.classList.remove('active');
+            button.querySelector('i').classList.remove('text-blue-500');
+            button.querySelector('span').classList.remove('text-blue-500');
+        });
+
+        // Menambahkan kelas active ke menu yang diklik
+        let activeButton = document.getElementById(pageId + 'Menu');
+        activeButton.classList.add('active');
+        activeButton.querySelector('i').classList.add('text-blue-500');
+        activeButton.querySelector('span').classList.add('text-blue-500');
+    }
+
+    // Atur menu default ke Tool
+    navigateTo('home');
+</script>
+</body>
+
+</html>
