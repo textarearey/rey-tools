@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>YouTube Text Formatter</title>
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome via JSDelivr -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css">
+
+    <!-- Tailwind CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+
+    <!-- FileSaver.js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js"></script>
+
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .header {
+            background-color: #1F2937;
+            color: white;
+            padding: 30px;
+            text-align: center;
+            font-size: 2rem;
+            font-weight: bold;
+            border-bottom: 4px solid #FF0000;
+        }
+
+        .header i {
+            color: #FF0000;
+            margin-right: 10px;
+        }
+
+        .input-box {
+            background-color: #1F2937;
+            padding: 25px;
+            border-radius: 10px;
+            border: 2px solid #3B82F6;
+            margin-bottom: 20px;
+        }
+
+        .input-box:nth-child(odd) {
+            background-color: #1F2937;
+            border-color: #10B981;
+        }
+
+        textarea {
+            padding: 15px;
+            overflow: hidden; /* Menghilangkan scrollbar */
+            resize: none; /* Mencegah pengubahan ukuran manual */
+        }
+
+        label i {
+            margin-right: 10px;
+            color: #FF0000; /* Warna merah untuk ikon */
+        }
+    </style>
+</head>
+<body class="bg-gray-900 text-white">
+
+    <div class="min-h-screen flex items-center justify-center">
+        <div class="w-full max-w-lg space-y-6 mt-8">
+            <!-- Form Input -->
+            <form id="textForm" class="space-y-6">
+
+                <!-- Judul -->
+                <div class="input-box">
+                    <label class="block text-lg font-medium mb-2">
+                        <i class="fas fa-heading"></i> Judul Video
+                    </label>
+                    <textarea id="judul" rows="2" class="w-full p-3 bg-gray-800 border border-gray-700 rounded-md focus:outline-none focus:border-indigo-500" placeholder="Masukkan judul video" oninput="updateStats('judul', 100)"></textarea>
+                    <div class="flex justify-between space-x-2 mt-2">
+                        <div class="bg-gray-800 p-2 w-full rounded-md text-sm text-center">
+                            <span id="judulWords">Kata: 0</span>
+                        </div>
+                        <div class="bg-gray-800 p-2 w-full rounded-md text-sm text-center">
+                            <span id="judulChars">Huruf: 0</span>
+                        </div>
+                    </div>
+                    <div class="bg-gray-800 p-2 mt-2 rounded-md text-sm text-center text-yellow-400" id="judulSeo">Masukkan judul untuk evaluasi SEO</div>
+                </div>
+
+                <!-- Naskah -->
+                <div class="input-box">
+                    <label class="block text-lg font-medium mb-2">
+                        <i class="fas fa-file-alt"></i> Naskah Video
+                    </label>
+                    <textarea id="naskah" rows="5" class="w-full p-3 bg-gray-800 border border-gray-700 rounded-md focus:outline-none focus:border-indigo-500" placeholder="Masukkan naskah video" oninput="updateStats('naskah')"></textarea>
+                    <div class="flex justify-between space-x-2 mt-2">
+                        <div class="bg-gray-800 p-2 w-full rounded-md text-sm text-center">
+                            <span id="naskahWords">Kata: 0</span>
+                        </div>
+                        <div class="bg-gray-800 p-2 w-full rounded-md text-sm text-center">
+                            <span id="naskahChars">Huruf: 0</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Deskripsi -->
+                <div class="input-box">
+                    <label class="block text-lg font-medium mb-2">
+                        <i class="fas fa-align-left"></i> Deskripsi Video
+                    </label>
+                    <textarea id="deskripsi" rows="3" class="w-full p-3 bg-gray-800 border border-gray-700 rounded-md focus:outline-none focus:border-indigo-500" placeholder="Masukkan deskripsi video" oninput="updateStats('deskripsi', 5000)"></textarea>
+                    <div class="flex justify-between space-x-2 mt-2">
+                        <div class="bg-gray-800 p-2 w-full rounded-md text-sm text-center">
+                            <span id="deskripsiWords">Kata: 0</span>
+                        </div>
+                        <div class="bg-gray-800 p-2 w-full rounded-md text-sm text-center">
+                            <span id="deskripsiChars">Huruf: 0</span>
+                        </div>
+                    </div>
+                    <div class="bg-gray-800 p-2 mt-2 rounded-md text-sm text-center text-yellow-400" id="deskripsiSeo">Masukkan deskripsi untuk evaluasi SEO</div>
+                </div>
+
+                <!-- Tag -->
+                <div class="input-box">
+                    <label class="block text-lg font-medium mb-2">
+                        <i class="fas fa-tags"></i> Tag Video
+                    </label>
+                    <textarea id="tag" rows="2" class="w-full p-3 bg-gray-800 border border-gray-700 rounded-md focus:outline-none focus:border-indigo-500" placeholder="Masukkan tag video (dipisah koma)" oninput="updateStats('tag', 500)"></textarea>
+                    <div class="flex justify-between space-x-2 mt-2">
+                        <div class="bg-gray-800 p-2 w-full rounded-md text-sm text-center">
+                            <span id="tagWords">Kata: 0</span>
+                        </div>
+                        <div class="bg-gray-800 p-2 w-full rounded-md text-sm text-center">
+                            <span id="tagChars">Huruf: 0</span>
+                        </div>
+                    </div>
+                    <div class="bg-gray-800 p-2 mt-2 rounded-md text-sm text-center text-yellow-400" id="tagSeo">Masukkan tag untuk evaluasi SEO</div>
+                </div>
+
+                <!-- Tombol -->
+                <div class="mt-6">
+                    <button type="button" id="generateButton" class="w-full bg-indigo-600 p-3 rounded-md text-white font-semibold hover:bg-indigo-500 transition duration-300">
+                        <i class="fas fa-file-download mr-2"></i>Buat File Teks
+                    </button>
+                </div><br><br>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        // Fungsi untuk menghitung jumlah kata, huruf, panjang rata-rata kata
+        function updateStats(id, maxChars = null) {
+            const value = document.getElementById(id).value;
+            const wordsArray = value.trim() === '' ? [] : value.trim().split(/\s+/);
+            const wordCount = wordsArray.length;
+            const charCount = value.length;
+
+            // Update statistik dasar
+            document.getElementById(`${id}Words`).textContent = `Kata: ${wordCount}`;
+            document.getElementById(`${id}Chars`).textContent = `Huruf: ${charCount}`;
+
+            // Hitung statistik SEO
+            if (id === 'judul') {
+                evaluateSeo(id, charCount, 100, "Maksimal 100 karakter untuk judul.");
+            } else if (id === 'deskripsi') {
+                evaluateSeo(id, charCount, 5000, "Maksimal 5000 karakter untuk deskripsi.");
+            } else if (id === 'tag') {
+                evaluateSeo(id, charCount, 500, "Maksimal 500 karakter untuk tag.");
+            }
+        }
+
+        // Fungsi evaluasi SEO untuk judul, deskripsi, dan tag
+        function evaluateSeo(id, charCount, maxChars, recommendation) {
+            const seoElement = document.getElementById(`${id}Seo`);
+            if (charCount === 0) {
+                seoElement.textContent = `Masukkan teks untuk evaluasi SEO`;
+                seoElement.classList.remove('text-red-400', 'text-green-400');
+                seoElement.classList.add('text-yellow-400');
+            } else if (charCount > maxChars) {
+                seoElement.textContent = `Teks terlalu panjang. ${recommendation}`;
+                seoElement.classList.add('text-red-400');
+                seoElement.classList.remove('text-green-400', 'text-yellow-400');
+            } else {
+                seoElement.textContent = `Teks sudah sesuai dengan batas karakter maksimal.`;
+                seoElement.classList.add('text-green-400');
+                seoElement.classList.remove('text-red-400', 'text-yellow-400');
+            }
+        }
+
+        document.getElementById('generateButton').addEventListener('click', function() {
+            // Mengambil nilai input
+            const judul = document.getElementById('judul').value;
+            const naskah = document.getElementById('naskah').value;
+            const deskripsi = document.getElementById('deskripsi').value;
+            const tag = document.getElementById('tag').value;
+
+            // Teks tambahan untuk deskripsi yang tidak dihitung
+            const defaultFooter = `
+Email me textarearey@gmail.com for any requests for removal of videos.
+
+Disclaimer: 
+Copyright Disclaimer Under Section 107 of the Copyright Act 1976, allowance is made for "fair use" for purposes such as criticism, comment, news reporting, teaching, scholarship, and research. Fair use is a use permitted by copyright statutes that might otherwise be infringing. Non-profit, educational, or personal use tips the balance in favor of fair use`;
+
+            // Menghitung statistik
+            const judulStats = document.getElementById('judulWords').textContent + ', ' + document.getElementById('judulChars').textContent;
+            const naskahStats = document.getElementById('naskahWords').textContent + ', ' + document.getElementById('naskahChars').textContent;
+            const deskripsiStats = document.getElementById('deskripsiWords').textContent + ', ' + document.getElementById('deskripsiChars').textContent;
+            const tagStats = document.getElementById('tagWords').textContent + ', ' + document.getElementById('tagChars').textContent;
+
+            // Membuat konten teks yang terformat dengan baik
+            let content = `Judul: ${judul}\n\n`;
+            content += `Naskah:\n${naskah}\n\n`;
+            content += `Deskripsi:\n${deskripsi}\n`;
+            content += defaultFooter + `\n\n`;
+            content += `Tag: ${tag}\n\n`;
+            content += `---- Statistik ----\n`;
+            content += `Judul: ${judulStats}\n`;
+            content += `Naskah: ${naskahStats}\n`;
+            content += `Deskripsi: ${deskripsiStats}\n`;
+            content += `Tag: ${tagStats}`;
+
+            // Membuat file teks dan mengunduhnya
+            const blob = new Blob([content], { type: 'text/plain;charset=utf-8' });
+            saveAs(blob, `${judul.replace(/[^a-z0-9]/gi, '_').toLowerCase()}_terformat.txt`);
+        });
+    </script>
+</body>
+</html>
+
