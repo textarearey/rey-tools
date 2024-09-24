@@ -1,0 +1,4701 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TEXTAREA TOOLS REY</title>
+   
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Rampart+One&display=swap">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.6.2/dist/sweetalert2.all.min.js"></script>
+    <!-- Tambahkan SweetAlert2 CSS dan JavaScript -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@12.5.1/dist/sweetalert2.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@12.5.1/dist/sweetalert2.all.min.js"></script>
+
+    <!-- Tambahkan Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- Tambahkan font Arab yang sesuai -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Naskh+Arabic:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.15/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <!-- Link ke library SlickNav dari CDN -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/slicknav@1.0.10/dist/slicknav.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/slicknav@1.0.10/dist/jquery.slicknav.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/jsbarcode/3.6.0/JsBarcode.all.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrious/4.0.2/qrious.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js"></script>
+    <script src="https://rawgit.com/schmich/instascan-builds/master/instascan.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Naskh+Arabic:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Black+Ops+One&display=swap" rel="stylesheet">
+
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Digital+7&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+
+
+
+
+
+    <link rel="icon" href="assets/img/logo2.png">
+    <style>
+        /* Menghilangkan ikon scroll */
+        textarea {
+            font-family: 'Noto Naskh Arabic', sans-serif;
+
+            scrollbar-width: none;
+            /* Menghilangkan lebar scroll */
+            -ms-overflow-style: none;
+            /* Untuk Internet Explorer */
+        }
+
+        /* Untuk browser yang mendukung WebKit (seperti Chrome dan Safari) */
+        textarea::-webkit-scrollbar {
+            display: none;
+            /* Sembunyikan scrollbar di browser WebKit */
+        }
+
+
+        #utama {
+            font-family: 'Noto Naskh Arabic', sans-serif;
+        
+
+        }
+
+
+
+        #pesan {
+            display: none;
+            animation: munculHilang 3s ease-in-out forwards;
+        }
+
+        @keyframes munculHilang {
+            0% {
+                opacity: 0;
+            }
+
+            10% {
+                opacity: 1;
+            }
+
+            90% {
+                opacity: 1;
+            }
+
+            100% {
+                opacity: 0;
+            }
+        }
+
+        /* Menghilangkan border pada input */
+
+
+        /* Menghilangkan resizer pada textarea */
+        textarea {
+            resize: none;
+        }
+
+        /* CSS untuk tombol */
+        .calculator-button {
+            /* ... gaya tombol lainnya ... */
+            transition: transform 0.2s;
+        }
+
+        /* Ikon Font Awesome default */
+
+
+        /* Saat kursor diarahkan, ikon diperbesar */
+        .calculator-button:hover {
+            transform: scale(1.1);
+            /* Skala ikon saat dihover */
+        }
+
+        #utama::placeholder {
+            /* Gunakan linear-gradient untuk gradiasi warna */
+            background: linear-gradient(to right, #ffffff86, #63636394);
+            /* Anda dapat menyesuaikan warna latar belakang sesuai keinginan Anda */
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            text-align: center;
+            font-size: 25px;
+            font-family: 'Black Ops One', cursive;
+
+        }
+
+
+
+
+        .swal2-popup {
+
+            color: white;
+            /* Warna teksnya, sesuaikan sesuai kebutuhan Anda */
+
+        }
+
+        /* CSS untuk tampilan popup SweetAlert2 */
+        .info-popup-container {
+            background: rgba(0, 0, 0, 0.724);
+            /* Warna latar belakang Gray-900 dengan opacity 0.9 */
+            color: #FFFFFF;
+            /* Warna teks putih */
+            padding: 20px;
+            border-radius: 5px;
+
+        }
+
+        .r1 {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
+        }
+
+
+        /* CSS untuk mengatur tampilan tabel */
+        .table {
+            width: 100%;
+            margin: 0 auto;
+            border-collapse: collapse;
+
+        }
+
+        .table th,
+        .table td {
+            border: 1px solid #4470ff;
+            /* Menambahkan garis pada sel tabel */
+            padding: 10px;
+            text-align: center;
+
+        }
+
+        .table th {
+            font-size: 25px;
+            padding: 10px;
+        }
+
+
+
+        /* Gaya scrollbar track (larangan yang tidak dapat digerakkan) */
+        div::-webkit-scrollbar {
+            border-radius: 5px;
+            height: 20px;
+            width: 5px;
+            /* Lebar scrollbar vertikal */
+            background-color: #f1f1f100;
+            /* Warna latar belakang track */
+        }
+
+        /* Gaya thumb scrollbar vertikal */
+        div::-webkit-scrollbar-thumb {
+            background-color: #88888800;
+            /* Warna latar belakang thumb */
+            border-radius: 5px;
+            /* Bentuk tombol thumb */
+            height: 20px;
+        }
+
+        /* Gaya thumb scrollbar vertikal saat dihover */
+        div::-webkit-scrollbar-thumb:hover {
+            background-color: #55555500;
+            height: 20px;
+            /* Warna latar belakang thumb saat dihover */
+        }
+
+
+        #conversionResultDots::placeholder {
+            text-align: center;
+            font-weight: bold;
+        }
+
+        #conversionResultEmoticons::placeholder {
+            text-align: center;
+            font-weight: bold;
+        }
+
+
+        #interim-text {
+            background-color: rgba(0, 0, 0, 0.89);
+            color: #ffffff;
+            padding: 10px;
+            border-radius: 8px;
+            font-weight: bold;
+            position: fixed;
+            top: 0;
+            right: 0;
+            /* untuk teks di kanan atas */
+        }
+
+        #interim-text.animated {
+            animation: fadeInOut 0.5s ease-in-out infinite;
+            /* Animasi lebih cepat dengan efek ease-in-out */
+        }
+
+
+        .switch { 
+            position: relative;
+            display: inline-block;
+            width: 60px;
+            height: 34px;
+        }
+
+        .switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #ccccccd2;
+            -webkit-transition: .4s;
+            transition: .4s;
+            border-radius: 34px;
+        }
+
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 26px;
+            width: 26px;
+            left: 4px;
+            bottom: 4px;
+            background-color: white;
+            -webkit-transition: .4s;
+            transition: .4s;
+            border-radius: 50%;
+        }
+
+        input:checked+.slider {
+            background-color: #2196F3;
+        }
+
+        input:focus+.slider {
+            box-shadow: 0 0 1px #2196F3;
+        }
+
+        input:checked+.slider:before {
+            -webkit-transform: translateX(26px);
+            -ms-transform: translateX(26px);
+            transform: translateX(26px);
+        }
+
+
+
+        .rubahteks::placeholder {
+            font-weight: bold;
+            text-align: center;
+            color: #1F2937;
+        }
+
+
+
+
+  /* CSS untuk animasi pada teks di textarea saat berubah */
+  @keyframes text-change {
+          
+            to {
+               
+                color: rgb(47, 125, 209);
+            }
+        }
+    
+        .animate-text-grow {
+            animation: text-change 0.5s;
+            
+        }
+
+
+
+    </style>
+</head>
+
+
+<body class="bg-gray-900 text-gray-100">
+
+    <button style="position: fixed; right: 15px; bottom: 10px; z-index: 10; color: #ffffff;" id="showMenuButton"><i class="fas fa-home fa-lg text-gray-200  "></i></button>
+
+
+    <div style="transition: left 0.3s; left: -250px; top: 0; position: fixed; height: 100%; width: 250px; background-color: #1f2937ec; z-index: 100;" id="menu">
+        <div class="menu-box  rounded text-gray-300 mb-2 p-4 flex justify-between items-center">
+            <div class="flex items-center">
+                <img src="assets/img/logo2.png" alt="Logo" class="w-10 h-10 mr-6">
+                <span class="text-xl text-gray-100 font-bold">Lapar.Online</span>
+            </div>
+        </div>
+        <hr class="border-t border-blue-600 ">
+        <a href="index.html"
+            class="menu-box  transition-transform duration-200 transform hover:scale-105 m-4 shadow bg-blue-700 hover:bg-blue-800 rounded-lg text-gray-300 p-2 pl-4 pr-4 flex justify-between items-center">
+            <div class="flex">
+                <span class="text-base">Beli Makanan</span>
+            </div>
+            <div class="text-center items-center">
+                <i class="fas fa-hotdog  text-2xl"></i>
+            </div>
+        </a>
+        <a href="textarea.html"
+            class="menu-box  transition-transform duration-200 transform hover:scale-105  m-4 shadow bg-blue-700 hover:bg-blue-800 rounded-lg text-gray-300 p-2 pl-4 pr-4 flex justify-between items-center">
+            <div class="flex">
+                <span class="text-base">Kumpulan Tool</span>
+            </div>
+            <div class="text-center items-center">
+                <i class="fas fa-tools text-2xl"></i>
+            </div>
+        </a>
+        <a href="code.html"
+            class="menu-box  transition-transform duration-200 transform hover:scale-105 m-4 shadow bg-blue-700 hover:bg-blue-800 rounded-lg text-gray-300 p-2 pl-4 pr-4 flex justify-between items-center">
+            <div class="flex">
+                <span class="text-base">Code Editor</span>
+            </div>
+            <div class="text-center items-center">
+                <i class="fas fa-code text-xl "></i>
+            </div>
+        </a>
+        <a href="latihan-mengetik.html"
+            class="menu-box  transition-transform duration-200 transform hover:scale-105  m-4 shadow bg-blue-700 hover:bg-blue-800 rounded-lg text-gray-300 p-2 pl-4 pr-4 flex justify-between items-center">
+            <div class="flex">
+                <span class="text-base">Kecepatan Mengetik</span>
+            </div>
+            <div class="text-center items-center">
+                <i class="fas fa-keyboard text-xl "></i>
+            </div>
+        </a>
+        <button id="tampilkanButton"
+            class="px-4 py-2 transition-transform duration-200 transform hover:scale-105  m-4 border border-blue-600 text-sm hover:bg-gray-700">Edit
+            ukuran font & input </button>
+        <button
+            class="px-4 py-2 transition-transform duration-200 transform hover:scale-105  m-4 border border-blue-600 text-sm hover:bg-gray-700"
+            id="tampilkansemuacode" onclick="tampilkanSemuaCode()">Sandi REY</button>
+    </div>
+
+    <div class="grid  pt-4 pl-4 pr-4 ">
+        <div id="rubahUkuran" class="hidden">
+            <div class="flex justify-center items-center mt-4">
+                <div class="w-full mb-4 p-4 border border-blue-600 rounded-lg shadow-lg">
+                    <div class="flex justify-between items-center">
+                        <label for="heightLabel" class="block text-gray-300 mr-4 font-bold">
+                            <span id="fontSizeLabel" class="block text-gray-400">Ukuran Font: <span id="fontSizeValue"
+                                    class="text-gray-200 font-semibold">16px</span></span>
+                        </label>
+                        <input type="range" id="fontSize" min="12" max="40" step="1" value="16"
+                            class="range-slider p-2 h-10 m-4 w-20  rounded-full  focus:outline-none">
+                    </div>
+                    <div class="flex justify-between items-center">
+                        <label for="fontColor" class="block text-gray-400 mr-4 font-bold">
+                            Color Font <i class="fas fa-font text-green-500 text-xl ml-2"></i>
+                        </label>
+                        <input type="color" id="fontColor" value="#000000"
+                            class="p-2 h-10 m-4 w-10 border-2 border-gray-300 rounded-full focus:ring-2 focus:ring-blue-500 focus:outline-none">
+                    </div>
+                    <div class="flex justify-between items-center">
+                        <label for="heightLabel" class="block text-gray-300 mr-4 font-bold">
+                            <span id="heightLabel" class="block text-gray-400">Tinggi Input : <span id="heightValue"
+                                    class="text-gray-200 font-semibold">6 </span></span>
+                        </label>
+                        <input type="range" id="height"
+                            class="range-slider p-2 h-10 m-4 w-20  rounded-full  focus:outline-none" min="3" max="12"
+                            step="1" value="6">
+                    </div>
+                    <div class="flex justify-between items-center">
+                        <label for="heightLabel" class="block text-gray-400  font-bold">
+                            Mode Full Screen
+                        </label>
+                        <div class="flex mt-4 mb-4 mr-4 items-center justify-center">
+                            <label class="switch">
+                                <input type="checkbox" id="full">
+                                <span class="slider"></span>
+                            </label>
+                        </div>
+                    </div>
+                    <script>
+                        const fullscreenToggle = document.getElementById("full");
+                        fullscreenToggle.addEventListener("change", () => {
+                            if (document.fullscreenElement) {
+                                // Jika layar penuh aktif, matikan
+                                document.exitFullscreen();
+                            } else {
+                                // Jika layar penuh tidak aktif, aktifkan
+                                document.documentElement.requestFullscreen();
+                            }
+                        });
+                    </script>
+                    <button
+                        class="mt-4 transition-transform duration-200 transform hover:scale-105   py-2 px-4 bg-red-600 rounded-lg text-sm text-white hover:bg-red-700"
+                        id="resetButton">Reset</button>
+
+                    <button id="sembunyikanButton"
+                        class="px-4 mt-4 transition-transform duration-200 transform hover:scale-105   py-2 rounded-lg bg-blue-600 text-sm hover:bg-blue-700 float-right">Tutup
+                    </button>
+                </div>
+            </div>
+        </div>
+   
+
+
+
+        <textarea id="utama" class="rounded-t-lg w-full border-t border-blue-500  p-4" rows="6" dir="auto"
+            placeholder="REY Textarea" autofocus style="outline: none; background-color: #1F2937; " ></textarea>
+
+
+        <!-- Video container -->
+        <div class="video-container">
+            <video class="rounded-t-lg w-full" id="video1" style="display: none;" controls>
+                <source src="assets/video/ppp.mp4" type="video/mp4">
+            </video>
+            <video class="rounded-t-lg w-full" id="video2" style="display: none;" controls>
+                <source src="assets/video/pp.mp4" type="video/mp4">
+            </video>
+            <video class="rounded-t-lg w-full" id="video3" style="display: none;" controls>
+                <source src="assets/video/pppp.mp4" type="video/mp4">
+            </video>
+        </div>
+        <div style="position: relative; display: flex; align-items: center; justify-content: center;">
+            <input type="text" id="display" class=" text-sm border-b border-blue-500 bg-gray-800 shadow-lg rounded-b-lg text-green-500 w-full p-2 mb-2 text-3xl text-center"
+                readonly style="outline: none;">
+
+            <div style="position: absolute; top: 25%; left: 50%; transform: translateX(-50%);">
+                <!-- Konten di dalam div ini -->
+                <div id="codeText" class="text-white text-center text-xs font-bold mt-2"></div>
+                <div class="flex items-center gap-10 justify-center">
+                    <button style="display: none;" id="prevButton">◀️</button>
+                    <button style="display: none;" id="nextButton">▶️</button>
+                </div>
+            </div>
+        </div>
+
+
+
+
+
+
+        <div id="hacking1" class="hidden ">
+
+            <div class="grid grid-cols-3 mt-4 gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-2 xl:grid-cols-3">
+                <!-- Card 1 -->
+                <a href="https://mega.nz/file/yEFzHCZS#168_lWOpjN_i7Oba67DMeWax3aFV33CB1PA3Cts11tc"
+                    class="bg-gray-800 text-white p-4 rounded-lg shadow-md">
+
+                    <p class="text-sm font-bold text-yellow-400">craxs v6,7</p>
+                </a>
+                <!-- Card 2 -->
+                <a href="https://mega.nz/file/7B80iYrT#Mj_4ML3PXgFDALlne8RqmqMA7BrqEaxWBuzizPf3-n4"
+                    class="bg-gray-800 text-white p-4 rounded-lg shadow-md">
+
+                    <p class="text-sm font-bold text-blue-400">craxs v6,6</p>
+                </a>
+
+                <!-- Card 3 -->
+                <a href="https://mega.nz/file/PEMzSD5J#enXEnKF4A5Jd83OTozulfETiUek3rKuwxEt3si7a8iE"
+                    class="bg-gray-800 text-white p-4 rounded-lg shadow-md">
+
+                    <p class="text-sm font-bold text-green-400">anonymouse</p>
+                </a>
+                <!-- Card 4 -->
+                <a href="https://mega.nz/file/zJkGUZAC#o-JBDxqJXGDgnW_-cJNEao5wi4n5or_47iuIqGfWZFk"
+                    class="bg-gray-800 text-white p-4 rounded-lg shadow-md">
+
+                    <p class="text-sm font-bold text-pink-400">craxs v3</p>
+                </a>
+                <!-- Card 5 -->
+                <a href="https://mega.nz/file/CMt2gYCT#hq34PZcfJBoAC6Xy6fSViXgzgxCg5qmL2B_KG0k4kw4"
+                    class="bg-gray-800 text-white p-4 rounded-lg shadow-md">
+
+                    <p class="text-sm font-bold text-purple-400">cypher</p>
+                </a>
+            </div>
+        </div>
+        <script>
+            // Dapatkan elemen textarea dan div
+            const textarea36 = document.getElementById("utama");
+            const hackingDiv = document.getElementById("hacking1");
+
+            // Tambahkan event listener untuk memantau perubahan pada textarea36
+            textarea36.addEventListener("input", function () {
+                if (textarea36.value.includes(".hacking")) {
+                    hackingDiv.classList.remove("hidden");
+                } else {
+                    hackingDiv.classList.add("hidden");
+                }
+            });
+        </script>
+
+        <div id="hidenscan" class="hidden" style="position: relative;">
+            <div class="flex items-center justify-center">
+                <div id="video-container" class="mt-2 mb-4 w-full "
+                    style="border-radius: 10px; overflow: hidden; position: relative;">
+                    <!-- Menyematkan CSS ke dalam atribut style -->
+                    <video id="video" playsinline autoplay style="width: 100%; height: 50%;"></video>
+                    <div id="detected" class="detected-message"
+                        style="background-color: #38a169; color: white; padding: 10px; border-radius: 5px; display: none; position: absolute; top: 10px; right: 10px;">
+                        <i class="fa fa-check-circle"></i> Terdeteksi | REY
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+
+        <p class="text-blue-600 p-2 text-sm" id="pesan"></p>
+
+        <button id="hitung-button" class="bg-green-500 text-gray-200 px-2 py-2 text-sm  rounded-lg hover:bg-green-600" style="display: none;">Hitung </button>
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div id="tampilkanshortlink"  class="hidden" >
+    <div  class=" flex justify-center  m-4 gap-2 ">
+        <button class=" w-full bg-gray-900  border  border-blue-900  text-gray-200 px-2 py-2 text-sm  rounded-lg shadow-xl     hover:bg-green-600" id="short-btn">Rubah Link</button>
+        <button class="bg-gray-900  border  border-blue-900   text-gray-200 px-4 py-2 text-sm  rounded-lg shadow-xl     hover:bg-green-600" id="reload-btn">Reload</button>
+        <button class="bg-gray-900  border  border-blue-900  text-gray-200 px-4 py-2 text-sm  rounded-lg shadow-xl     hover:bg-green-600" id="copy-btn">Salin</button>
+        <button class="bg-gray-900  border  border-blue-900  text-gray-200 px-4 py-2 text-sm  rounded-lg shadow-xl     hover:bg-green-600" id="go-link-btn">Lihat</button>
+        
+    </div>
+</div>
+
+   <script>
+    const reloadBtn = document.getElementById('reload-btn');
+    const copyBtn = document.getElementById('copy-btn');
+    const goLinkBtn = document.getElementById('go-link-btn');
+    const utamaTextarealink = document.getElementById("utama");
+    const tampilkanshortlinkDiv = document.getElementById("tampilkanshortlink");
+    const shortBtn = document.getElementById('short-btn');
+
+    utamaTextarealink.addEventListener('input', checkForLinks);
+
+    function checkForLinks() {
+        const utama = utamaTextarealink.value;
+        const urlRegex = /https?:\/\/[^\s/$.?#].[^\s]*/g;
+        
+        if (utama.match(urlRegex)) {
+            // Jika terdeteksi tautan, tampilkan div
+            tampilkanshortlinkDiv.classList.remove("hidden");
+        } else {
+            // Jika tidak ada tautan, sembunyikan div
+            tampilkanshortlinkDiv.classList.add("hidden");
+        }
+    }
+
+    function shortenUrl() {
+        var utama = utamaTextarealink.value;
+        var apiUrl = "https://tinyurl.com/api-create.php?url=" + encodeURIComponent(utama);
+
+        fetch(apiUrl).then(response => response.text()).then(data => {
+            utamaTextarealink.value = data;
+        }).catch(error => {
+            utamaTextarealink.value = "Error : Unable to shorten URL!";
+        });
+    }
+
+    function copyShortLink() {
+        utamaTextarealink.select();
+        document.execCommand("copy");
+    }
+
+    function goToShortLink() {
+        const shortLink = utamaTextarealink.value;
+        window.open(shortLink, "_blank");
+    }
+
+    reloadBtn.addEventListener('click', () => {
+        location.reload();
+    });
+
+    shortBtn.addEventListener('click', shortenUrl);
+
+    copyBtn.addEventListener('click', copyShortLink); // Tambahkan baris ini
+    goLinkBtn.addEventListener('click', goToShortLink); // Tambahkan baris ini
+   </script>
+   
+
+
+
+
+
+    <div id="arisan" class="hidden  m-4">
+        <div  class="max-w-md text-white mx-auto bg-white p-4 rounded-lg shadow-md bg-gray-800">
+            <h1 class="text-2xl text-white font-bold text-center mb-4">Quiz Koclok Nama</h1>
+            <div class="mb-4 flex">
+                <input autofocus style=" outline: none;" type="text" id="nama" class="w-full p-2 text-center bg-gray-900 border-2 border-blue-900 rounded-l-lg" placeholder="Masukkan nama">
+                <button onclick="tambahNama()" class="bg-gray-900 text-green-600 font-bold px-4 border-2 border-blue-900 py-2 rounded-r-lg hover:bg-gray-700">Tambah Nama</button>
+            </div>
+            <div class="flex justify-center items-center mb-4">
+              
+                <button onclick="acakNama()" class="bg-gray-900 text-blue-600 font-bold px-4 py-2 rounded hover:bg-gray-700">Koclok Nama</button>
+            </div>
+            
+            <div id="daftarNama" class="hidden">
+                <h2 class="text-xl  font-bold mb-2">Daftar Nama:</h2>
+                <ul id="namaList" class="list-disc list-inside"></ul>
+            </div>
+            <div id="loading" class="text-center hidden">
+                <i class="fas fa-spinner fa-spin text-success text-4xl"></i>
+            </div>
+            
+            <div id="hasilkoclok" class="mt-4 text-center hidden">
+                <h2 class="text-xl font-bold">Nama yang Terpilih:</h2>
+                <p id="namaTerpilih" class="text-4xl bg-gray-900 rounded-lg p-2 m-4 font-bold text-blue-600"></p>
+            </div>
+           
+        </div>
+    </div>
+ 
+        <script>
+            var daftarNama = [];
+    
+            function tambahNama() {
+                var inputNama = document.getElementById("nama");
+                var nama = inputNama.value.trim();
+    
+                if (nama !== "") {
+                    daftarNama.push(nama);
+                    inputNama.value = "";
+                    perbaruiDaftarNama();
+                }
+                
+            }
+          
+
+            
+    
+            function acakNama() {
+    var loadingDiv = document.getElementById("loading");
+    var hasilkoclokDiv = document.getElementById("hasilkoclok");
+    var namaTerpilih = document.getElementById("namaTerpilih");
+
+    loadingDiv.style.display = "block";
+    hasilkoclokDiv.style.display = "none";
+
+    // Melakukan pencampuran ulang daftar nama sebelum pemilihan nama
+    daftarNama = shuffleArray(daftarNama);
+
+    setTimeout(function () {
+        if (daftarNama.length > 0) {
+            var namaPilihan = daftarNama.pop(); // Mengambil nama paling atas daftar (setelah diacak)
+            namaTerpilih.textContent = namaPilihan;
+            hasilkoclokDiv.style.display = "block";
+        }
+        loadingDiv.style.display = "none";
+    }, 2000); // Mengganti 2000 dengan waktu loading yang sesuai
+}
+
+// Fungsi untuk mencampur ulang elemen dalam array
+function shuffleArray(array) {
+    for (var i = array.length - 1; i > 0; i--) {
+        var j = Math.floor(Math.random() * (i + 1));
+        [array[i], array[j]] = [array[j], array[i]];
+    }
+    return array;
+}
+
+    
+            function perbaruiDaftarNama() {
+                var daftarDiv = document.getElementById("daftarNama");
+                var namaList = document.getElementById("namaList");
+                namaList.innerHTML = "";
+    
+                if (daftarNama.length > 0) {
+                    daftarDiv.style.display = "block";
+                    daftarNama.forEach(function(nama, index) {
+                        var listItem = document.createElement("li");
+                        listItem.textContent = nama;
+                        namaList.appendChild(listItem);
+                    });
+                } else {
+                    daftarDiv.style.display = "none";
+                }
+            }
+           
+        </script>
+
+
+   <script>
+        const arisankoclok = document.getElementById("utama");
+        const arisanDiv = document.getElementById("arisan");
+        
+        arisankoclok.addEventListener("input", function() {
+            const inputText = arisankoclok.value;
+            if (inputText.includes(".arisan")) {
+                arisanDiv.style.display = "block";
+            } else {
+                arisanDiv.style.display = "none";
+            }
+        });
+        </script>
+
+
+
+
+<div id="kalkulatorrey" class="hidden  mx-auto max-w-sm p-4 bg-gray-900">
+    <div class="grid grid-cols-4 gap-2">
+        <!-- Tombol-tombol kalkulator -->
+        <button class="border-b border-blue-500 border-t bg-gray-800 text-gray-400 py-6 px-4 rounded-lg text-2xl"
+            onclick="appendToDisplay('7')">7</button>
+        <button class=" border-b border-blue-500 border-t bg-gray-800 text-gray-400 py-6 px-4 rounded-lg text-2xl"
+            onclick="appendToDisplay('8')">8</button>
+        <button class=" border-b border-blue-500 border-t bg-gray-800 text-gray-300 py-6 px-4 rounded-lg text-2xl"
+            onclick="appendToDisplay('9')">9</button>
+        <button
+            class=" border-b border-blue-500 border-t bg-gray-800 hover:bg-blue-600 text-gray-300 py-6 px-4 rounded-lg text-2xl"
+            onclick="appendToDisplay('/')">÷</button>
+        <button class=" border-b border-blue-500 border-t bg-gray-800 text-gray-400 py-6 px-4 rounded-lg text-2xl"
+            onclick="appendToDisplay('4')">4</button>
+        <button class=" border-b border-blue-500 border-t bg-gray-800 text-gray-400 py-6 px-4 rounded-lg text-2xl"
+            onclick="appendToDisplay('5')">5</button>
+        <button class=" border-b border-blue-500 border-t bg-gray-800 text-gray-400 py-6 px-4 rounded-lg text-2xl"
+            onclick="appendToDisplay('6')">6</button>
+        <button
+            class=" border-b border-blue-500 border-t bg-gray-800 hover:bg-blue-600 text-gray-300 py-6 px-4 rounded-lg text-2xl"
+            onclick="appendToDisplay('*')">×</button>
+        <button class="border-b border-blue-500 border-t bg-gray-800 text-gray-400 py-6 px-4 rounded-lg text-2xl"
+            onclick="appendToDisplay('1')">1</button>
+        <button class="border-b border-blue-500 border-t bg-gray-800 text-gray-400 py-6 px-4 rounded-lg text-2xl"
+            onclick="appendToDisplay('2')">2</button>
+        <button class="border-b border-blue-500 border-t bg-gray-800 text-gray-400 py-6 px-4 rounded-lg text-2xl"
+            onclick="appendToDisplay('3')">3</button>
+        <button
+            class="border-b border-blue-500 border-t bg-gray-800 hover:bg-blue-600 text-gray-300 py-6 px-4 rounded-lg text-2xl"
+            onclick="appendToDisplay('-')">-</button>
+        <button class="border-b border-blue-500 border-t bg-gray-800 text-gray-400 py-6 px-4 rounded-lg text-2xl"
+            onclick="appendToDisplay('00')">00</button>
+        <button class="border-b border-blue-500 border-t bg-gray-800 text-gray-400 py-6 px-4 rounded-lg text-2xl"
+            onclick="appendToDisplay('0')">0</button>
+        <button id="kentod"
+            class="border-b border-blue-500 border-t bg-green-500 hover:bg-green-600 text-white font-semibold py-6 px-4 rounded-lg text-2xl"
+            onclick="calculate()">=</button>
+
+        <button
+            class="border-b border-blue-500 border-t bg-gray-800 hover:bg-blue-600 text-gray-300 py-6 px-4 rounded-lg text-2xl"
+            onclick="appendToDisplay('+')">+</button>
+        <button
+            class="border-b border-blue-500 border-t col-span-2 bg-gray-800 hover:bg-red-600 text-gray-400 py-6 px-4 rounded-lg text-2xl"
+            onclick="clearDisplay()">C</button>
+        <button
+            class=" border-b border-blue-500 border-t col-span-2 bg-gray-800 hover:bg-red-600 text-gray-400 py-6 px-4 rounded-lg text-2xl"
+            onclick="backspace()">←</button>
+    </div>
+
+</div>
+
+
+
+<script>
+    const kalkulatorreyee = document.querySelector("#utama");
+    const kalkulatorrey = document.getElementById("kalkulatorrey");
+
+    // Fungsi untuk menampilkan atau menyembunyikan div #kalkulatorrey berdasarkan teks dalam textarea
+    function toggleWarnaGVisibility() {
+        const text = kalkulatorreyee.value;
+        if (text.includes(".k")) {
+            kalkulatorrey.classList.remove("hidden");
+        } // Tidak perlu else statement untuk menyembunyikan kotak
+    }
+
+    // Event listener untuk mendengarkan perubahan pada textarea
+    kalkulatorreyee.addEventListener("input", toggleWarnaGVisibility);
+
+    // Panggil fungsi toggleWarnaGVisibility saat halaman dimuat
+    toggleWarnaGVisibility();
+</script>
+
+
+
+
+
+
+    <div id="tandatangan" class="hidden">
+    <div  class="flex  justify-center items-center">
+        <div style="position: relative; text-align: center;">
+            <canvas class="bg-white rounded-lg  " width="400" height="300"  id="signatureCanvas" style="border: 1px solid #000;"></canvas>
+            <div style="position: absolute; top: 5px; left: 10%; transform: translateX(-50%);">
+                <button onclick="clearCanvas()"><i class="fas fa-rotate-right text-red-500 mr-2"></i></button>
+                <button onclick="downloadSignature()"><i class="fas fa-download text-green-500"></i></button>
+            </div>
+        </div>
+    </div>
+</div>
+    
+    
+
+    <script>
+        const utamaTextarea75 = document.getElementById("utama");
+        const tandatanganDiv = document.getElementById("tandatangan");
+        
+        utamaTextarea75.addEventListener("input", function() {
+            const inputText = utamaTextarea75.value;
+            if (inputText.includes(".tanda tangan")) {
+                tandatanganDiv.style.display = "block";
+            } else {
+                tandatanganDiv.style.display = "none";
+            }
+        });
+        </script>
+
+    <script>
+const canvas = document.getElementById("signatureCanvas");
+const context = canvas.getContext("2d");
+let isDrawing = false;
+let lastX, lastY;
+
+canvas.addEventListener("mousedown", (e) => {
+    isDrawing = true;
+    [lastX, lastY] = [e.offsetX, e.offsetY];
+    // Mengunci scrolling
+    document.body.style.overflow = "hidden";
+});
+
+canvas.addEventListener("mousemove", draw);
+
+canvas.addEventListener("mouseup", () => {
+    isDrawing = false;
+    // Membuka kembali scrolling setelah selesai menggambar
+    document.body.style.overflow = "auto";
+});
+
+canvas.addEventListener("mouseout", () => {
+    isDrawing = false;
+    // Membuka kembali scrolling jika keluar dari area canvas
+    document.body.style.overflow = "auto";
+});
+
+canvas.addEventListener("touchstart", (e) => {
+    isDrawing = true;
+    [lastX, lastY] = [e.touches[0].clientX - canvas.getBoundingClientRect().left, e.touches[0].clientY - canvas.getBoundingClientRect().top];
+    // Mengunci scrolling
+    document.body.style.overflow = "hidden";
+});
+
+canvas.addEventListener("touchmove", draw);
+
+canvas.addEventListener("touchend", () => {
+    isDrawing = false;
+    // Membuka kembali scrolling setelah selesai menggambar
+    document.body.style.overflow = "auto";
+});
+
+canvas.addEventListener("touchcancel", () => {
+    isDrawing = false;
+    // Membuka kembali scrolling jika terjadi pembatalan sentuhan
+    document.body.style.overflow = "auto";
+});
+        function draw(e) {
+            if (!isDrawing) return;
+            context.strokeStyle = "#000";
+            context.lineWidth = 2;
+            context.lineJoin = "round";
+            context.lineCap = "round";
+
+            context.beginPath();
+            context.moveTo(lastX, lastY);
+
+            // Menggunakan event mouse atau touch, tergantung dari perangkat
+            if (e.type === "mousemove") {
+                [lastX, lastY] = [e.offsetX, e.offsetY];
+            } else if (e.type === "touchmove") {
+                [lastX, lastY] = [e.touches[0].clientX - canvas.getBoundingClientRect().left, e.touches[0].clientY - canvas.getBoundingClientRect().top];
+            }
+
+            context.lineTo(lastX, lastY);
+            context.stroke();
+        }
+
+        function clearCanvas() {
+            context.clearRect(0, 0, canvas.width, canvas.height);
+        }
+
+        function downloadSignature() {
+    // Menyiapkan canvas sementara dengan resolusi tinggi
+    const tempCanvas = document.createElement("canvas");
+    const tempContext = tempCanvas.getContext("2d");
+    const scaleFactor = 4; // Faktor skala untuk meningkatkan resolusi (sesuaikan sesuai kebutuhan)
+
+    tempCanvas.width = canvas.width * scaleFactor;
+    tempCanvas.height = canvas.height * scaleFactor;
+
+    // Menggambar gambar asli pada canvas sementara dengan skala
+    tempContext.drawImage(canvas, 0, 0, tempCanvas.width, tempCanvas.height);
+
+    // Mengubah gambar pada canvas sementara menjadi tautan unduhan
+    const link = document.createElement("a");
+    link.href = tempCanvas.toDataURL("image/png");
+    link.download = "signature.png";
+
+    // Menghapus canvas sementara setelah selesai
+    document.body.appendChild(tempCanvas);
+    link.click();
+    document.body.removeChild(tempCanvas);
+}
+
+    </script>
+
+
+
+
+
+<div id="pembungkus"  class="hidden">
+    <div class="flex  justify-center items-center m-4 gap-3">
+        <input id="awalteks" class="rubahteks w-1/2 h-10 rounded-lg bg-transparent shadow-xl border border-blue-900 text-gray-100 p-2 outline-none" type="text" placeholder="Teks yang ingin di ganti">
+        <button id="gantiteks" class="text-green-500 font-bold transition-transform duration-200 transform hover:scale-105"> <i class="fas fa-sync "></i></button>
+        <input id="penggantiteks" class="rubahteks w-1/2 h-10 rounded-lg bg-transparent shadow-xl border border-blue-900 text-gray-100 p-2 outline-none" type="text" placeholder="di ganti dengan ?">
+      </div>
+    </div>
+   
+      <script>
+        document.addEventListener("DOMContentLoaded", function () {
+          var textarea76576 = document.getElementById("utama");
+          var awalteksInput = document.getElementById("awalteks");
+          var penggantiteksInput = document.getElementById("penggantiteks");
+          var gantiButton = document.getElementById("gantiteks");
+          var pembungkus = document.getElementById("pembungkus");
+    
+          textarea76576.addEventListener("input", function () {
+  var teks = textarea76576.value;
+  if (teks.includes(".ganti")) {
+    // Jika teks textarea berisi ".ganti", tampilkan div "pembungkus"
+    pembungkus.style.display = "block";
+    // Hapus teks ".ganti" dari textarea
+    textarea76576.value = teks.replace(".ganti", "");
+  } else {
+    // Jika tidak, sembunyikan div "pembungkus"
+    pembungkus.style.display = "none";
+  }
+});
+
+          gantiButton.addEventListener("click", function () {
+            var teks = textarea76576.value;
+            var awalteks = awalteksInput.value;
+            var penggantiteks = penggantiteksInput.value;
+    
+            if (awalteks.trim() !== "") {
+              var regex = new RegExp(awalteks, "g");
+              var teksBaru = teks.replace(regex, penggantiteks);
+    
+              // Tambahkan kelas animasi saat teks berubah
+              textarea76576.classList.add("animate-text-grow");
+              setTimeout(function () {
+                textarea76576.classList.remove("animate-text-grow");
+              }, 500); // Hentikan animasi setelah 0.5 detik
+    
+              textarea76576.value = teksBaru;
+            }
+          });
+    
+          penggantiteksInput.addEventListener("keydown", function (event) {
+            if (event.key === "Enter") {
+              // Simulasikan klik pada tombol "gantiteks" jika tombol "Enter" ditekan
+              gantiButton.click();
+              event.preventDefault(); // Mencegah submit form (jika ada)
+            }
+          });
+    
+          // Menambahkan event listener saat tombol "Enter" ditekan pada input "awalteks"
+          awalteksInput.addEventListener("keydown", function (event) {
+            if (event.key === "Enter") {
+              // Fokus pada input "penggantiteks" ketika "Enter" ditekan
+              penggantiteksInput.focus();
+              event.preventDefault(); // Mencegah peristiwa default tombol "Enter"
+            }
+          });
+        });
+      </script>
+    
+
+
+
+  <!-- 
+
+
+    <div class="hidden grid gap-2 p-4 w-full overflow-x-auto" id="reylink">
+      Gunakan overflow-x-auto untuk membuat scrollbar horizontal jika diperlukan 
+    </div>
+
+
+    <script>
+        function detectAndDisplay() {
+            var inputText = document.getElementById('utama').value;
+            var reDomain =
+            /(\bhttps?:\/\/\S+\b)|(\S+@\S+\.\S+)|(\d{10,12})/g; // Pola pencocokan untuk tautan, alamat email, dan nomor handphone
+
+            var reylinkDiv = document.getElementById('reylink');
+            reylinkDiv.innerHTML = ""; // Hapus isi div sebelum menampilkan hasil
+
+            var matches = inputText.match(reDomain);
+
+            if (matches) {
+                reylinkDiv.style.display =
+                "block","overflow-x-auto"; // Tampilkan div ketika terdapat tautan, alamat email, atau nomor handphone
+
+                matches.forEach(function (match, index) {
+                    var span = document.createElement("span");
+                    if (/^https?:\/\//.test(match)) {
+                        var link = document.createElement("a");
+                        link.href = match;
+                        link.textContent = match;
+                        link.classList.add("text-blue-500", "text-xs", "p-1", "rounded",
+                            "hover:underline", "mr-2");
+                        link.style.animation = `fadeIn 2s ${index * 2}s`; // Animasi muncul
+                        span.appendChild(link);
+                    } else if (/^(\S+@\S+\.\S+)$/.test(match)) { // Mendeteksi alamat email
+                        var emailLink = document.createElement("a");
+                        emailLink.href = "mailto:" + match;
+                        emailLink.textContent = match;
+                        emailLink.classList.add("text-red-400", "text-xs", "p-1", "rounded",
+                            "hover:underline", "mr-2");
+                        emailLink.style.animation = `fadeIn 2s ${index * 2}s`; // Animasi muncul
+                        span.appendChild(emailLink);
+                    } else if (/^\d{10,12}$/.test(match)) { // Mendeteksi nomor handphone
+                        var phoneLink = document.createElement("a");
+                        phoneLink.href = "tel:" + match;
+                        phoneLink.textContent = match;
+                        phoneLink.classList.add("text-green-500", "text-xs", "p-1", "rounded",
+                            "hover:underline", "mr-2");
+                        phoneLink.style.animation = `fadeIn 2s ${index * 2}s`; // Animasi muncul
+                        span.appendChild(phoneLink);
+                    }
+                    reylinkDiv.appendChild(span);
+                });
+            } else {
+                reylinkDiv.style.animation = "fadeOut 0.5s"; // Animasi menghilang
+                reylinkDiv.style.display =
+                "none"; // Sembunyikan div jika tidak ada tautan, alamat email, atau nomor handphone
+            }
+        }
+
+        // Panggil fungsi detectAndDisplay saat textarea berubah
+        document.getElementById('utama').addEventListener('input', detectAndDisplay);
+    </script>
+
+
+-->
+
+
+
+
+
+
+
+
+
+
+
+
+    <div id="warnaG" class=" hidden justify-center items-center flex">
+        <div class="wrapper bg-gray-800 m-8  p-4 rounded-lg  " style="width: 400px;">
+            <div class="gradient-box h-44 w-full rounded-md"
+                style="background: linear-gradient(to left top, #5665E9, #A271F8);"></div>
+
+            <div class="options flex items-center gap-4  mt-8">
+                <div class="direction w-1/2">
+
+                    <div class="select-box">
+                        <select class="w-full bg-gray-800 text-gray-100 p-2 border border-gray-500 rounded">
+                            <option value="to top">Top</option>
+                            <option value="to right top">Right top</option>
+                            <option value="to right">Right</option>
+                            <option value="to right bottom">Right bottom</option>
+                            <option value="to bottom">Bottom</option>
+                            <option value="to left bottom">Left bottom</option>
+                            <option value="to left">Left</option>
+                            <option value="to left top" selected>Left top</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="palette items-center ml-10 mb-3 justify-center mt-4">
+                    <div class="colors flex gap-2">
+                        <input type="color" value="#5665E9" class="p-2 shadow-lg h-10 w-10 rounded-full">
+                        <input type="color" value="#A271F8" class="p-2 shadow-lg h-10 w-10 rounded-full">
+                    </div>
+                </div>
+            </div>
+
+            <div class="buttons mt-4 flex justify-center space-x-4">
+                <button style="background: linear-gradient(to left top, #5665E9, #A271F8);"
+                    class="refresh shadow-lg  text-white text-xs font-semibold py-2 px-4 rounded">Random Warna</button>
+
+            </div>
+        </div>
+    </div>
+
+
+    <script>
+        const gradientBox = document.querySelector(".gradient-box");
+        const selectMenu = document.querySelector(".select-box select");
+        const colorInputs = document.querySelectorAll(".colors input");
+        const textarea366 = document.querySelector("#utama");
+        const refreshBtn = document.querySelector(".refresh");
+
+
+        const getRandomColor = () => {
+            // Generating a random color in hexadecimal format. Example: #5665E9
+            const randomHex = Math.floor(Math.random() * 0xffffff).toString(16);
+            return `#${randomHex}`;
+        }
+
+        const generateGradient = (isRandom) => {
+            if (isRandom) {
+                colorInputs[0].value = getRandomColor();
+                colorInputs[1].value = getRandomColor();
+            }
+            const gradient =
+                `linear-gradient(${selectMenu.value}, ${colorInputs[0].value}, ${colorInputs[1].value})`;
+            gradientBox.style.background = gradient;
+            textarea366.value = `background: ${gradient};`;
+
+            // Ambil nilai warna dari input
+            const color1 = colorInputs[0].value;
+            const color2 = colorInputs[1].value;
+
+            // Atur teks kode angka dengan warna yang sesuai
+            document.getElementById("codeText").innerHTML =
+                `<span style="color: ${color1}">${color1}</span>, <span style="color: ${color2}">${color2}</span>`;
+        }
+
+
+        colorInputs.forEach(input => {
+            // Calling generateGradient function on each color input clicks
+            input.addEventListener("input", () => generateGradient(false));
+        });
+
+        selectMenu.addEventListener("change", () => generateGradient(false));
+        refreshBtn.addEventListener("click", () => generateGradient(true));
+    </script>
+
+
+
+    <script>
+        const textarea367 = document.querySelector("#utama");
+        const warnaG = document.getElementById("warnaG");
+
+        // Fungsi untuk menampilkan atau menyembunyikan div #warnaG berdasarkan teks dalam textarea
+        function toggleWarnaGVisibility() {
+            const text = textarea367.value;
+            if (text.includes(".warna")) {
+                warnaG.classList.remove("hidden");
+            } // Tidak perlu else statement untuk menyembunyikan kotak
+        }
+
+        // Event listener untuk mendengarkan perubahan pada textarea
+        textarea367.addEventListener("input", toggleWarnaGVisibility);
+
+        // Panggil fungsi toggleWarnaGVisibility saat halaman dimuat
+        toggleWarnaGVisibility();
+    </script>
+
+
+    <div id="opet"  class="  hidden text-gray-300 p-6 font-semibold hover:bg-green-500 bg-gray-800 m-4 rounded-lg text-center "></div>
+
+    <script>
+        const utama33 = document.getElementById('utama');
+        const opetDiv = document.getElementById('opet');
+
+        utama33.addEventListener('input', function () {
+            const text = utama33.value;
+            if (text.includes('.link')) {
+                const styledText = 'Nomor WhatsApp : \nPesan (Opsional) : ';
+                utama33.value = styledText;
+                utama33.style.fontWeight = 'bold';
+                utama33.style.color = 'gray';
+
+                // Hapus kelas 'hidden' dari elemen 'opet'
+                opetDiv.classList.remove('hidden');
+            } else {
+                updateWhatsAppLink();
+            }
+        });
+
+        opetDiv.addEventListener('click', function () {
+            // Menyalin teks dari elemen 'opet' ke clipboard
+            const textToCopy = opetDiv.innerText;
+            const textArea = document.createElement("textarea");
+            textArea.value = textToCopy;
+            document.body.appendChild(textArea);
+            textArea.select();
+            document.execCommand('copy');
+            document.body.removeChild(textArea);
+
+            // Memberi tahu pengguna bahwa teks telah disalin
+            alert('Teks telah disalin ke clipboard!');
+        });
+
+        function updateWhatsAppLink() {
+            const text = utama33.value;
+            if (text.includes('Nomor WhatsApp :')) {
+                let phoneNumberMatch = text.match(/\d{1,15}/);
+
+                if (phoneNumberMatch) {
+                    let phoneNumber = phoneNumberMatch[0];
+
+                    if (!phoneNumber.startsWith('+62')) {
+                        phoneNumber = phoneNumber.replace(/^0/, '+62');
+                    }
+
+                    const messageMatch = text.match(/Pesan \(Opsional\) : (.+)/);
+                    const message = messageMatch ? messageMatch[1] : ''; // Ambil pesan opsional
+
+                    let whatsappLink = `https://wa.me/${phoneNumber}`;
+                    if (message) {
+                        whatsappLink += `?text=${encodeURIComponent(message)}`;
+                    }
+
+                    opetDiv.innerHTML = `<a href="${whatsappLink}" target="_blank">${whatsappLink}</a>`;
+                }
+            }
+        }
+    </script>
+
+
+
+
+
+
+
+
+    <script src="https://rawgit.com/schmich/instascan-builds/master/instascan.min.js"></script>
+    <script>
+        const video = document.getElementById('video');
+        const outputTextarea = document.getElementById('utama');
+        const detectedMessage = document.getElementById('detected');
+
+        // Membuat instansiasi Instascan
+        const scanner = new Instascan.Scanner({
+            video: video
+        });
+
+        // Fungsi untuk memulai pemindaian
+        function startScanning() {
+            video.style.display = 'block';
+
+            Instascan.Camera.getCameras()
+                .then(function (cameras) {
+                    const rearCamera = cameras.find(camera => camera.name.includes('back'));
+                    if (rearCamera) {
+                        rearCamera.mirror = false; // Menonaktifkan mirror
+                        scanner.start(rearCamera);
+                    } else if (cameras.length > 0) {
+                        cameras[0].mirror = false; // Menonaktifkan mirror
+                        scanner.start(cameras[0]);
+                    } else {
+                        console.error('Tidak ada kamera yang tersedia.');
+                    }
+                })
+                .catch(function (err) {
+                    console.error(err);
+                });
+        }
+
+
+
+        // Fungsi untuk menghentikan pemindaian
+        function stopScanning() {
+            video.style.display = 'none';
+            scanner.stop();
+        }
+
+        // Fungsi untuk menangani konten QR Code yang terdeteksi
+        function handleDetectedContent(content) {
+            if (isValidURL(content)) {
+                window.location.href = content; // Arahkan ke URL jika tautan terdeteksi
+            } else if (isValidPhoneNumber(content)) {
+                // Menggunakan skema "tel:" untuk memicu panggilan telepon
+                const phoneNumber = content.replace(/\D/g, ''); // Hilangkan karakter selain angka
+                if (phoneNumber) {
+                    window.location.href = 'tel:' + phoneNumber;
+                }
+            }
+        }
+
+        // Fungsi untuk memeriksa apakah konten adalah nomor telepon
+        function isValidPhoneNumber(str) {
+            // Pattern untuk nomor telepon Indonesia yang umum
+            const pattern = /^(0|62|\\+62|0\\+62|62\\+0)8[0-9]{8,14}$/;
+            return pattern.test(str);
+        }
+
+
+        // Fungsi untuk memeriksa apakah konten adalah URL
+        function isValidURL(str) {
+            const pattern = /^(https?|ftp|file):\/\/.*/;
+            return pattern.test(str);
+        }
+
+        // Memantau input di textarea
+        outputTextarea.addEventListener('input', function () {
+            const text = outputTextarea.value;
+            if (text.includes('.scan')) {
+                startScanning();
+                outputTextarea.value = text.replace('.scan', '');
+
+                // Tampilkan kembali div yang tersembunyi
+                const hidenscan = document.getElementById('hidenscan');
+                hidenscan.style.display = 'block';
+            }
+        });
+
+
+        // Menambahkan event listener ketika QR Code terdeteksi
+        scanner.addListener('scan', function (content) {
+            outputTextarea.value = content;
+            detectedMessage.style.display = 'block';
+
+            handleDetectedContent(content); // Handle konten yang terdeteksi
+
+            setTimeout(() => {
+                detectedMessage.style.display = 'none';
+            }, 2000);
+        });
+    </script>
+
+
+
+    <div id="tutorial" class="hidden">
+        <div class="flex  items-center justify-center">
+            <label class="switch">
+                <input type="checkbox" id="film">
+                <span class="slider"></span>
+            </label>
+        </div>
+    </div>
+    <script>
+        const textarea35 = document.getElementById("utama");
+        const tutorialDiv = document.getElementById("tutorial");
+
+        // Fungsi untuk menampilkan div tutorial
+        function showTutorial() {
+            tutorialDiv.style.display = "block";
+        }
+
+        // Fungsi untuk menyembunyikan div tutorial
+        function hideTutorial() {
+            tutorialDiv.style.display = "none";
+        }
+
+        textarea35.addEventListener("input", () => {
+            const text = textarea35.value;
+            if (text.includes(".reyvideo")) {
+                showTutorial();
+                // Hapus teks .tutorial dari textarea35
+                textarea35.value = text.replace(".reyvideo", "");
+            } else {
+                hideTutorial();
+            }
+        });
+    </script>
+
+
+
+    <script>
+        const checkbox = document.getElementById("film");
+        const textarea34 = document.getElementById("utama");
+        const videoContainer = document.querySelector(".video-container");
+        const videos = videoContainer.querySelectorAll("video");
+        let currentVideo = 0;
+        const prevButton = document.getElementById("prevButton");
+        const nextButton = document.getElementById("nextButton");
+
+        // Fungsi untuk menampilkan video saat tombol diaktifkan
+        function showVideo() {
+            videos[currentVideo].style.display = "block";
+            videos[currentVideo].play();
+            textarea34.style.display = "none";
+            prevButton.style.display = "block"; // Menampilkan tombol "Sebelumnya"
+            nextButton.style.display = "block"; // Menampilkan tombol "Selanjutnya"
+        }
+
+        // Fungsi untuk menyembunyikan semua video
+        function hideVideos() {
+            videos.forEach((video) => {
+                video.style.display = "none";
+                video.pause();
+            });
+            prevButton.style.display = "none"; // Menyembunyikan tombol "Sebelumnya"
+            nextButton.style.display = "none"; // Menyembunyikan tombol "Selanjutnya"
+        }
+
+        checkbox.addEventListener("change", () => {
+            if (checkbox.checked) {
+                showVideo();
+            } else {
+                hideVideos();
+                textarea34.style.display = "block";
+            }
+        });
+
+        // Fungsi untuk menggeser video ke kiri
+        function slideLeft() {
+            hideVideos();
+            currentVideo = (currentVideo - 1 + videos.length) % videos.length;
+            showVideo();
+        }
+
+        // Fungsi untuk menggeser video ke kanan
+        function slideRight() {
+            hideVideos();
+            currentVideo = (currentVideo + 1) % videos.length;
+            showVideo();
+        }
+
+        // Tombol Sebelumnya
+        prevButton.addEventListener("click", () => {
+            if (checkbox.checked) {
+                slideLeft();
+            }
+        });
+
+        // Tombol Selanjutnya
+        nextButton.addEventListener("click", () => {
+            if (checkbox.checked) {
+                slideRight();
+            }
+        });
+    </script>
+
+    <script>
+        let doubleClickCount = 0;
+
+        // Fungsi yang akan dipanggil saat ada input di textarea
+        function showDeteksi() {
+            const textarea = document.getElementById('utama');
+            const inputText = textarea.value;
+
+            if (inputText.includes('.berjanji')) {
+                // Jika teks mengandung ".berjanji", ubah teks dan atribut textarea
+                const additionalText = "اَلْجَنَّةُ وَنَعِيْمُهَا سَعْدٌ لِمَنْ يُصَلِّيْ وَيُسَلِّمُ وَيُبَارِكُ عَلَيْهِ\n\nبِسْمِ اللّٰهِ الرَّحْمٰنِ الرَّحِيْمِ\nاَبْتَدِئُ الْاِمْلَاءَ بِاسْمِ الذَّاتِ الْعَلِيَّةِ ۞ مُسْتَدِرًّا فَيْضَ الْبَرَكَاتِ عَلٰى مَا اَنَالَهٗ وَاَوْلَاهُ ۞ وَاُثَنِّيْ بِحَمْدٍ مَّوَارِدُهٗ سَاۤئِغَةٌ هَنِيَّةٌ ۞ مُمْتَطِيًا مِّنَ الشُّكْرِ الْجَمِيْلِ مَطَايَاهُ ۞ وَاُصَلِّيْ وَاُسَلِّمُ عَلَى النُّوْرِ الْمَوْصُوْفِ بِالتَّقَدُّمِ وَالْاَوَّلِيَّةِ ۞ اَلْمُنْتَقِلِ فِى الْغُرَرِ الْكَرِيْمَةِ وَ الْجِبَاهِ ۞ وَ اَسْتَمْنِحُ اللّٰهَ تَعَالٰى رِضْوَانًا يَخُصُّ الْعِتْرَةَ الطَّاهِرَةَ النَّبَوِيَّةَ ۞ وَيَعُمُّ الصَّحَابَةَ وَ الْاَتْبَاعَ وَ مَنْ وَّالَاهُ ۞ وَاَسْتَجْدِيْهِ هِدَايَةً لِّسُلُوْكِ السُّبُلِ الْوَاضِحَةِ الْجَلِيَّةِ ۞ وَحِفْظًا مِنَ الْغَوَايَةِ فِيْ خُطَطِ الْخَطَاِ وَخُطَاهُ ۞ وَاَنْشُرُ مِنْ قِصَّةِ الْمَوْلِدِ النَّبَوِيِّ بُرُوْدًا حِسَانًا عَبْقَرِيَّةً ۞ نَاظِمًا مِّنَ النَّسَبِ الشَّرِيْفِ عِقْدًاتُحَلَّى الْمَسَامِعُ بِحُلَاهُ ۞ وَ اَسْتَعِيْنُ بِحَوْلِ اللّٰهِ تَعَالٰى وَقُوَّتِهِ الْقَوِيَّةِ ۞ فَاِنَّهٗ لَا حَوْلَ وَ لَا قُوَّةَ اِلَّا بِاللّٰهِ ۞\nعَطِّرِاللّٰهُمَّ قَبْرَهُ الْكَرِيْمَ بِعَرْفٍ شَذِيٍّ مِّنْ صَلَاةٍ وَّتَسْلِيْمٍ\n\nوَبَعْدُ فَاَقُوْلُ هُوَ سَيِّدُنَا مُحَمَّدُ بْنُ عَبْدِ اللّٰهِ بْنِ عَبْدِ الْمُطَّلِبِ وَ اسْمُهٗ شَيْبَةُ الْحَمْدِ حُمِدَتْ خِصَالُهُ السَّنِيَّةُ ۞ اِبْنِ هَاشِمٍ وّاسْمُهٗ عَمْرُوْ بْنُ عَبْدِ مَنَافٍ وَّاسْمُهُ الْمُغِيْرَةُ الَّذِيْ يَنْتَمِى الْاِرْتِقَاءُ لِعُلْيَاهُ ۞ اِبْنِ قُصَيٍّ وَّاسْمُهٗ مُجَمِّعٌ سُمِّيَ بِقُصَيٍّ لِّتَقَاصِيْهِ فِيْ بِلَادِ قُضَاعَةَ الْقَصِيَّةِ ۞ اِلٰى اَنْ اَعَادَهُ اللّٰهُ تَعَالٰى اِلَى الْحَرَمِ الْمُحْتَرَمِ فَحَمٰى حِمَاهُ ۞ اِبْنِ كِلَابٍ وَّاسْمُهٗ حَكِيْمُ بْنُ مُرَّةَ بْنِ كَعْبِ بْنِ لُؤَيِّ بْنِ غَالِبِ بْنِ فِهْرٍ وَّاسْمُهٗ قُرَيْشٌ وَّ اِلَيْهِ تُنْسِبُ الْبُطُوْنُ الْقُرَشِيَّةُ ۞ وَ مَا فَوْقَهٗ كِنَانِيٌّ كَمَا جَنَحَ اِلَيْهِ الْكَثِيْرُ وَارْتَضَاهُ ۞ اِبْنِ مَالِكِ بْنِ النَّضْرِ بْنِ كِنَانَةَ بْنِ خُزَيْمَةَ بْنِ مُدْرِكَةَ ابْنِ اِلْيَاسَ وَ هُوَ اَوَّلُ مَنْ اَهْدَى الْبُدْنَ اِلَى الرِّحَابِ الْحَرَمِيَّةِ ۞ وَ سُمِعَ فِيْ صُلْبِهِ النَّبِيُّ صَلَّى اللّٰهُ عَلَيْهِ وَ سَلَّمَ ذَكَرَ اللّٰهَ تَعَالٰى وَ لَبَّاهُ ۞ اِبْنِ مُضَرَ بْنِ نِزَارِ بْنِ مَعَدِّ بْنِ عَدْنَانَ وَ هٰذَا سِلْكٌ نَّظَمَتْ فَرَائِدُهٗ بَنَانَ السُّنَّةِ السَّنِيَّةِ ۞ وَ رَفْعُهٗ اِلَى الْخَلِيْلِ اِبْرَاهِيْمَ اَمْسَكَ عَنْهُ الشَّارِعُ وَ اَبَاهُ ۞ وَ عَدْنَانُ بِلَا رَيْبٍ عِنْدَ ذَوِى الْعُلُوْمِ النَّسَبِيَّةِ ۞ اِلَى الذَّبِيْحِ اِسْمَاعِيْلَ نِسْبَتُهٗ وَ مُنْتَمَاهُ ۞ فَاَعْظِمْ بِهٖ مِنْ عِقْدٍ تَاَلَّقَتْ كَوَاكِبُهُ الدُّرِّيَّةُ ۞ وَ كَيْفَ لَا وَالسَّيِّدُ الْاَ كْرَمُ صَلَّى اللهُ عَلَيْهِ وَ سَلَّمَ وَاسِطَتُهُ الْمُنْتَقَاهُ ۞\nعَطِّرِاللّٰهُمَّ قَبْرَهُ الْكَرِيْمَ بِعَرْفٍ شَذِيٍّ مِّنْ صَلَاةٍ وَّتَسْلِيْمٍ\n\nوَلَمَّا اَرَادَاللّٰهُ تَعَالٰى اِبْرَازَ حَقِيْقَتِهِ الْمُحَمَّدِيَّةِ ۞ وَ اِظْهَارَهٗ جِسْمًا وَّ رُوْحًا بِصُوْرَتِهٖ وَ مَعْنَاهُ ۞ نَقَلَهٗ اِلٰى مَقَرِّهٖ مِنْ صَدَفَةِ اٰمِنَةَ الزُّهْرِيَّةِ ۞ وَ خَصَّهَا الْقَرِيْبُ الْمُجِيْبُ بِاَنْ تَكُوْنَ اُمًّا لِّمُصْطَفَاهُ ۞ وَ نُوْدِيَ فِى السَّمٰوٰاتِ وَ الْاَرْضِ بِحَمْلِهَا لِاَنْوَارِهِ الذَّاتِيَّةِ ۞ وَ صَبَا كُلُّ صَبٍّ لِهُبُوْبِ نَسِيْمِ صَبَاهُ ۞ وَ كُسِيَتِ الْاَرْضُ بَعْدَ طُوْلِ جَدْبِهَا مِنَ النَّبَاتِ حُلَلًا سُنْدُسِيَّةً ۞ وَ اَيْنَعَتِ الثِّمَارُ وَاَدْنَى الشَّجَرُ لِلْجَانِيْ جَنَاهُ ۞ وَنَطَقَتْ بِحَمْلِهٖ كُلُّ دۤابَّةٍ لِّقُرَيْشٍ بِفِصَاحِ الْاَلْسُنِ الْعَرَبِيَّةِ ۞ وَ خَرَّتِ الْاَسِرَّةُ وَ الْاَصْنَامُ عَلَى الْوُجُوْهِ وَ الْاَفْوَاهُ ۞ وَ تَبَاشَرَتْ وُحُوْشُ الْمَشَارِقِ وَ الْمَغَارِبِ وَ دَوۤابُّهَا الْبَحْرِيَّةُ ۞ وَاحْتَسَتِ الْعَوَالِمُ مِنَ السُّرُوْرِ كَأْسَ حُمَيَّاهُ ۞ وَ بُشِّرَتِ الْجِنُّ بِاَظْلَالِ زَمَنِهٖ وَانْتُهِكَتِ الْكَهَانَةُ وَ رَهَبَتِ الرَّهْبَانِيَّةُ ۞ وَ لَهِجَ بِخَبَرِهٖ كُلُّ حَبْرٍ خَبِيْرٍ وَّ فِيْ حُلٰى حُسْنِهٖ تَاهَ ۞ وَ اُوْتِيَتْ اُمُّهٗ فِى الْمَنَامِ فَقَالَ لَهَا اِنَّكِ قَدْ حَمَلْتِ بِسَيِّدِ الْعٰالَمِيْنَ وَ خَيْرِ الْبَرِيَّةِ ۞ وَ سَمِّيْهِ اِذَاوَضَعْتِهٖ مُحَمَّدًالِّاَ نَّهٗ سَتُحْمَدُ عُقْبَاهُ ۞\nعَطِّرِاللّٰهُمَّ قَبْرَهُ الْكَرِيْمَ بِعَرْفٍ شَذِيٍّ مِّنْ صَلَاةٍ وَّتَسْلِيْمٍ\n\nوَلَمَّا تَمَّ مِنْ حَمْلِهٖ شَهْرَانِ عَلٰى مَشْهُوْرِ الْاَقْوَالِ الْمَرْوِيَّةِ ۞ تُوُفِّيَ بِالْمَدِيْنَةِ الْمُنَوَّرَةِ اَبُوْهُ عَبْدُ اللّٰهِ وَ كَانَ قَدِ اجْتَازَ بِاَخْوَالِهٖ بَنِيْ عَدِيٍّ مِّنَ الطّۤائِفَةِ النَّجَّارِيَّةِ ۞ وَ مَكَثَ فِيْهِمْ شَهْرًا سَقِيْمًا يُّعَانُوْنَ سُقْمَهٗ وَ شَكْوَاهُ ۞ وَ لَمَّا تَمَّ مِنْ حَمْلِهٖ عَلَى الرَّاجِحِ تِسْعَةُ اَشْهُرٍ قَمَرِيَّةٍ ۞ وَ اٰنَ لِلزَّمَانِ اَنْ يَنْجَلِيَ عَنْهُ صَدَاهُ ۞ حَضَرَ اُمَّهُ لَيْلَةَ مَوْلِدِهِ اٰسِيَةُ وَ مَرْيَمُ فِيْ نِسْوَةٍ مِّنَ الْحَظِيْرَةِ الْقُدْسِيَّةِ ۞ وَ اَخَذَهَا الْمَخَاضُ فَوَلَدَتْهُ صَلَّى اللّٰهُ عَلَيْهِ وَ سَلَّمَ نُوْرًا يَتَلَأْ لَاُ سَنَاهُ ۞ وَ مُحَيًّا كَالشَّمْسِ مِنْكَ مُضِيْءٌ ۞ اَسْفَرَتْ عَنْهُ لَيْلَةٌ غَرَّاءُ ۞ لَيْلَةُ الْمَوْلِدِ الَّذِيْ كَانَ لِلدِّيْنِ سُرُوْرٌ بِيَوْمِهِ وَازْدِهَاءُ ۞ يَوْمَ نَالَتْ بِوَضْعِهِ ابْنَةُ وَهَبٍ مِنْ فَخَارٍ مَا لَمْ تَنَلْهُ النِّسَاءُ ۞ وَ اَتَتْ قَوْمَهَا بِاَفْضَلَ مِمَّا حَمَلَتْ قَبْلُ مَرْيَمُ الْعَذْرَاءُ ۞ مَوْلِدٌ كَانَ مِنْهُ فِيْ طَالِعِ الْكُفْرِ وَ بَالٌ عَلَيْهِمُ وَ وَبَاءُ ۞ وَ تَوَالَتْ بُشْرَى الْهَوَاتِفِ اَنْ قَدْ وُلِدَ الْمُصْطَفَى وَ حَقَّ الْهَنَاءُ ۞ هذَا وَ قَدِ اسْتَحْسَنَ الْقِيَامَ عِنْدَ ذِكْرِ مَوْلِدِهِ الشَّرِيْفِ اَئِمَّةٌ ذَوُوْا رِوَايَةٍ وَرَوِيَّةٍ ۞ فَطُوْبَى لِمَنْ كَانَ تَعْظِيْمُهُ صَلَّى اللّٰهُ عَلَيْهِ وَسَلَّمَ غَايَةَ مَرَامِهٖ وَمَرْمَاهُ ۞\n";
+                textarea.value = additionalText;
+                textarea.style.fontSize = '25px';
+                textarea.style.textAlign = 'center';
+                textarea.style.lineHeight = '2';
+                textarea.style.backgroundColor = '#111827'; // Mengubah background menjadi bg-gray-900
+                textarea.style.padding = '0'; // Mengatur padding menjadi 0
+                textarea.setAttribute('readonly', true);
+                textarea.style.height = '100vh';
+
+                // Otomatis klik tombol dengan ID "tampilkanButton"
+                const tampilkanButton = document.getElementById('tampilkanButton');
+                tampilkanButton.click();
+            }
+        }
+
+
+        // Tambahkan event listener untuk memantau input
+        document.getElementById('utama').addEventListener('input', showDeteksi);
+
+        // Fungsi yang akan dipanggil saat teks area diklik dua kali
+        document.getElementById('utama').addEventListener('dblclick', function () {
+            const textarea = document.getElementById('utama');
+            if (doubleClickCount === 1) {
+                if (isFullscreen) {
+                    exitFullscreen();
+                    isFullscreen = false;
+                }
+                textarea.removeAttribute('readonly');
+                textarea.style.fontSize = '20px';
+                textarea.style.height = 'auto';
+                doubleClickCount = 0;
+            } else {
+                doubleClickCount++;
+            }
+        });
+    </script>
+
+
+    <script>
+        let doubleClickCount2 = 0;
+
+        // Fungsi yang akan dipanggil saat ada input di textarea
+        function showDeteksi() {
+            const textarea = document.getElementById('utama');
+            const inputText = textarea.value;
+
+            if (inputText.includes('.quran')) {
+                // Jika teks mengandung ".berjanji", ubah teks dan atribut textarea
+                const additionalText = "dd";
+                textarea.value = additionalText;
+                textarea.style.fontSize = '25px';
+                textarea.style.textAlign = 'center';
+                textarea.style.lineHeight = '2';
+                textarea.style.backgroundColor = '#111827'; // Mengubah background menjadi bg-gray-900
+                textarea.style.padding = '0'; // Mengatur padding menjadi 0
+                textarea.setAttribute('readonly', true);
+                textarea.style.height = '100vh';
+
+                // Otomatis klik tombol dengan ID "tampilkanButton"
+                const tampilkanButton = document.getElementById('tampilkanButton');
+                tampilkanButton.click();
+            }
+        }
+
+
+        // Tambahkan event listener untuk memantau input
+        document.getElementById('utama').addEventListener('input', showDeteksi);
+
+        // Fungsi yang akan dipanggil saat teks area diklik dua kali
+        document.getElementById('utama').addEventListener('dblclick', function () {
+            const textarea = document.getElementById('utama');
+            if (doubleClickCount2 === 1) {
+                if (isFullscreen) {
+                    exitFullscreen();
+                    isFullscreen = false;
+                }
+                textarea.removeAttribute('readonly');
+                textarea.style.fontSize = '20px';
+                textarea.style.height = 'auto';
+                doubleClickCount2 = 0;
+            } else {
+                doubleClickCount2++;
+            }
+        });
+    </script>
+
+
+
+
+
+    <div id="tomboledit" class="flex hidden items-center justify-center">
+        <label class="switch">
+            <input type="checkbox" id="toggle">
+            <span class="slider"></span>
+        </label>
+    </div>
+    <script>
+        // Mendapatkan referensi elemen-elemen yang diperlukan
+        const textarea31 = document.getElementById('utama');
+        const tomboledit = document.getElementById('tomboledit');
+        let isDivVisible = false;
+
+        // Fungsi yang akan dipanggil saat ada input di textarea31
+        function showDeteksi() {
+            // Mendapatkan nilai dari textarea31
+            const text = textarea31.value;
+
+            // Cek apakah teks .edit ada di textarea31
+            if (text.includes('.edit')) {
+                // Jika ada, tampilkan div "tomboledit" jika belum terlihat
+                if (!isDivVisible) {
+                    tomboledit.classList.remove('hidden');
+                    isDivVisible = true;
+                }
+
+                // Hapus teks .edit dari textarea31
+                textarea31.value = text.replace('.edit', '');
+            } else {
+                // Jika .edit tidak ada, jangan sembunyikan div "tomboledit" jika sudah terlihat
+                if (isDivVisible) {
+                    tomboledit.classList.add('hidden');
+                    isDivVisible = false;
+                }
+            }
+        }
+
+        // Tambahkan event listener untuk memantau input di textarea31
+        textarea31.addEventListener('input', showDeteksi);
+    </script>
+
+
+    <script>
+        const toggleSwitch = document.getElementById('toggle');
+        const textarea29 = document.getElementById('utama');
+
+        toggleSwitch.addEventListener('change', function () {
+            if (this.checked) {
+                textarea29.setAttribute('dir', 'ltr'); // Mengubah arah teks ke kiri-kanan
+            } else {
+                textarea29.setAttribute('dir', 'auto'); // Mengembalikan arah teks ke otomatis
+            }
+        });
+
+        textarea29.addEventListener('input', function () {
+            if (toggleSwitch.checked) {
+                // Jika tombol aktif, ganti spasi bawah dengan teks "\n"
+                const text = textarea29.value;
+                const newText = text.replace(/\n/g,
+                '\\n'); // Mengganti spasi bawah (baris baru) dengan teks "\n"
+                textarea29.value = newText;
+            }
+        });
+    </script>
+
+
+
+
+
+
+
+    <div id="semuacode" class="hidden">
+        <div class="flex flex-wrap p-4">
+            <div class="w-full md:w-1/2 p-2 ">
+                <div style="position: relative;">
+                    <textarea id="conversionResultDots" class="w-full bg-gray-800  rounded-md p-4" rows="6"
+                        placeholder="KODE STRIP" readonly></textarea>
+                    <button id="copyDots"
+                        class="bg-blue-500 text-gray-300 text-xs mb-2 px-2 mr-1 py-1  shadow-lg transition-transform duration-200 transform hover:scale-105 rounded-lg"
+                        style="position: absolute; bottom: 5px; right: 5px;">Copy</button>
+                    <button id="resetDots"
+                        class="bg-red-500 text-gray-300 text-xs m-2 mr-5 px-2 py-1  shadow-lg transition-transform duration-200 transform hover:scale-105 rounded-lg"
+                        style="position: absolute; bottom: 5px; right: 40px;">Reset</button>
+                </div>
+            </div>
+
+            <div class="w-full md:w-1/2 p-2">
+
+                <div style="position: relative;">
+                    <textarea id="conversionResultEmoticons" class="w-full bg-gray-800 rounded-md p-4" rows="6"
+                        placeholder="KODE EMOTIKON" readonly></textarea>
+                    <button id="copyEmoticons"
+                        class="bg-blue-500 text-gray-300 text-xs m-2 px-2 mr-1 py-1  shadow-lg transition-transform duration-200 transform hover:scale-105 rounded-lg"
+                        style="position: absolute; bottom: 5px; right: 5px;">Copy</button>
+                    <button id="resetEmoticons"
+                        class="bg-red-500 text-gray-300 text-xs m-2 mr-5 px-2 py-1  shadow-lg transition-transform duration-200 transform hover:scale-105 rounded-lg"
+                        style="position: absolute; bottom: 5px; right: 40px;">Reset</button>
+                </div>
+            </div>
+            <button id="tutupsemuacode"
+                Class="px-4 py-2 transition-transform duration-200 transform hover:scale-105  m-4 border border-blue-600 text-sm hover:bg-gray-700"
+                onclick="tutupSemuaCode()">Tutup Code</button>
+        </div>
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <script>
+        // Seleksi tombol dan elemen yang akan ditampilkan/menghilang
+        const tampilkanButton = document.getElementById('tampilkanButton');
+        const sembunyikanButton = document.getElementById('sembunyikanButton');
+        const rubahUkuran = document.getElementById('rubahUkuran');
+
+        // Event listener untuk tombol "Tampilkan"
+        tampilkanButton.addEventListener('click', function () {
+            rubahUkuran.style.display = 'block';
+        });
+
+        // Event listener untuk tombol "Sembunyikan"
+        sembunyikanButton.addEventListener('click', function () {
+            rubahUkuran.style.display = 'none';
+        });
+    </script>
+
+    <div id="umurtua" class="hidden">
+        <div id="container" class=" flex p-8 justify-center items-center">
+            <div id="grafik-umur">
+                <canvas id="umurChart" class="w-full"></canvas>
+            </div>
+        </div>
+    </div>
+    <script>
+        // Mengambil elemen tombol dan div umurtua
+        const tombolHitung = document.getElementById('hitung-button');
+        const divUmur = document.getElementById('umurtua');
+
+        // Menambahkan event listener untuk tombol
+        tombolHitung.addEventListener('click', function () {
+            // Mengubah kelas CSS dari 'hidden' menjadi 'visible'
+            divUmur.classList.remove('hidden');
+        });
+
+        // Fungsi untuk menghitung umur dan menampilkan hasil
+        function hitungUmur() {
+            // Lakukan perhitungan umur di sini
+            const umur = 25; // Contoh umur
+
+            // Tampilkan hasil umur
+            const hasilUmur = document.createElement('p');
+            hasilUmur.textContent = 'Umur Anda adalah ' + umur + ' tahun.';
+
+            // Gantikan konten div dengan hasil umur
+            divUmur.innerHTML = ''; // Hapus konten sebelumnya (jika ada)
+            divUmur.appendChild(hasilUmur);
+        }
+    </script>
+
+
+
+
+
+
+    <div id="qr" class="hidden">
+
+        <div class=" m-4  md:flex ">
+
+            <div class="p-4 bg-gray-800 shadow-md rounded-lg max-w-md w-full md:w-1/2  md:mr-2 mb-2 md:mb-0  mx-auto">
+                <div class="flex justify-between items-center">
+                    <label for="barcode-color" class="block text-gray-300 mr-4 font-bold">
+                        Color <i class="fas fa-barcode text-green-500 text-xl ml-2"></i>
+                    </label>
+                    <input type="color" id="barcode-color" value="#000000"
+                        class="p-2 h-10 m-4 w-10 border-2 border-gray-300 rounded-full focus:ring-2 focus:ring-blue-500 focus:outline-none">
+                </div>
+                <div class="flex justify-between items-center">
+                    <label for="qr-color" class="block text-gray-300 mr-4 font-bold">
+                        Color <i class="fas fa-qrcode text-green-500 text-xl ml-2"></i>
+                    </label>
+                    <input type="color" id="qr-color" value="#000000"
+                        class="p-2 h-10 m-4 w-10 border-2 border-gray-300 rounded-full focus:ring-2 focus:ring-blue-500 focus:outline-none">
+                </div>
+
+                <div class="flex justify-between items-center">
+                    <label for="bg-color" class="block text-gray-300 mr-4 font-bold">
+                        Background Color:
+                    </label>
+                    <input type="color" id="bg-color" value="#ffffff"
+                        class="p-2 h-10 m-4 w-10 border-2 border-gray-300 rounded-full focus:ring-2 focus:ring-blue-500 focus:outline-none">
+                </div>
+                <div class=" rounded-lg flex justify-center items-center">
+
+                    <button type="button" id="generate-button"
+                        class="lg:ml-2  bg-blue-700 hover:bg-blue-300 px-4 py-2 rounded-lg font-bold text-gray-100 xl:ml-4 mt-4">
+                        <i class="fas fa-rocket text-xl text-white mr-2 "></i> Buat
+                    </button>
+                </div>
+            </div>
+
+            <div class="grid w-full shadow-lg md:w-1/2  bg-gray-800 rounded-lg max-w-md p-2 mx-auto">
+                <div class="p-4 bg-white shadow-md rounded-lg  flex flex-wrap justify-center items-center">
+                    <canvas class="w-20 h-20 lg:w-24 lg:h-24 xl:w-32 xl:h-32 m-2" id="barcode1"></canvas>
+                    <canvas class="w-20 h-20 lg:w-24 lg:h-24 xl:w-32 xl:h-32 m-2" id="barcode2"></canvas>
+                    <canvas class="w-20 h-20 lg:w-24 lg:h-24 xl:w-32 xl:h-32 m-2" id="barcode3"></canvas>
+
+                </div>
+                <button type="button" id="save-button-jpg" class=" mt-3 px-4 py-2 rounded-lg font-bold text-gray-600 ">
+                    <i class="fas fa-download text-xl text-green-500 "></i> Unduh
+                </button>
+            </div>
+
+        </div>
+    </div>
+
+
+
+
+
+    <div id="alquran-container" class=" hidden p-4" dir="auto"
+        style="font-size: 30px; font-family: 'Arial', sans-serif;">
+        <canvas class="hidden mb-2" id="bar-chart" width="400" height="200"></canvas>
+
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Huruf dan Harokat</th>
+                    <th>Jumlah</th>
+                </tr>
+            </thead>
+            <tbody id="arab-details">
+            </tbody>
+        </table>
+        <div id="download-text" class="justify-center flex items-center">
+            <button
+                class="mt-4 mb-2 text-sm bg-green-600 hover:bg-green-700 text-white font-bold py-1 px-2 rounded ">Unduh
+                Teks</button>
+        </div>
+    </div>
+
+
+
+    <div id="deteksi" class="hidden ">
+        <div class=" m-10  grid justify-center items-center">
+
+            <div class="flex flex-wrap  text-center">
+                <div class=" p-2  w-1/2 md:w-1/4 flex flex-col items-center h-full">
+                    <canvas id="charDonutChart"></canvas>
+                    <div style="border:solid 1px rgba(75, 192, 192, 1);"
+                        class="text-xs mt-3 font-bold text-gray-400  w-full p-1   rounded text-center">Karakter:
+                        <div class="text-center"><span style="color: #FF5733;" class="text-center"
+                                id="charCount">0</span></div>
+                    </div>
+
+                </div>
+
+                <div class=" p-2  w-1/2 md:w-1/4 flex flex-col items-center h-full">
+                    <canvas id="uppercaseDonutChart"></canvas>
+                    <div style="border:solid 1px rgba(75, 192, 192, 1);"
+                        class="text-xs mt-3 font-bold text-gray-400  w-full p-1   rounded text-center">Huruf Besar:
+                        <div class="text-center"><span style="color: rgb(243, 255, 71);" class="text-center"
+                                id="uppercaseCount">0</span></div>
+                    </div>
+
+
+                </div>
+                <div class=" p-2  w-1/2 md:w-1/4 flex flex-col items-center h-full">
+                    <canvas id="lowercaseDonutChart"></canvas>
+                    <div style="border:solid 1px rgba(75, 192, 192, 1);"
+                        class="text-xs mt-3 font-bold text-gray-400  w-full p-1   rounded text-center">Huruf Kecil:
+                        <div class="text-center"><span style="color: #33FF57;" class="text-center"
+                                id="lowercaseCount">0</span></div>
+                    </div>
+                </div>
+                <div class=" p-2  w-1/2 md:w-1/4 flex flex-col items-center h-full">
+                    <canvas id="lineDonutChart"></canvas>
+                    <div style="border:solid 1px rgba(75, 192, 192, 1);"
+                        class="text-xs mt-3 font-bold text-gray-400  w-full p-1   rounded text-center">Jumlah Baris:
+                        <div class="text-center"><span style="color: rgb(166, 71, 255);" class="text-center"
+                                id="lineCount">0</span></div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+
+
+
+
+    </div>
+
+
+    <div class="hidden" id="kalimah">
+        <div class="container text-sm mx-auto p-8">
+            <div class="grid sm:grid-cols-2 gap-2">
+                <div class="w-full sm:w-1/1 mx-auto" style="overflow: hidden;">
+                    <canvas id="sentencesChart" class="w-full max-w-6xl mx-auto"></canvas>
+                </div>
+                <div class="w-full sm:w-1/2 mx-auto">
+                    <table class="w-full">
+                        <thead>
+                            <tr>
+                                <th style="border:solid 1px rgba(75, 192, 192, 1);" class="px-4 text-xl py-2">Kata</th>
+                                <th style="border:solid 1px rgba(75, 192, 192, 1);" class="px-4 text-xl py-2">Jumlah
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody style=" font-family: 'Arial', sans-serif; font-size: 20px;"
+                            class="text-gray-300 text-center" id="chartTable">
+                            <!-- Isi tabel disini -->
+                        </tbody>
+                    </table>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Mendapatkan elemen textarea dan div kalimah
+        const utamaTextarea = document.getElementById("utama");
+        const kalimahDiv = document.getElementById("kalimah");
+
+        // Menambahkan event listener untuk input pada textarea
+        utamaTextarea.addEventListener("input", function () {
+            // Cek apakah textarea memiliki teks (tidak kosong)
+            if (utamaTextarea.value.trim() !== "") {
+                // Jika tidak kosong, tampilkan div kalimah
+                kalimahDiv.classList.remove("hidden");
+            } else {
+                // Jika textarea kosong, sembunyikan div kalimah
+                kalimahDiv.classList.add("hidden");
+            }
+        });
+    </script>
+
+    <script>
+        const myTextarea = document.getElementById('utama');
+        const chartTable = document.getElementById('chartTable');
+        const ctx = document.getElementById('sentencesChart').getContext('2d');
+        let myChart; // Variabel untuk menyimpan objek grafik
+
+        function styleTable() {
+            chartTable.style.border = '1px solid rgba(75, 192, 192, 1)';
+
+            // Menambahkan gaya CSS untuk sel tabel
+            const tableRows = chartTable.getElementsByTagName('tr');
+            for (let i = 0; i < tableRows.length; i++) {
+                const tableCells = tableRows[i].getElementsByTagName('td');
+                for (let j = 0; j < tableCells.length; j++) {
+                    tableCells[j].style.border = '1px solid rgba(75, 192, 192, 1)';
+                    tableCells[j].classList.add('p-2'); // Menggunakan kelas-kelas Tailwind CSS lainnya jika diperlukan
+                }
+            }
+        }
+
+
+        // Fungsi untuk menghitung jumlah kalimat
+        function countSentences() {
+            const text = myTextarea.value;
+
+            // Menghapus grafik sebelum membuat yang baru
+            if (myChart) {
+                myChart.destroy();
+            }
+
+            // Menggunakan regex untuk menghitung jumlah kalimat (menggunakan tanda ., !, atau ? sebagai penanda akhir kalimat)
+            const sentences = text.split(/[.!?،]+/).filter(Boolean);
+            const sentenceCounts = {};
+
+            sentences.forEach(sentence => {
+                const words = sentence.trim().split(/\s+/).filter(Boolean);
+                words.forEach(word => {
+                    if (sentenceCounts[word]) {
+                        sentenceCounts[word]++;
+                    } else {
+                        sentenceCounts[word] = 1;
+                    }
+                });
+            });
+
+            // Menampilkan hasil dalam bentuk grafik
+            myChart = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: Object.keys(sentenceCounts),
+                    datasets: [{
+                        label: 'Jumlah Kalimat',
+                        data: Object.values(sentenceCounts),
+                        backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                        borderColor: 'rgba(75, 192, 192, 1)',
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
+                    }
+                }
+            });
+
+            // Menghapus isi tabel sebelum memasukkan yang baru
+            chartTable.innerHTML = '';
+
+            // Memasukkan detail dari chart ke dalam tabel
+            for (const word in sentenceCounts) {
+                const row = chartTable.insertRow();
+                const cell1 = row.insertCell(0);
+                const cell2 = row.insertCell(1);
+                cell1.innerHTML = word;
+                cell2.innerHTML = sentenceCounts[word];
+            }
+
+            // Memanggil fungsi untuk mengatur gaya CSS tabel
+            styleTable();
+        }
+
+        // Event listener saat pengguna menulis
+        myTextarea.addEventListener('input', countSentences);
+
+        // Awalnya, hitung kalimat saat halaman dimuat
+        countSentences();
+    </script>
+
+    <script>
+        const charDonutChartCanvas = document.getElementById('charDonutChart');
+        const charDonutChart = new Chart(charDonutChartCanvas, {
+            type: 'doughnut',
+            data: {
+                datasets: [{
+                    data: [0, 0],
+                    backgroundColor: ['#FF5733', 'rgba(255, 255, 255, 0)'],
+                    borderColor: 'rgba(75, 192, 192, 1)', // Warna biru cerah
+                    borderWidth: 1,
+                }],
+            },
+        });
+
+        const lineDonutChartCanvas = document.getElementById('lineDonutChart');
+        const lineDonutChart = new Chart(lineDonutChartCanvas, {
+            type: 'doughnut',
+            data: {
+                datasets: [{
+                    data: [0, 0],
+                    backgroundColor: ['rgb(166, 71, 255)', 'rgba(255, 255, 255, 0)'],
+                    borderColor: 'rgba(75, 192, 192, 1)', // Warna biru cerah
+                    borderWidth: 1,
+                }],
+            },
+        });
+
+        const uppercaseDonutChartCanvas = document.getElementById('uppercaseDonutChart');
+        const uppercaseDonutChart = new Chart(uppercaseDonutChartCanvas, {
+            type: 'doughnut',
+            data: {
+
+                datasets: [{
+                    data: [0, 0],
+                    backgroundColor: ['rgb(243, 255, 71)', 'rgba(255, 255, 255, 0)'],
+                    borderColor: 'rgba(75, 192, 192, 1)', // Warna biru cerah
+                    borderWidth: 1,
+                }],
+            },
+        });
+
+        const lowercaseDonutChartCanvas = document.getElementById('lowercaseDonutChart');
+        const lowercaseDonutChart = new Chart(lowercaseDonutChartCanvas, {
+            type: 'doughnut',
+            data: {
+
+                datasets: [{
+                    data: [0, 0],
+                    backgroundColor: ['#33FF57', 'rgba(255, 255, 255, 0)'],
+                    borderColor: 'rgba(75, 192, 192, 1)', // Warna biru cerah
+                    borderWidth: 1,
+                }],
+            },
+        });
+
+        const utama = document.getElementById('utama');
+        const charCount = document.getElementById('charCount');
+        const lineCount = document.getElementById('lineCount');
+        const uppercaseCount = document.getElementById('uppercaseCount');
+        const lowercaseCount = document.getElementById('lowercaseCount');
+        const deteksi = document.getElementById('deteksi');
+
+        function showDeteksi() {
+            // Munculkan elemen deteksi saat pengguna mulai menulis
+            if (utama.value.trim() !== '' && !containsArabic(utama.value)) {
+                deteksi.classList.remove('hidden');
+            } else {
+                deteksi.classList.add('hidden');
+            }
+        }
+
+        function containsArabic(text) {
+            const arabicRegex = /[\u0600-\u06FF]/g; // Regex untuk huruf Arab
+            return arabicRegex.test(text);
+        }
+
+        // Inisialisasi panjang minimal dan maksimal
+        let minLength = 100;
+        let maxLength = 1000;
+
+        // Ambil elemen textarea
+        const textarea21 = document.getElementById('utama');
+
+        // Tambahkan event listener untuk memantau input dalam textarea21
+        textarea21.addEventListener('input', function () {
+            const text = textarea21.value;
+            const charLength = text.length;
+
+            // Perbarui karakter
+            charCount.textContent = charLength;
+
+            // Menghitung jumlah huruf besar dan kecil
+            const uppercaseChars = (text.match(/[A-Z]/g) || []).length;
+            const lowercaseChars = (text.match(/[a-z]/g) || []).length;
+
+            // Update huruf besar
+            uppercaseCount.textContent = uppercaseChars;
+
+            // Update huruf kecil
+            lowercaseCount.textContent = lowercaseChars;
+
+            // Perbarui jumlah baris
+            const lineCountValue = text.split('\n').length;
+            lineCount.textContent = lineCountValue;
+
+            // Perbarui grafik karakter
+            charDonutChart.data.datasets[0].data = [charLength, maxLength - charLength];
+
+            // Perbarui grafik jumlah huruf besar dan kecil
+            uppercaseDonutChart.data.datasets[0].data = [uppercaseChars, maxLength - uppercaseChars];
+            lowercaseDonutChart.data.datasets[0].data = [lowercaseChars, maxLength - lowercaseChars];
+
+            // Perbarui grafik jumlah baris
+            lineDonutChart.data.datasets[0].data = [lineCountValue, maxLength - lineCountValue];
+
+            // Periksa kembali setiap kali ada perubahan teks
+            showDeteksi();
+
+            // Update grafik setelah memperbarui data
+            charDonutChart.update();
+            uppercaseDonutChart.update();
+            lowercaseDonutChart.update();
+            lineDonutChart.update();
+        });
+    </script>
+
+
+
+
+<!--
+
+
+    <div class="grid grid-cols-1 lg:grid-cols-1 mt-6 mx-4">
+        <div class="border border-blue-600  rounded p-4  text-center  lg:w-full">
+            <span id="dateValue" class="text-xs mr-2 bg-gray-800 rounded p-2 font-bold text-blue-600">Tanggal</span>
+            <span id="timeValue" class="text-xs bg-gray-800 rounded p-2  font-bold text-blue-600">Jam</span>
+            <canvas id="timeChart" class="w-full h-auto mt-12"></canvas>
+            <span id="timeText" class="text-xl hidden font-semibold text-gray-800 mt-4 text-center">-</span>
+        </div>
+        <div class="border hidden border-blue-500 rounded-lg p-4 text-right lg:w-full">
+
+            <canvas id="dateChart" class="w-full h-auto"></canvas>
+            <span id="dateText" class="text-xl font-semibold text-gray-800 mt-4 text-center">-</span>
+        </div>
+    </div>
+
+-->
+
+
+    <div id="browser" class=" m-4   rounded-lg h-screen mt-6  flex flex-col">
+        <div class="bg-gray-800 pl-2 pr-2 pt-2 rounded-t-lg flex w-full items-center">
+            <button class="control-button text-gray-400  mr-2 mt-2" id="home-button">
+
+                <span class="material-symbols-outlined">
+                    table_chart
+                </span>
+
+            </button>
+            <div class="address-bar text-gray-200 flex-1 text-center rounded-t-lg p-2 bg-gray-700" style="width: 30px;">
+                Penampil html css & javascript
+
+            </div>
+            <button class="control-button text-4xl text-gray-400  ml-2" id="home-button">
+                <span>+</span>
+            </button>
+
+        </div>
+        <div class="bg-gray-700  text-center flex items-center">
+            <button class="control-button text-gray-400 ml-4 mt-2 ml-4 mt-2" id="home-button">
+                <i class="material-icons">home</i>
+            </button>
+            <button class="control-button text-gray-400 ml-4 mt-2" id="back-button">
+                <i class="material-icons">arrow_back</i>
+            </button>
+            <button class="control-button text-gray-400 ml-4 mt-2" id="refresh-button">
+                <i class="material-icons">refresh</i>
+            </button>
+
+            <input type="text" class="address-bar flex-1 text-sm m-2 p-2 rounded-full pl-4 bg-gray-800" id="address-bar"
+                placeholder="http://127.0.0.1:5500">
+            <button class="control-button text-gray-400 mr-4 mt-2" id="home-button">
+                <i class="material-icons">more_vert</i>
+
+
+            </button>
+        </div>
+
+        <div class="browser-content flex-1 rounded-b-lg bg-gray-200 ">
+            <iframe srcdoc="" class="w-full h-full" id="html-container">
+                <!-- Konten HTML Anda di sini -->
+            </iframe>
+        </div>
+
+
+
+
+
+
+
+
+
+        <script>
+            const textarea23 = document.getElementById("utama");
+            const qrDiv = document.getElementById("qr");
+
+            textarea23.addEventListener("input", function () {
+                const inputValue = textarea23.value;
+
+                if (inputValue.includes(".qr")) {
+                    // Munculkan div dengan ID "qr"
+                    qrDiv.classList.remove("hidden");
+
+                    // Hapus teks ".qr" dari textarea23
+                    textarea23.value = inputValue.replace(".qr", "");
+
+                    // Fokuskan kembali ke textarea23
+                    textarea23.focus();
+                }
+            });
+        </script>
+
+
+
+        <script>
+            var barcode1 = document.getElementById("barcode1");
+            var barcode2 = document.getElementById("barcode2");
+            var barcode3 = document.getElementById("barcode3");
+
+            var barcodeInput = document.getElementById("utama");
+            var generateButton = document.getElementById("generate-button");
+            var saveButton = document.getElementById("save-button");
+
+            function hideCanvases() {
+                barcode1.style.display = "none";
+                barcode2.style.display = "none";
+                barcode3.style.display = "none";
+            }
+
+            function showCanvases() {
+                barcode1.style.display = "block";
+                barcode2.style.display = "block";
+                barcode3.style.display = "block";
+            }
+
+            generateButton.addEventListener("click", function () {
+                // Sembunyikan canvas
+                hideCanvases();
+                // Panggil fungsi generateBarcode()
+                generateBarcode();
+                // Tampilkan kembali canvas
+                showCanvases();
+            });
+
+            function generateBarcode() {
+                var text = barcodeInput.value;
+
+                if (text) {
+                    var qrColor = document.getElementById("qr-color").value;
+                    var bgColor = document.getElementById("bg-color").value;
+                    var barcodeColor = document.getElementById("barcode-color").value;
+
+                    // Generate barcode 1
+                    JsBarcode(barcode1, text, {
+                        format: "CODE128",
+                        lineColor: barcodeColor,
+                        background: bgColor,
+                        margin: 10,
+                        height: 300,
+                        size: 2000,
+                        displayValue: true,
+                        fontOptions: "bold",
+                        font: "monospace",
+                        fontSize: 0,
+                    });
+
+                    // Generate barcode 2
+                    new QRious({
+                        element: barcode2,
+                        value: text,
+                        size: 2000,
+
+                        background: bgColor,
+                        foreground: qrColor,
+                    });
+                    new QRious({
+                        element: barcode3,
+                        value: text,
+                        size: 2000,
+                        background: "rgba(0,0,0,0)",
+
+                        foreground: qrColor,
+                    });
+                }
+            }
+
+
+            generateButton.addEventListener("click", generateBarcode);
+            // Save button for JPG
+            var saveButtonJpg = document.getElementById("save-button-jpg");
+            saveButtonJpg.addEventListener("click", function () {
+                var barcode1Canvas = document.createElement("canvas");
+                barcode1Canvas.width = barcode1.width;
+                barcode1Canvas.height = barcode1.height;
+                var barcode1Context = barcode1Canvas.getContext("2d");
+                barcode1Context.clearRect(0, 0, barcode1.width, barcode1.height);
+                barcode1Context.fillStyle = "rgba(0,0,0,0)";
+                barcode1Context.fillRect(0, 0, barcode1.width, barcode1.height);
+                barcode1Context.drawImage(barcode1, 0, 0);
+
+                var barcode2Canvas = document.createElement("canvas");
+                barcode2Canvas.width = barcode2.width;
+                barcode2Canvas.height = barcode2.height;
+                var barcode2Context = barcode2Canvas.getContext("2d");
+                barcode2Context.clearRect(0, 0, barcode2.width, barcode2.height);
+                barcode2Context.fillStyle = "rgba(0,0,0,0)";
+                barcode2Context.fillRect(0, 0, barcode2.width, barcode2.height);
+                barcode2Context.drawImage(barcode2, 0, 0);
+
+                var barcode3Canvas = document.createElement("canvas");
+                barcode3Canvas.width = barcode3.width;
+                barcode3Canvas.height = barcode3.height;
+                var barcode3Context = barcode3Canvas.getContext("2d");
+                barcode3Context.clearRect(0, 0, barcode3.width, barcode3.height);
+                barcode3Context.fillStyle = "rgba(0,0,0,0)";
+                barcode3Context.fillRect(0, 0, barcode3.width, barcode3.height);
+                barcode3Context.drawImage(barcode3, 0, 0);
+
+                var link1 = document.createElement("a");
+                link1.href = barcode1Canvas.toDataURL("image/jpeg");
+                link1.download = "barcode1.jpg";
+                document.body.appendChild(link1);
+                link1.click();
+                document.body.removeChild(link1);
+
+                var link2 = document.createElement("a");
+                link2.href = barcode2Canvas.toDataURL("image/jpeg");
+                link2.download = "barcode2.jpg";
+                document.body.appendChild(link2);
+                link2.click();
+                document.body.removeChild(link2);
+
+                var link3 = document.createElement("a");
+                link3.href = barcode3Canvas.toDataURL("image/png");
+                link3.download = "barcode3.png";
+                document.body.appendChild(link3);
+                link3.click();
+                document.body.removeChild(link3);
+
+
+            });
+        </script>
+
+
+
+
+
+
+
+
+
+
+
+
+        <script>
+            document.getElementById("download-text").addEventListener("click", function () {
+                const utamaTextarea = document.getElementById('utama');
+                const teksUtama = utamaTextarea.value;
+
+                const arabDetails = document.getElementById('arab-details');
+                const rows = Array.from(arabDetails.querySelectorAll("tr"));
+                const textContent = rows.map(row => {
+                    const columns = Array.from(row.querySelectorAll("td"));
+                    return columns.map(column => column.textContent).join('\t');
+                }).join('\n');
+
+                const teksLengkap = `${teksUtama}\n\nHurup & Jumlah:\n${textContent}`;
+
+                const blob = new Blob([teksLengkap], {
+                    type: 'text/plain'
+                });
+                const url = URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = 'arab-details.txt';
+                a.click();
+            });
+        </script>
+
+
+
+
+
+
+
+
+
+
+        <script>
+            const textareaUtama5 = document.getElementById('utama');
+            const alquranContainer = document.getElementById('alquran-container');
+            const chartCanvas = document.getElementById('bar-chart');
+            const arabDetails = document.getElementById('arab-details');
+
+            // Fungsi untuk menghitung jumlah dan detail huruf hijaiyah dalam teks al-Quran
+            function hitungDetailHurufHijaiyah(teks) {
+                const detailHurufHijaiyah = {};
+                const regex = /[\u0600-\u06FF]/g;
+                const hasil = teks.match(regex);
+
+                if (hasil) {
+                    hasil.forEach(huruf => {
+                        if (!detailHurufHijaiyah[huruf]) {
+                            detailHurufHijaiyah[huruf] = 1;
+                        } else {
+                            detailHurufHijaiyah[huruf]++;
+                        }
+                    });
+                }
+
+                return detailHurufHijaiyah;
+            }
+
+
+            const chartData = {
+                labels: [],
+                datasets: [{
+                    label: 'Jumlah Kemunculan',
+                    data: [],
+                    backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                    borderColor: 'rgba(75, 192, 192, 1)',
+                    borderWidth: 1,
+                }],
+            };
+
+            const chartConfig = {
+                type: 'bar',
+                data: chartData,
+                options: {
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            ticks: {
+                                font: {
+                                    size: 15,
+                                },
+                            },
+                        },
+                        x: {
+                            maxBarThickness: 50,
+                            ticks: {
+                                font: {
+                                    size: 25,
+                                },
+                            },
+                        },
+                    },
+                },
+            };
+
+            const chart = new Chart(chartCanvas, chartConfig);
+
+
+            // Fungsi untuk menampilkan karakter Arab dan jumlahnya dalam tabel
+            function tampilkanTabel(detail) {
+                const arabDetails = document.getElementById('arab-details');
+                arabDetails.innerHTML = '';
+
+                let totalHurufArab = 0;
+                let totalKarakterLainnya = 0;
+
+                const harkatRegex = /[\u064B-\u0652]/; // Rentang karakter untuk harkat, kecuali karakter "ٰ"
+
+                for (const huruf in detail) {
+                    arabDetails.innerHTML += `<tr><td>${huruf}</td><td class="text-lg">${detail[huruf]}</td>`;
+                    if (/[\u0600-\u06FF]/.test(huruf) && !harkatRegex.test(huruf) && huruf !== "ٰ") {
+                        // Huruf Arab yang bukan karakter harkat, dan bukan karakter "ٰ"
+                        totalHurufArab += detail[huruf];
+                    } else {
+                        // Karakter lainnya
+                        totalKarakterLainnya += detail[huruf];
+                    }
+                }
+
+                // Tambahkan total ke dalam tabel
+                arabDetails.innerHTML +=
+                    `<tr><td class="text-sm font-bold ">Total Huruf</td><td class="text-lg">${totalHurufArab}</td></tr>`;
+                arabDetails.innerHTML +=
+                    `<tr><td class="text-sm font-bold ">Total Harokat</td><td class="text-lg">${totalKarakterLainnya}</td></tr>`;
+            }
+
+
+            // Tambahkan event listener untuk memantau perubahan dalam textarea "utama"
+            textareaUtama5.addEventListener('input', function () {
+                const teksUtama = textareaUtama5.value;
+
+                // Hitung detail huruf hijaiyah
+                const detailHurufHijaiyah = hitungDetailHurufHijaiyah(teksUtama);
+
+                // Jika ada huruf Arab, tampilkan hasilnya
+                if (Object.keys(detailHurufHijaiyah).length > 0) {
+                    // Tampilkan karakter Arab dan jumlahnya dalam tabel
+                    tampilkanTabel(detailHurufHijaiyah);
+
+                    // Update data grafik
+                    chart.data.labels = Object.keys(detailHurufHijaiyah);
+                    chart.data.datasets[0].data = Object.values(detailHurufHijaiyah);
+                    chart.update();
+
+                    // Jika Anda ingin menampilkan elemen tabel (alquran-container), Anda bisa menghilangkan class "hidden"
+                    alquranContainer.classList.remove('hidden');
+                } else {
+                    // Jika tidak ada huruf Arab, sembunyikan elemen tabel
+                    alquranContainer.classList.add('hidden');
+                    arabDetails.innerHTML = '';
+                }
+            });
+        </script>
+
+
+
+
+
+
+
+
+
+    </div>
+
+
+    <script>
+        const textareaUtama45 = document.getElementById('utama');
+        const browser = document.getElementById('browser');
+        // Deklarasikan konstanta (variabel) untuk tombol "home" dan "refresh"
+        const homeButton = document.getElementById('home-button');
+        const backButton = document.getElementById('back-button');
+
+        const refreshButton = document.getElementById('refresh-button');
+
+        const htmlContainer = document.getElementById('html-container');
+
+        // Fungsi untuk menampilkan div "browser"
+        function tampilkanBrowser() {
+            browser.classList.remove('hidden');
+        }
+
+        // Fungsi untuk melakukan navigasi kembali
+        function navigateBack() {
+            htmlContainer.contentWindow.history.back(); // Ini akan melakukan navigasi kembali dalam iframe
+        }
+        // Fungsi untuk navigasi ke halaman awal
+        function navigateHome() {
+            htmlContainer.contentWindow.location.href =
+                "URL_HALAMAN_AWAL"; // Ganti dengan URL halaman awal yang diinginkan
+        }
+        // Fungsi untuk me-refresh halaman dalam iframe
+        function refreshPage() {
+            htmlContainer.contentWindow.location.reload(); // Me-refresh halaman dalam iframe
+        }
+
+        // Fungsi untuk memeriksa apakah ada kode HTML dalam textarea
+        function updateBrowser() {
+            const kode = textareaUtama45.value;
+            const isHTML = /<[\w\W]*>/.test(kode);
+
+            if (isHTML) {
+                tampilkanBrowser(); // Tampilkan div "browser"
+            } else {
+                browser.classList.add('hidden'); // Sembunyikan div "browser"
+            }
+        }
+
+        // Tambahkan event listener untuk memantau perubahan dalam textarea
+        textareaUtama45.addEventListener('input', updateBrowser);
+
+        // Tambahkan event listener untuk mendeteksi paste di textarea
+        textareaUtama45.addEventListener('paste', tampilkanBrowser);
+        // Tambahkan event listener untuk tombol "home"
+        homeButton.addEventListener('click', navigateHome);
+
+
+        // Tambahkan event listener untuk tombol "arrow back"
+        backButton.addEventListener('click', navigateBack);
+
+        // Tambahkan event listener untuk tombol "refresh"
+        refreshButton.addEventListener('click', refreshPage);
+
+
+
+        // Panggil fungsi pertama kali saat halaman dimuat
+        updateBrowser();
+    </script>
+
+    <script>
+        const textareaUtama4 = document.getElementById('utama');
+        const htmlContainer4 = document.getElementById('html-container');
+
+        // Fungsi untuk memperbarui konten di dalam iframe "html-container"
+        function updateHtmlContainer4() {
+            const kode = textareaUtama4.value;
+
+            // Setel konten iframe dengan isi dari textarea
+            htmlContainer4.srcdoc = kode;
+        }
+
+        // Tambahkan event listener untuk memantau perubahan dalam textarea "utama"
+        textareaUtama4.addEventListener('input', updateHtmlContainer4);
+
+        // Panggil fungsi pertama kali saat halaman dimuat
+        updateHtmlContainer4();
+    </script>
+
+
+
+    <br><br><br><br>
+
+    <p style="background-color: #33ff5800;"></p>
+
+    <script>
+        // Ambil elemen textarea
+        const textarea18 = document.getElementById('utama');
+
+        // Tambahkan event listener untuk memantau input dalam textarea18
+        textarea18.addEventListener('input', function () {
+            let teks = textarea18.value;
+
+            // Cek jika input mengandung ".go"
+            if (teks.includes('.go')) {
+                Swal.fire({
+                    title: 'Pilihan Pencarian',
+                    showCancelButton: true,
+                    cancelButtonText: 'Batal',
+                    showCloseButton: false,
+                    showConfirmButton: false,
+                    customClass: {
+                        popup: 'bg-gray-800',
+                        container: 'bg-gray-800',
+                        title: 'text-green-500',
+                    },
+                    html: '<div class="p-4" style="max-height: 400px;  background-color: #33ff5800; overflow-y: auto;  overflow-x: hidden; ">' +
+                        '<button id="googleButton" class="bg-gray-700 text-gray-200 m-2 py-2 px-4 rounded-lg w-full">Google</button>' +
+                        '<button id="translateButton" class="bg-gray-700 text-gray-200 m-2 py-2 px-4 rounded-lg w-full">Google Translate</button>' +
+                        '<button id="youtubeButton" class="bg-gray-700 text-gray-200 m-2 py-2 px-4 rounded-lg w-full">Youtube</button>' +
+                        '<button id="mapsButton" class="bg-gray-700 text-gray-200 m-2 py-2 px-4 rounded-lg w-full">Google Maps</button>' +
+                        '<button id="wikipediaButton" class="bg-gray-700 text-gray-200 m-2 py-2 px-4 rounded-lg w-full">Wikipedia</button>' +
+                        '<button id="yandexButton" class="bg-gray-700 text-gray-200 m-2 py-2 px-4 rounded-lg w-full">Yandex</button>' +
+                        '<button id="bingButton" class="bg-gray-700 text-gray-200 m-2 py-2 px-4 rounded-lg w-full">Bing</button>' +
+                        '<button id="ai1Button" class="bg-gray-700 text-gray-200 m-2 py-2 px-4 rounded-lg w-full">AI 1</button>' +
+                        '<button id="ai2Button" class="bg-gray-700 text-gray-200 m-2 py-2 px-4 rounded-lg w-full">AI 2</button>' +
+                        '</div>',
+                });
+
+
+                const googleButton = document.getElementById('googleButton');
+                const translateButton = document.getElementById('translateButton');
+                const youtubeButton = document.getElementById('youtubeButton');
+                const mapsButton = document.getElementById('mapsButton');
+                const wikipediaButton = document.getElementById('wikipediaButton');
+                const yandexButton = document.getElementById('yandexButton');
+                const bingButton = document.getElementById('bingButton');
+                const ai1Button = document.getElementById('ai1Button');
+                const ai2Button = document.getElementById('ai2Button');
+
+                googleButton.addEventListener('click', () => {
+                    handleSearch('Google');
+                });
+
+                translateButton.addEventListener('click', () => {
+                    handleSearch('Google Translate');
+                });
+
+                youtubeButton.addEventListener('click', () => {
+                    handleSearch('Youtube');
+                });
+
+                mapsButton.addEventListener('click', () => {
+                    handleSearch('Google Maps');
+                });
+
+                wikipediaButton.addEventListener('click', () => {
+                    handleSearch('Wikipedia');
+                });
+
+                yandexButton.addEventListener('click', () => {
+                    handleSearch('Yandex');
+                });
+
+                bingButton.addEventListener('click', () => {
+                    handleSearch('Bing');
+                });
+
+                ai1Button.addEventListener('click', () => {
+                    handleSearch('AI 1');
+                });
+
+                ai2Button.addEventListener('click', () => {
+                    handleSearch('AI 2');
+                });
+
+                // Hapus teks dari textarea setelah memprosesnya
+                this.value = teks.replace('.go', '');
+            }
+        });
+
+        function handleSearch(selectedOption) {
+            let searchQuery = textarea18.value.replace('.go', '');
+            let searchUrl = '';
+
+            if (selectedOption === 'Google') {
+                searchUrl = 'https://www.google.com/search?q=' + searchQuery;
+            } else if (selectedOption === 'Google Translate') {
+                searchUrl = 'https://translate.google.com/?sl=auto&tl=en&text=' + searchQuery;
+            } else if (selectedOption === 'Youtube') {
+                searchUrl = 'https://www.youtube.com/search?q=' + searchQuery;
+            } else if (selectedOption === 'Google Maps') {
+                searchUrl = 'https://www.google.com/maps/search/' + searchQuery;
+            } else if (selectedOption === 'Wikipedia') {
+                searchUrl = 'https://en.wikipedia.org/wiki/' + searchQuery;
+            } else if (selectedOption === 'Yandex') {
+                searchUrl = 'https://www.yandex.com/search/?text=' + searchQuery;
+            } else if (selectedOption === 'Bing') {
+                searchUrl = 'https://www.bing.com/search?q=' + searchQuery;
+            } else if (selectedOption === 'AI 1') {
+                searchUrl = 'https://you.com/search?q=' + searchQuery + '&fromSearchBar=true&tbm=youchat&cid=';
+            } else if (selectedOption === 'AI 2') {
+                searchUrl = 'https://www.perplexity.ai/search?q=&focus=internet' + searchQuery;
+            }
+
+            window.open(searchUrl, '_blank');
+        }
+    </script>
+
+
+
+
+
+
+    <script>
+        // Ambil elemen textarea
+        const textarea10 = document.getElementById('utama');
+
+        // Tambahkan event listener untuk memantau input dalam textarea10
+        textarea10.addEventListener('input', function () {
+            let teks = textarea10.value;
+
+            // Cek jika input mengandung ".vocal"
+            if (teks.includes('.vocal')) {
+                Swal.fire({
+                    title: 'Pilih Huruf Vokal',
+                    input: 'select',
+                    inputOptions: {
+                        'a': 'A',
+                        'i': 'I',
+                        'u': 'U',
+                        'e': 'E',
+                        'o': 'O',
+                    },
+                    customClass: {
+                        popup: 'bg-gray-900',
+                        container: 'bg-gray-900',
+                        title: 'text-green-500',
+                        input: 'bg-gray-800 text-gray-200', // Atur warna latar belakang dan teks select
+                    },
+                    showCancelButton: false, // Sembunyikan tombol Batal
+                    allowOutsideClick: false,
+                    preConfirm: (vocal) => {
+                        if (vocal) {
+                            // Hapus semua kemunculan ".vocal" dalam teks
+                            teks = teks.replace(/\.vocal/g, '');
+
+                            // Gantilah semua huruf vokal dengan huruf vokal yang dipilih
+                            teks = teks.replace(/[aiueo]/g, vocal);
+
+                            // Salin teks yang telah diubah ke clipboard
+                            navigator.clipboard.writeText(teks).then(() => {
+                                Swal.fire({
+                                    icon: 'success',
+                                    title: 'Teks Telah Diubah dan Disalin!',
+                                    showConfirmButton: false,
+                                    timer: 2000,
+                                    customClass: {
+                                        popup: 'bg-gray-900',
+                                        container: 'bg-gray-900',
+                                        title: 'text-green-500',
+                                    },
+                                });
+                            }).catch((error) => {
+                                console.error('Gagal menyalin teks ke clipboard:', error);
+                            });
+
+                            textarea10.value = teks;
+                        }
+                    },
+                });
+            }
+        });
+    </script>
+
+
+
+
+    <script>
+        const textareaUmur = document.getElementById('utama');
+        const hitungButton = document.getElementById('hitung-button');
+
+        let umurDihitung = false;
+        let kondisiAwalTextarea = '';
+
+        textareaUmur.addEventListener('input', function () {
+            const teksUmur = textareaUmur.value;
+
+            if (teksUmur.includes('.umur') && !umurDihitung) {
+                kondisiAwalTextarea = teksUmur;
+                const teksTanpaUmur = teksUmur.replace('.umur', '');
+                textareaUmur.value = teksTanpaUmur + 'Tanggal:\nBulan:\nTahun:';
+                hitungButton.style.display = 'block';
+
+                hitungButton.addEventListener('click', function () {
+                    const teksUmur = textareaUmur.value;
+                    if (teksUmur.includes('Tanggal:') && teksUmur.includes('Bulan:') && teksUmur
+                        .includes('Tahun:')) {
+                        const tanggalMatch = /Tanggal:(\d{1,2})\n/.exec(teksUmur);
+                        const bulanMatch = /Bulan:(\d{1,2})\n/.exec(teksUmur);
+                        const tahunMatch = /Tahun:(\d{4})/.exec(teksUmur);
+
+                        if (tanggalMatch && bulanMatch && tahunMatch) {
+                            const tanggal = parseInt(tanggalMatch[1]);
+                            const bulan = parseInt(bulanMatch[1]) -
+                                1; // Perhatikan pengurangan 1 untuk bulan.
+                            const tahun = parseInt(tahunMatch[1]);
+
+                            const today = new Date();
+                            const birthDate = new Date(tahun, bulan,
+                                tanggal); // Perbaikan bulan.
+
+                            const ageInMilliseconds = today - birthDate;
+
+                            const ageInSeconds = ageInMilliseconds / 1000;
+                            const ageInMinutes = ageInSeconds / 60;
+                            const ageInHours = ageInMinutes / 60;
+                            const ageInDays = ageInHours / 24;
+
+                            const years = Math.floor(ageInDays / 365);
+                            const months = Math.floor((ageInDays % 365) / 30.44);
+                            const days = Math.floor(ageInDays % 30.44);
+                            const hours = Math.floor(ageInHours % 24);
+                            const minutes = Math.floor(ageInMinutes % 60);
+                            const seconds = Math.floor(ageInSeconds % 60);
+
+                            const umurText =
+                                `Umur Anda adalah :\n 🥲 ${years} tahun\n 😥 ${months} bulan\n 😓 ${days} hari\n 😬 ${hours} jam\n 😅 ${minutes} menit\n 🤣 ${seconds} detik\n 📌 By-REY`;
+
+
+                            textareaUmur.value = kondisiAwalTextarea + umurText;
+
+                            // Hapus teks .umur
+                            textareaUmur.value = textareaUmur.value.replace('.umur', '');
+
+                            hitungButton.style.display = 'none';
+                            umurDihitung = true;
+
+                            // Buat grafik batang
+                            const umurCanvas = document.createElement('canvas');
+                            umurCanvas.id = 'umurChart';
+                            umurCanvas.width = 400;
+                            umurCanvas.height = 200;
+
+                            // Tambahkan grafik ke elemen tampilan
+                            const grafikDiv = document.getElementById('grafik-umur');
+                            grafikDiv.innerHTML = '';
+                            grafikDiv.appendChild(umurCanvas);
+
+                            const ctx = umurCanvas.getContext('2d');
+
+                            const data = {
+                                labels: ['Tahun', 'Bulan', 'Hari', 'Jam', 'Menit', 'Detik'],
+                                datasets: [{
+                                    label: 'Umur Anda',
+                                    data: [years, months, days, hours, minutes, seconds],
+                                    backgroundColor: [
+                                        'rgba(75, 192, 192, 0.2)', // Hijau dengan tingkat kejernihan 50%
+                                        'rgba(75, 192, 192, 0.2)',
+                                        'rgba(75, 192, 192, 0.2)',
+                                        'rgba(75, 192, 192, 0.2)',
+                                        'rgba(75, 192, 192, 0.2)',
+                                        'rgba(75, 192, 192, 0.2)'
+                                    ],
+                                    borderColor: 'rgba(75, 192, 192, 1)', // Warna garis batas
+                                    borderWidth: 1 // Lebar garis batas
+                                }]
+                            };
+
+                            const config = {
+                                type: 'bar', // Mengubah tipe grafik menjadi 'bar'
+                                data: data,
+                                options: {
+                                    scales: {
+                                        y: {
+                                            beginAtZero: true
+                                        }
+                                    },
+                                    plugins: {
+                                        legend: {
+                                            display: false // Sembunyikan legenda
+                                        }
+                                    }
+                                }
+                            };
+
+                            const umurChart = new Chart(ctx, config);
+
+
+                        }
+                    }
+                });
+            }
+        });
+    </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <div class="p-8" id="catatan-container">
+        <h2 id="judul-catatan-tersimpan" class="mb-4 text-gray-400 font-bold  shadow" style="display: none;">Catatan
+            Tersimpan :</h2>
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <script>
+        const textareaBalik = document.getElementById('utama');
+        const pesanBalik = document.getElementById('pesan');
+
+        textareaBalik.addEventListener('input', function () {
+            const text = this.value;
+
+            // Memeriksa apakah teks mengandung ".balik"
+            if (text.includes('.balik')) {
+                const reversedText = text.replace('.balik', '').split(' ').map(word => word.split('')
+                    .reverse().join('')).join(' ');
+                this.value = reversedText;
+
+                // Salin teks yang telah dibalik ke clipboard
+                navigator.clipboard.writeText(reversedText).then(() => {
+                    pesanBalik.textContent = 'Teks telah dibalik dan disalin ke clipboard.';
+                    pesanBalik.style.display = 'block'; // Menampilkan pesan
+                    setTimeout(() => {
+                        pesanBalik.style.display =
+                            'none'; // Menghilangkan pesan setelah 5 detik
+                    }, 5000);
+                }).catch((error) => {
+                    console.error('Gagal menyalin teks ke clipboard:', error);
+                });
+            }
+        });
+    </script>
+
+    <script>
+        const textareaRapih = document.getElementById('utama');
+        const pesanRapih = document.getElementById('pesan');
+        let namaPengguna = '';
+
+        function mintaNamaPengguna() {
+            namaPengguna = prompt('Masukkan nama Anda:');
+            if (!namaPengguna) {
+                namaPengguna = 'rey'; // Menggunakan default jika tidak ada nama
+            }
+        }
+
+        function gantiTeksDenganNama() {
+            const currentDate = new Date();
+            const monthNames = [
+                'Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni',
+                'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember'
+            ];
+
+            const text = textareaRapih.value;
+            const textTanpaRapih = text.replace('.status', '').trim();
+            const formattedText = textTanpaRapih;
+            const formattedDate =
+                `${currentDate.getDate()} ${monthNames[currentDate.getMonth()]} ${currentDate.getFullYear()}`;
+            const formattedTime =
+                `${currentDate.getHours()}:${currentDate.getMinutes()}:${currentDate.getSeconds()}`;
+            const teksRapih =
+                `'${formattedText}'\n\n        -${namaPengguna}-\n${formattedDate}\n       ${formattedTime}`;
+
+            textareaRapih.value = teksRapih; // Memperbarui teks di textarea
+
+            // Salin teks yang telah diformat rapih ke clipboard
+            navigator.clipboard.writeText(teksRapih).then(() => {
+                pesanRapih.textContent = 'Teks telah diformat rapih dan disalin ke clipboard.';
+                pesanRapih.style.display = 'block';
+                setTimeout(() => {
+                    pesanRapih.style.display = 'none';
+                }, 5000);
+            }).catch((error) => {
+                console.error('Gagal menyalin teks ke clipboard:', error);
+            });
+        }
+
+        textareaRapih.addEventListener('input', function () {
+            const text = this.value;
+
+            // Memeriksa apakah teks mengandung ".status"
+            if (text.includes('.status')) {
+                mintaNamaPengguna();
+                gantiTeksDenganNama();
+            }
+        });
+    </script>
+
+    <script>
+        const textareaSejajar = document.getElementById('utama');
+        const pesanSejajar = document.getElementById('pesan');
+
+        textareaSejajar.addEventListener('input', function () {
+            const text = this.value;
+
+            // Memeriksa apakah teks mengandung ".sejajar"
+            if (text.includes('.sejajar')) {
+                const formattedText = text.replace('.sejajar', '').split(' ').map(word => {
+                    return word.split('').map((char, index) => {
+                        return index % 2 === 0 ? char.toUpperCase() : char
+                            .toLowerCase();
+                    }).join('');
+                }).join('\n');
+                this.value = formattedText;
+
+                // Salin teks yang telah diformat sejajar ke clipboard
+                navigator.clipboard.writeText(formattedText).then(() => {
+                    pesanSejajar.textContent =
+                        'Teks telah diformat sejajar dan disalin ke clipboard.';
+                    pesanSejajar.style.display = 'block'; // Menampilkan pesan
+                    setTimeout(() => {
+                        pesanSejajar.style.display =
+                            'none'; // Menghilangkan pesan setelah 5 detik
+                    }, 5000);
+                }).catch((error) => {
+                    console.error('Gagal menyalin teks ke clipboard:', error);
+                });
+            }
+        });
+    </script>
+
+
+
+
+
+
+
+
+
+    <div></div>
+
+    <script>
+        const textareaUtama = document.getElementById('utama');
+        const catatanContainer = document.getElementById('catatan-container');
+        const judulCatatanTersimpan = document.getElementById('judul-catatan-tersimpan');
+
+
+
+        // Fungsi untuk menyimpan catatan ke local storage
+        function simpanCatatanKeLocalStorage() {
+            const catatanTextareas = catatanContainer.querySelectorAll('textarea');
+            const catatanArray = [];
+            catatanTextareas.forEach(function (catatanTextarea) {
+                catatanArray.push(catatanTextarea.value);
+            });
+            localStorage.setItem('catatan', JSON.stringify(catatanArray));
+        }
+
+        // Fungsi untuk menampilkan catatan dari local storage
+        function tampilkanCatatanDariLocalStorage() {
+            const catatanArray = JSON.parse(localStorage.getItem('catatan'));
+            if (catatanArray) {
+                catatanArray.forEach(function (catatanText) {
+                    tambahkanCatatan(catatanText);
+                });
+            }
+        }
+
+
+
+
+        // Fungsi untuk menambahkan catatan ke halaman
+        function tambahkanCatatan(teksCatatan) {
+            // Menampilkan judul "Catatan Tersimpan"
+            judulCatatanTersimpan.style.display = 'block';
+
+            const textareaCatatan = document.createElement('div');
+            textareaCatatan.classList.add('catatan', 'bg-gray-800', 'w-full', 'p-2', 'rounded-lg', 'shadow-lg',
+                'text-sm', 'mb-4', 'text-blue-300');
+
+            const teks = document.createElement('textarea');
+            teks.value = teksCatatan;
+            teks.rows = 6;
+            teks.dir = 'auto';
+            teks.classList.add('bg-gray-800', 'w-full', 'p-2', 'rounded-t-lg', 'text-sm', 'mb-4', 'text-blue-300');
+
+            const salinButton = document.createElement('button');
+            salinButton.innerHTML = '<i class="fas fa-copy" style="margin-left:8px; "></i>'
+            salinButton.addEventListener('click', function () {
+                // Salin teks dari textarea ke clipboard
+                teks.select();
+                document.execCommand('copy');
+
+            });
+
+            const hapusButton = document.createElement('button');
+            hapusButton.innerHTML = '<i class="fas fa-trash" style="margin-left:8px;"></i>';
+            hapusButton.addEventListener('click', function () {
+                Swal.fire({
+                    title: 'Konfirmasi Hapus',
+                    text: 'Apakah Anda yakin ingin menghapus catatan ini?',
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Ya, Hapus',
+                    cancelButtonText: 'Batal',
+                    customClass: {
+                        popup: 'bg-gray-900',
+                        container: 'bg-gray-900',
+                        title: 'text-green-500', // Mengatur warna judul
+                        confirmButton: 'bg-green-500 hover:bg-green-600', // Mengatur tombol konfirmasi
+                        cancelButton: 'bg-red-500 hover:bg-red-600', // Mengatur tombol batal
+                    },
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        // Hapus catatan saat tombol hapus ditekan
+                        catatanContainer.removeChild(textareaCatatan);
+                        // Simpan perubahan ke local storage
+                        simpanCatatanKeLocalStorage();
+                    }
+                });
+            });
+
+            const unduhButton = document.createElement('button');
+            unduhButton.innerHTML = '<i class="fas fa-download" style="margin-left:8px; "></i>';
+            unduhButton.addEventListener('click', function () {
+                // Unduh teks catatan saat tombol unduh ditekan
+                const textToUnduh = teks.value;
+                unduhTeks(textToUnduh, 'catatan.txt');
+            });
+
+            const infoButton = document.createElement('button');
+            infoButton.innerHTML = '<i class="fas fa-info" style="margin-left:8px;"></i>';
+            infoButton.addEventListener('click', function () {
+                const teksCatatan = teks.value;
+                const jumlahKarakter = teksCatatan.length;
+                const jumlahKata = teksCatatan.split(/\s+/).filter(Boolean).length;
+                const jumlahBaris = teksCatatan.split('\n').filter(Boolean).length;
+                const jumlahHurufBesar = teksCatatan.replace(/[^A-Z]/g, '').length;
+                const jumlahHurufKecil = teksCatatan.replace(/[^a-z]/g, '').length;
+
+                const tanggalPerbuatan = new Date().toLocaleString();
+                const infoPopup = `
+  <div class="shadow-lg text-sm text-green-500 rounded-lg">
+    <div class=" text-green-500 rounded p-2" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+      <strong style="flex: 1; text-align: left;">Jumlah Karakter:</strong>
+      <span style="flex: 1; text-align: right;">${jumlahKarakter}</span>
+    </div>
+    <div class=" text-green-500 rounded p-2" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+      <strong style="flex: 1; text-align: left;">Jumlah Kata:</strong>
+      <span style="flex: 1; text-align: right;">${jumlahKata}</span>
+    </div>
+    <div class=" text-green-500 rounded p-2" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+      <strong style="flex: 1; text-align: left;">Jumlah Baris:</strong>
+      <span style="flex: 1; text-align: right;">${jumlahBaris}</span>
+    </div>
+    <div class=" text-green-500 rounded p-2" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+      <strong style="flex: 1; text-align: left;">Jumlah Huruf Besar:</strong>
+      <span style="flex: 1; text-align: right;">${jumlahHurufBesar}</span>
+    </div>
+    <div class=" text-green-500 rounded p-2" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+      <strong style="flex: 1; text-align: left;">Jumlah Huruf Kecil:</strong>
+      <span style="flex: 1; text-align: right;">${jumlahHurufKecil}</span>
+    </div>
+    <div class=" text-green-500 rounded p-2" style="display: flex; justify-content: space-between; align-items: center;">
+      <strong style="flex: 1; text-align: left;">Tanggal & Jam Perbuatan:</strong>
+      <span style="flex: 1; text-align: right;">${tanggalPerbuatan}</span>
+    </div>
+  </div>
+`;
+
+                Swal.fire({
+                    title: 'Info Catatan',
+                    html: infoPopup,
+                    customClass: {
+                        popup: 'bg-gray-900',
+                        container: 'bg-gray-900',
+                        content: 'text-green-500',
+                        confirmButton: 'bg-green-500 hover:bg-green-600',
+                    },
+                });
+
+
+
+
+            });
+
+
+            textareaCatatan.appendChild(teks);
+            textareaCatatan.appendChild(salinButton);
+            textareaCatatan.appendChild(hapusButton);
+            textareaCatatan.appendChild(unduhButton);
+            textareaCatatan.appendChild(infoButton);
+            catatanContainer.appendChild(textareaCatatan);
+
+            // Tambahkan event listener untuk memantau perubahan dalam textarea "teks"
+            teks.addEventListener('input', function () {
+                const teksCatatan = teks.value;
+                if (teksCatatan) {
+                    // Simpan catatan ke local storage setelah perubahan
+                    simpanCatatanKeLocalStorage();
+                }
+            });
+        }
+
+
+
+        // Fungsi untuk mengunduh teks sebagai file
+        function unduhTeks(teks, namaFile) {
+            const blob = new Blob([teks], {
+                type: 'text/plain'
+            });
+            const url = window.URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = namaFile;
+            a.click();
+            window.URL.revokeObjectURL(url);
+        }
+
+        // Panggil fungsi untuk menampilkan catatan yang ada di local storage saat halaman dimuat
+        tampilkanCatatanDariLocalStorage();
+
+        // Tambahkan event listener untuk memantau perubahan dalam textarea "utama"
+        textareaUtama.addEventListener('input', function () {
+            const teksUtama = textareaUtama.value;
+
+            // Periksa apakah teksUtama berisi ".save"
+            if (teksUtama.includes('.save')) {
+                // Hapus ".save" dari teksUtama
+                const teksCatatan = teksUtama.replace('.save', '');
+                tambahkanCatatan(teksCatatan);
+
+                // Kosongkan textarea "utama"
+                textareaUtama.value = '';
+
+                // Simpan catatan ke local storage setelah perubahan
+                simpanCatatanKeLocalStorage();
+            }
+        });
+
+        // Fungsi untuk memfilter catatan berdasarkan teks pencarian
+        function filterCatatan(tertulis) {
+            const catatanTextareas = catatanContainer.querySelectorAll('.catatan');
+            catatanTextareas.forEach(function (catatanTextarea) {
+                const teksCatatan = catatanTextarea.querySelector('textarea').value.toLowerCase();
+                if (teksCatatan.includes(tertulis)) {
+                    catatanTextarea.style.display = 'block'; // Tampilkan textarea "catatan" yang sesuai
+                } else {
+                    catatanTextarea.style.display =
+                        'none'; // Sembunyikan textarea "catatan" yang tidak sesuai
+                }
+            });
+        }
+
+        // Tambahkan event listener untuk pencarian
+        textareaUtama.addEventListener('keyup', function () {
+            // Ambil teks yang dimasukkan dalam textarea "utama" dan ubah ke huruf kecil
+            const teksPencarian = textareaUtama.value.toLowerCase();
+
+            // Panggil fungsi filterCatatan dengan teksPencarian sebagai argumen
+            filterCatatan(teksPencarian);
+        });
+    </script>
+
+
+
+
+
+
+    <script>
+        const textareaUtama3 = document.getElementById('utama');
+
+        // Tambahkan event listener untuk memantau perubahan dalam textarea "utama"
+        textareaUtama3.addEventListener('input', function () {
+            // Ambil nilai teks dari textarea "utama"
+            const teksUtama = textareaUtama3.value;
+
+            // Periksa apakah teksUtama berisi ".salin"
+            if (teksUtama.includes('.salin')) {
+                // Hapus ".salin" dari teksUtama
+                const teksTanpaSalin = teksUtama.replace('.salin', '');
+
+                // Ganti karakter baris baru (\n) dengan karakter baris baru (\r\n)
+                const teksDiformat = teksTanpaSalin.replace(/\n/g, '\r\n');
+
+                // Salin teks ke clipboard
+                const tempInput = document.createElement('textarea');
+                tempInput.value = teksDiformat;
+                document.body.appendChild(tempInput);
+                tempInput.select();
+                document.execCommand('copy');
+                document.body.removeChild(tempInput);
+
+                // Kosongkan textarea "utama"
+                textareaUtama3.value = '';
+            }
+        });
+    </script>
+
+
+
+    <!-- Tambahkan elemen teks interim dengan ID dan class -->
+    <div style="text-align: center; padding: 10px; position: fixed; bottom: 0; left: 0; width: 100%;">
+        <span class="popup-box rounded-lg text-yellow-400 hidden" id="interim-text"></span>
+    </div>
+
+
+
+    <script>
+        // Ambil referensi elemen teks interim dan tombol rekaman
+        const interimText2 = document.getElementById("interim-text");
+        const startRecordingButton = document.getElementById("start-recording");
+
+        // Tambahkan event listener untuk tombol rekaman
+        startRecordingButton.addEventListener("click", function () {
+            // Hapus kelas "hidden" untuk menampilkan teks interim
+            interimText2.classList.remove("hidden");
+
+            // Di sini Anda dapat memulai rekaman suara
+            // Pastikan untuk menambahkan logika rekaman suara sesuai dengan kebutuhan Anda.
+        });
+    </script>
+
+
+
+
+    <script>
+        const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+        const recognition = new window.webkitSpeechRecognition();
+        const outputText = document.getElementById('utama');
+
+        const interimText = document.getElementById('interim-text');
+        const startBtn = document.getElementById('start-btn');
+        const stopBtn = document.getElementById('stop-btn');
+
+
+        const punctuation = {
+            "titik ": ".",
+            "pemisah": ":",
+            "koma": ",",
+            "tiga titik": "...",
+            "tanda tanya": "?",
+            "tanda seru": "!",
+            "petik satu": "'",
+            "petik dua": "\"",
+            "kurung buka": "(",
+            "kurung tutup": ")",
+            "kurung kurawal buka": "{",
+            "kurung kurawal tutup": "}",
+            "sama dengan": "=",
+            "tanda tambah": "+",
+            "tanda kurangi": "-",
+            "tanda kali": "×",
+            "tanda bagi": "÷",
+            "persen": "%",
+            "panah kanan": ">",
+            "panah kiri": "<",
+            "poin": "\n• ",
+            "point": "\n• ",
+            "baris baru": " ",
+            "spasi": "\n",
+            "hehehe": "🤭🤭",
+            "subhan": "MUHAMMAD SUBHAN AL-GOTSANI",
+            "agim": "AGIM ABDUL GHOFUR",
+
+        };
+
+        function capitalize(str) {
+            let words = str.split(" ");
+            words = words.map((word) => {
+                if (word in punctuation) {
+                    return punctuation[word];
+                } else {
+                    return word.charAt(0).toUpperCase() + word.slice(1);
+                }
+            });
+            return words.join(" ");
+        }
+
+        let isRecording = true;
+        recognition.lang = 'id-ID';
+        recognition.lang = ['id-ID', 'su-ID'];
+        recognition.continuous = true;
+        recognition.maxAlternatives = 5;
+        recognition.interimResults = isMobile ? false : true;
+
+        recognition.onend = () => {
+            if (isRecording) {
+                console.log('Recognition ended, restarting');
+                recognition.start({
+                    remember: true
+                });
+
+            }
+        };
+
+        recognition.onerror = (event) => {
+            console.error('Recognition error', event);
+        };
+
+        setTimeout(() => {
+            stopRecognition();
+        }, 300000); // rekam selama 5 menit (300 detik)
+
+        function showInterimTranscripts() {
+            if (interimTranscripts.length > 0 && !isTyping) {
+                interimText.style.display = 'block';
+                interimText.innerHTML = interimTranscripts.join('');
+            } else {
+                interimText.style.display = 'none';
+                interimText.innerHTML = '';
+            }
+        }
+
+
+        function toggleRecognition() {
+            const popupBox = document.querySelector('.popup-box');
+
+            if (isRecording) {
+                recognition.stop();
+                startBtn.classList.remove('recording');
+                startBtn.style.display = 'inline-block';
+                stopBtn.style.display = 'none';
+
+                interimText.innerHTML = '';
+                popupBox.classList.remove('show');
+            } else {
+                recognition.start();
+                startBtn.classList.add('recording');
+                stopBtn.style.display = 'inline-block';
+                popupBox.classList.add('show');
+            }
+
+            isRecording = !isRecording;
+        }
+
+        const shareContent = (url) => {
+            window.location.href = url + encodeURIComponent(outputText.value);
+        }
+
+
+        const searchOnYouTube = () => {
+            const query = outputText.value;
+            const url = `https://www.youtube.com/results?search_query=${encodeURIComponent(query)}`;
+            window.open(url, '_blank');
+            audio.play();
+        }
+        const audio = new Audio('assets/notif4.mp3');
+        let googleWindow;
+
+        const searchOnGoogle = () => {
+            const query = outputText.value;
+            const url = `https://www.google.com/search?q=${encodeURIComponent(query)}`;
+
+            if (googleWindow && !googleWindow.closed) { // cek apakah window sudah dibuka sebelumnya
+                googleWindow.location.href = url; // buka URL di window yang sudah dibuka
+            } else {
+                googleWindow = window.open(url, 'googleWindow'); // buka window baru dengan nama 'googleWindow'
+            }
+
+            audio.play(); // tambahkan kode ini untuk memainkan file audio
+        }
+        const audio7 = new Audio('assets/notif1.mp3');
+        const goToFooter = () => {
+            // Mengarahkan pengguna ke halaman HTML lain (ganti 'nama-halaman.html' dengan nama halaman yang sesuai)
+            window.location.href = 'index.html';
+        }
+
+
+        const color1Button = () => {
+            const color1Button = document.getElementById("color1Button");
+            color1Button.click();
+            audio.play();
+        }
+        const audio5 = new Audio('assets/notif1.mp3');
+        const goToProduk = () => {
+            // Pindah ke bagian footer
+            const Produk = document.getElementById("Produk");
+            window.scrollTo(0, Produk.offsetTop);
+            audio5.play();
+        }
+        const audio6 = new Audio('assets/notif1.mp3');
+        const goToTatang = () => {
+            // Pindah ke bagian footer
+            const Tatang = document.getElementById("Tatang");
+            window.scrollTo(0, Tatang.offsetTop);
+            audio6.play();
+        }
+
+
+        const shareToWhatsApp = () => {
+            window.location.href = "https://wa.me/?text=" + encodeURIComponent(outputText.value);
+            audio.play();
+        }
+
+        let currentDirection = null; // variabel global untuk menyimpan arah scroll saat ini
+        let scrollInterval = null; // variabel global untuk menyimpan interval scroll saat ini
+
+        function startAutoScroll(direction) {
+            if (currentDirection !== direction) {
+                // Jika arah scroll saat ini berbeda dengan arah yang baru, hentikan scroll terlebih dahulu
+                stopAutoScroll();
+                currentDirection = direction;
+            }
+
+            // Mulai scroll dengan arah yang baru
+            const scrollStep = 1;
+            const scrollSpeed = 10;
+            scrollInterval = setInterval(() => {
+                if (currentDirection === "up") {
+                    window.scrollBy(0, -scrollStep);
+                } else if (currentDirection === "down") {
+                    window.scrollBy(0, scrollStep);
+                }
+            }, scrollSpeed);
+        }
+
+        function stopAutoScroll() {
+            clearInterval(scrollInterval);
+        }
+
+
+        recognition.onresult = function (event) {
+            const interimTranscripts = [];
+            for (let i = event.resultIndex, len = event.results.length; i < len; i++) {
+                const transcript = event.results[i][0].transcript;
+                if (event.results[i].isFinal) {
+                    let output = transcript;
+
+                    for (let word in punctuation) {
+                        const pattern = new RegExp("\\b" + word + "\\b", "gi");
+                        output = output.replace(pattern, punctuation[word]);
+                    }
+
+
+                    if (/\bsalin teks\b/.test(output.toLowerCase())) {
+                        navigator.clipboard.writeText(outputText.value);
+                        outputText.focus();
+
+                        if ('vibrate' in navigator) {
+                            navigator.vibrate(200);
+                        }
+
+                        // Memainkan suara ketika teks tersalin
+                        const audio = new Audio(
+                            'assets/notif5.mp3'); // Gantilah 'path/ke/suara.mp3' dengan path ke file audio Anda
+                        audio.play();
+
+                        if (output.toLowerCase().includes("salin teks")) {
+                            const copyBtn = document.getElementById('salin-btn');
+                            copyBtn.click();
+                        }
+                    }
+
+                    if (/\btempel teks\b/.test(output.toLowerCase())) {
+                        // Mengambil teks dari clipboard
+                        navigator.clipboard.readText().then((clipboardText) => {
+                            if (clipboardText) {
+                                // Mendapatkan teks yang sudah ada di textarea
+                                const existingText = outputText.value;
+
+                                // Menggabungkan teks dari clipboard dengan teks yang ada di textarea
+                                const newText = existingText + clipboardText;
+
+                                // Memasukkan teks yang sudah digabung ke textarea
+                                outputText.value = newText;
+
+                                if ('vibrate' in navigator) {
+                                    navigator.vibrate(200);
+                                }
+
+                                // Memainkan suara ketika teks dipaste
+                                const audio = new Audio(
+                                    'assets/notif5.mp3'
+                                    ); // Gantilah 'path/ke/suara.mp3' dengan path ke file audio Anda
+                                audio.play();
+                            }
+                        });
+                    } else if (output.toLowerCase().includes("hapus")) {
+                        if (output.toLowerCase().includes("semua")) { // hapus semua kalimat
+                            outputText.value = "";
+                            const audio = new Audio(
+                                'assets/notif2.mp3'); // ganti 'suara-sukses.mp3' dengan path file suara Anda
+                            audio.play(); // memainkan suara ketika perintah dijalankan
+                        } else if (output.toLowerCase().includes("satu kalimat")) { // hapus satu kalimat terakhir
+                            outputText.value = hapusKalimatTerakhir(outputText.value, 1);
+                            const audio = new Audio(
+                                'assets/notif2.mp3'); // ganti 'suara-sukses.mp3' dengan path file suara Anda
+                            audio.play();
+                        } else if (output.toLowerCase().includes("dua kalimat")) { // hapus dua kalimat terakhir
+                            outputText.value = hapusKalimatTerakhir(outputText.value, 2);
+                            const audio = new Audio(
+                                'assets/notif2.mp3'); // ganti 'suara-sukses.mp3' dengan path file suara Anda
+                            audio.play();
+                        } else if (output.toLowerCase().includes("tiga kalimat")) { // hapus tiga kalimat terakhir
+                            outputText.value = hapusKalimatTerakhir(outputText.value, 3);
+                            const audio = new Audio(
+                                'assets/notif2.mp3'); // ganti 'suara-sukses.mp3' dengan path file suara Anda
+                            audio.play();
+                        } else if (output.toLowerCase().includes("4 kalimat")) { // hapus empat kalimat terakhir
+                            outputText.value = hapusKalimatTerakhir(outputText.value, 4);
+                            const audio = new Audio(
+                                'assets/notif2.mp3'); // ganti 'suara-sukses.mp3' dengan path file suara Anda
+                            audio.play();
+                        } else {
+                            outputText.value = hapusKalimatSebelumnya(outputText.value) ||
+                                hapusKalimatTerakhirTidakKosong(
+                                    outputText.value);
+                        }
+                    } else if (output.toLowerCase().includes("share ke whatsapp")) {
+                        shareToWhatsApp();
+                    } else if (output.toLowerCase().includes("cari di google")) {
+                        searchOnGoogle();
+                    } else if (output.toLowerCase().includes("cari di youtube")) {
+                        searchOnYouTube();
+                    } else if (output.toLowerCase().includes("share ke facebook")) {
+                        shareContent('https://facebook.com/sharer/sharer.php?u=');
+                        // ganti URL di atas dengan URL dari platform sharing yang ingin digunakan
+                    } else if (output.toLowerCase().includes("beli makanan")) {
+                        goToFooter();
+
+                    } else if (output.toLowerCase().includes("pindah ke produk")) {
+                        goToProduk();
+
+                    } else if (output.toLowerCase().includes("pindah ke atas")) {
+                        goToTatang();
+
+                    } else if (output.toLowerCase().includes("mode layar penuh")) {
+                        document.querySelector('#full-mode-toggle').click();
+
+
+                        const audio = new Audio(
+                            'assets/notif3.mp3'); // ganti 'suara-sukses.mp3' dengan path file suara Anda
+                        audio.play();
+                    } else if (output.toLowerCase().includes("mode layar biasa")) {
+                        document.querySelector('#full-mode-toggle').click();
+                        const audio = new Audio(
+                            'assets/notif3.mp3'); // ganti 'suara-sukses.mp3' dengan path file suara Anda
+                        audio.play();
+
+                    } else if (output.toLowerCase().includes("stop scroll")) {
+                        stopAutoScroll(); // menghentikan scroll
+                        const audio = new Audio(
+                            'assets/notif3.mp3'); // ganti 'suara-sukses.mp3' dengan path file suara Anda
+                        audio.play();
+                    } else if (output.toLowerCase().includes("scroll ke bawah")) {
+                        startAutoScroll("down");
+                        const audio = new Audio(
+                            'assets/notif5.mp3'); // ganti 'suara-sukses.mp3' dengan path file suara Anda
+                        audio.play();
+                        // memulai scroll ke bawah
+                    } else if (output.toLowerCase().includes("scroll ke atas")) {
+                        startAutoScroll("up"); // memulai scroll ke atas
+                        const audio = new Audio(
+                            'assets/notif5.mp3'); // ganti 'suara-sukses.mp3' dengan path file suara Anda
+                        audio.play();
+                    } else if (output.toLowerCase().includes("putar musik")) {
+                        const audio = new Audio(
+                            'assets/notif9.mp3'); // ganti 'path/to/music.mp3' dengan path file musik Anda
+                        audio.play();
+                    } else if (transcript.toLowerCase().includes('whatsapp sarah')) {
+                        window.location.href = 'https://api.whatsapp.com/send?phone=6282311406572&action=phone';
+                    } else {
+                        outputText.value += output;
+                    }
+
+                } else {
+                    interimTranscripts.push(transcript);
+                }
+            }
+
+            interimText.innerHTML = interimTranscripts.map(transcript => `<span>${transcript}</span>`).join('');
+
+        };
+
+        function hapusKalimatTerakhir(text, n) {
+            const kalimat = text.split(" ");
+            if (n > kalimat.length) {
+                return "";
+            }
+            return kalimat.slice(0, kalimat.length - n).join(" ");
+        }
+
+        function hapusKalimatSebelumnya(text) {
+            const kalimat = text.split(" ");
+            if (kalimat.length <= 2) {
+                return "";
+            }
+            return kalimat.slice(0, kalimat.length - 2).join(" ") + " ";
+        }
+
+
+        function startRecognition() {
+            // Menampilkan popup
+            const popupBox = document.querySelector('.popup-box');
+            popupBox.style.display = 'block';
+
+            recognition.start();
+            isRecording = true;
+
+            startBtn.classList.add('recording');
+            stopBtn.style.display = 'inline-block';
+
+
+        }
+
+        function stopRecognition() {
+            recognition.stop();
+
+            // Menyembunyikan popup
+            const popupBox = document.querySelector('.popup-box');
+            popupBox.style.display = 'none';
+
+            startBtn.classList.remove('recording');
+
+            stopBtn.style.display = 'none';
+
+            const outputText = document.getElementById("utama").value;
+            navigator.clipboard.writeText(outputText);
+        }
+        document.addEventListener("keydown", function (event) {
+            const popupBox = document.querySelector(".popup-box");
+
+            if (event.key === "ArrowRight") {
+                startRecognition();
+                interimText.innerHTML = '';
+                popupBox.classList.remove('show');
+            } else if (event.key === "ArrowLeft") {
+                stopRecognition();
+
+            }
+
+
+
+
+        });
+    </script>
+
+
+
+
+
+    <script>
+        let isFullscreen = false;
+
+        // Fungsi untuk mengubah mode layar ke penuh
+        function enterFullscreen() {
+            if (document.documentElement.requestFullscreen) {
+                document.documentElement.requestFullscreen();
+            } else if (document.documentElement.mozRequestFullScreen) { // Untuk Firefox
+                document.documentElement.mozRequestFullScreen();
+            } else if (document.documentElement.webkitRequestFullscreen) { // Untuk Chrome, Safari, dan Opera
+                document.documentElement.webkitRequestFullscreen();
+            } else if (document.documentElement.msRequestFullscreen) { // Untuk IE/Edge
+                document.documentElement.msRequestFullscreen();
+            }
+        }
+
+        // Fungsi untuk keluar dari mode penuh
+        function exitFullscreen() {
+            if (document.exitFullscreen) {
+                document.exitFullscreen();
+            } else if (document.mozCancelFullScreen) { // Untuk Firefox
+                document.mozCancelFullScreen();
+            } else if (document.webkitExitFullscreen) { // Untuk Chrome, Safari, dan Opera
+                document.webkitExitFullscreen();
+            } else if (document.msExitFullscreen) { // Untuk IE/Edge
+                document.msExitFullscreen();
+            }
+        }
+
+        // Fungsi untuk menangani input teks
+        function handleInput() {
+            const inputText = document.getElementById("utama").value;
+
+            if (inputText.includes(".fs")) {
+                if (isFullscreen) {
+                    exitFullscreen();
+                    isFullscreen = false;
+                } else {
+                    enterFullscreen();
+                    isFullscreen = true;
+                }
+            }
+        }
+
+        // Mendengarkan perubahan pada input teks
+        document.getElementById("utama").addEventListener("input", handleInput);
+    </script>
+<!-- 
+
+
+    <script>
+        // Fungsi untuk menggambar grafik waktu (bar chart)
+        function drawTimeChart() {
+            const ctx = document.getElementById('timeChart').getContext('2d');
+            const now = new Date();
+            const jam = now.getHours();
+            const menit = now.getMinutes();
+            const detik = now.getSeconds();
+
+            const data = [jam, menit, detik];
+            const labels = ['Jam', 'Menit', 'Detik'];
+
+            const timeChart = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: labels,
+                    datasets: [{
+                        label: 'JAM REY',
+                        data: data,
+                        backgroundColor: ['rgba(75, 85, 192, 0.2)', 'rgba(110, 75, 192, 0.2)',
+                            'rgba(75, 192, 192, 0.2)'
+                        ],
+                        borderColor: ['rgba(75, 85, 192, 1)', 'rgba(110, 75, 192, 1)',
+                            'rgba(75, 192, 192, 1)'
+                        ],
+                        borderWidth: 2,
+                    }],
+                },
+                options: {
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            max: 60 // Atur maksimum hingga 60 (menit/detik tidak boleh melebihi 60)
+                        }
+                    }
+                }
+            });
+
+            // Update nilai teks untuk waktu
+            const timeValue = document.getElementById('timeValue');
+            timeValue.textContent = `${jam} : ${menit} : ${detik}`;
+        }
+
+        // Fungsi untuk menggambar grafik tanggal (bar chart)
+        function drawDateChart() {
+            const ctx = document.getElementById('dateChart').getContext('2d');
+            const now = new Date();
+            const tanggal = now.getDate();
+            const bulan = now.getMonth() + 1; // Perhatikan: bulan dimulai dari 0 (Januari)
+            const tahun = now.getFullYear();
+            const data = [tanggal, bulan, tahun];
+            const labels = ['Tanggal', 'Bulan', 'Tahun'];
+
+            const dateChart = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: labels,
+                    datasets: [{
+                        label: 'Grafik Tanggal',
+                        data: data,
+                        backgroundColor: ['rgba(75, 85, 192, 0.2)', 'rgba(110, 75, 192, 0.2)',
+                            'rgba(75, 192, 192, 0.2)'
+                        ],
+                        borderColor: ['rgba(75, 85, 192, 1)', 'rgba(110, 75, 192, 1)',
+                            'rgba(75, 192, 192, 1)'
+                        ],
+                        borderWidth: 2,
+                    }],
+                },
+            });
+
+            // Update nilai teks untuk tanggal
+            const dateValue = document.getElementById('dateValue');
+            dateValue.textContent = `${tanggal}-${bulan}-${tahun}`;
+        }
+
+        // Fungsi untuk memperbarui grafik waktu dan tanggal secara real-time
+        function updateCharts() {
+            updateChart();
+            updateDateChart();
+        }
+
+        // Fungsi untuk memperbarui grafik waktu secara real-time
+        function updateChart() {
+            const timeChart = Chart.getChart('timeChart');
+            const now = new Date();
+            const jam = now.getHours();
+            const menit = now.getMinutes();
+            const detik = now.getSeconds();
+
+            timeChart.data.datasets[0].data = [jam, menit, detik];
+            timeChart.update();
+
+            // Update nilai teks untuk waktu
+            const timeValue = document.getElementById('timeValue');
+            timeValue.textContent = `${jam} : ${menit} : ${detik}`;
+        }
+
+        // Fungsi untuk memperbarui grafik tanggal secara real-time
+        function updateDateChart() {
+            const dateChart = Chart.getChart('dateChart');
+            const now = new Date();
+            const tanggal = now.getDate();
+            const bulan = now.getMonth() + 1; // Perhatikan: bulan dimulai dari 0 (Januari)
+            const tahun = now.getFullYear();
+
+            dateChart.data.datasets[0].data = [tanggal, bulan, tahun];
+            dateChart.update();
+
+            // Update nilai teks untuk tanggal
+            const dateValue = document.getElementById('dateValue');
+            dateValue.textContent = `${tanggal}-${bulan}-${tahun}`;
+        }
+
+        // Panggil fungsi untuk menggambar grafik waktu dan tanggal
+        drawTimeChart();
+        drawDateChart();
+
+        // Perbarui grafik dan nilai teks setiap detik
+        setInterval(updateCharts, 1000);
+    </script>
+-->
+
+    <script>
+        const textarea28 = document.getElementById('utama');
+const fontSizeInput = document.getElementById('fontSize');
+const fontSizeLabel = document.getElementById('fontSizeLabel');
+const heightInput = document.getElementById('height');
+const heightLabel = document.getElementById('heightLabel');
+const colorInput = document.getElementById('fontColor'); // Input warna font
+const resetButton = document.getElementById('resetButton');
+
+// Fungsi untuk menyimpan pengaturan ukuran font
+function saveFontSize() {
+    const fontSize = fontSizeInput.value;
+    localStorage.setItem('fontSize', fontSize);
+    fontSizeLabel.textContent = `Ukuran Font: ${fontSize}px`;
+    textarea28.style.fontSize = fontSize + 'px';
+}
+
+function saveHeight() {
+    const height = heightInput.value;
+    localStorage.setItem('height', height);
+
+    if (height === heightInput.max) {
+        // Jika pengguna memilih tinggi maksimal, atur teks span sesuai tinggi layar penuh
+        const fullScreenHeight = window.innerHeight;
+        heightLabel.textContent = `Tinggi Textarea: Layar Penuh`;
+        textarea28.style.height = fullScreenHeight + 'px';
+    } else {
+        // Jika bukan nilai tertinggi, atur teks span sesuai dengan jumlah baris yang dipilih
+        heightLabel.textContent = `Tinggi Input : ${height} `;
+        textarea28.style.height = 'auto';
+    }
+
+    // Update jumlah  textarea
+    textarea28.rows = height;
+}
+
+
+// Fungsi untuk menyimpan pengaturan warna font
+function saveFontColor() {
+    const fontColor = colorInput.value;
+    localStorage.setItem('fontColor', fontColor);
+    textarea28.style.color = fontColor;
+}
+
+// Fungsi untuk mereset ke ukuran dan warna default
+function resetSize() {
+    localStorage.removeItem('fontSize');
+    localStorage.removeItem('height');
+    localStorage.removeItem('fontColor');
+    fontSizeInput.value = 20;
+    heightInput.value = 6;
+    colorInput.value = '#ffffff'; // Warna font default (putih)
+    fontSizeLabel.textContent = `Ukuran Font: 20px`;
+    heightLabel.textContent = `Tinggi Inpunt : 6 `;
+    textarea28.style.fontSize = '20px';
+    textarea28.style.height = 'auto';
+    textarea28.style.color = '#ffffff'; // Warna font default (putih)
+
+    // Terapkan perubahan secara langsung
+    saveFontSize();
+    saveHeight();
+    saveFontColor();
+}
+
+
+// Cek apakah ada pengaturan ukuran font yang tersimpan di localStorage
+if (localStorage.getItem('fontSize')) {
+    const fontSize = localStorage.getItem('fontSize');
+    fontSizeInput.value = fontSize;
+    fontSizeLabel.textContent = `Ukuran Font: ${fontSize}px`;
+    textarea28.style.fontSize = fontSize + 'px';
+}
+// Cek apakah ada pengaturan tinggi textarea28 yang tersimpan di localStorage
+if (localStorage.getItem('height')) {
+    const height = localStorage.getItem('height');
+    heightInput.value = height;
+    heightLabel.textContent = `Tinggi Input : ${height} `;
+
+    if (height === heightInput.max) {
+        // Jika tinggi yang disimpan adalah maksimal, maka atur tinggi textarea sesuai dengan tinggi layar penuh
+        const fullScreenHeight = window.innerHeight;
+        textarea28.style.height = fullScreenHeight + 'px';
+    } else {
+        // Jika bukan nilai tertinggi, atur tinggi textarea sesuai dengan jumlah baris yang dipilih
+        textarea28.style.height = 'auto';
+        textarea28.rows = height;
+    }
+}
+
+
+// Cek apakah ada pengaturan warna font yang tersimpan di localStorage
+if (localStorage.getItem('fontColor')) {
+    const fontColor = localStorage.getItem('fontColor');
+    colorInput.value = fontColor;
+    textarea28.style.color = fontColor;
+}
+
+// Tambahkan event listener untuk input range
+fontSizeInput.addEventListener('input', saveFontSize);
+heightInput.addEventListener('input', saveHeight);
+colorInput.addEventListener('input', saveFontColor); // Tambahkan event listener untuk input warna
+
+// Tambahkan event listener untuk tombol Reset
+resetButton.addEventListener('click', resetSize);
+    </script>
+
+<!-- .vmess -->
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        // Dapatkan referensi ke textarea dengan ID "utama"
+        var textarea = document.getElementById("utama");
+
+        // Mendengarkan peristiwa "input" pada textarea
+        textarea.addEventListener("input", function () {
+            // Ambil nilai dari textarea
+            var teks = textarea.value;
+
+            // Periksa apakah nilai tersebut mengandung ".vmess"
+            if (teks.includes(".vmess")) {
+                // Jika mengandung ".vmess", arahkan ke website yang ditentukan
+                window.location.href = "https://vpn.sshs8.com/accounts/VMESS/223";
+            }
+        });
+    });
+</script>
+
+<!-- menggandakan teks  ... kali ... =  -->
+<script>
+    // menggandakan teks  ... kali ... = 
+    const gandakankalimat = document.getElementById("utama");
+    gandakankalimat.addEventListener("input", handleInput);
+
+    function handleInput() {
+      const text = gandakankalimat.value;
+      const pattern = /(.+) kali (\d+) =/;
+      const match = text.match(pattern);
+
+      if (match) {
+        const content = match[1];
+        const n = parseInt(match[2]);
+        let result = '';
+        for (let i = 0; i < n; i++) {
+          result += content + '\n'; // Menggunakan karakter newline untuk baris baru
+        }
+        const newText = text.replace(pattern, result.trim());
+        gandakankalimat.value = newText;
+      }
+    }
+  </script>
+
+  <!-- merubah  teks menjadi tag html css dan javascript  -->
+  <script>
+    // Fungsi untuk memeriksa dan mengubah teks saat ".tag" ditemukan
+    function checkAndFormatText() {
+      // Dapatkan teks dari textarea dengan ID "utama"
+      var inputText = document.getElementById("utama").value;
+  
+      // Cek apakah teks berisi .tag
+      if (inputText.includes(".tag")) {
+        // Format teks sesuai dengan kebutuhan
+        var formattedText = "<!-- " + inputText + " -->\n/* " + inputText + " */\n// " + inputText;
+  
+        // Hapus .tag setelah pemformatan
+        formattedText = formattedText.replace(/\.tag/g, '');
+  
+        // Setel teks yang sudah diformat ke textarea
+        document.getElementById("utama").value = formattedText;
+  
+        // Salin teks yang sudah diformat ke clipboard
+        var textArea = document.createElement("textarea");
+        textArea.value = formattedText;
+        document.body.appendChild(textArea);
+        textArea.select();
+        document.execCommand('copy');
+        document.body.removeChild(textArea);
+      }
+    }
+  
+    // Tambahkan event listener untuk textarea
+    document.getElementById("utama").addEventListener("keyup", checkAndFormatText);
+  </script>
+
+  
+<!-- chat gpt  -->
+<div class=" hidden chat-container text-white"></div>
+<script>
+    // chat gpt 
+
+    const chatInput = document.querySelector("#utama");
+    const chatContainer = document.querySelector(".chat-container");
+
+    let userText = '';
+    const API_KEY = "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"; // Ganti dengan API key Anda
+
+    const createChatElement = (content, className) => {
+        const chatDiv = document.createElement("div");
+        chatDiv.classList.add("chat", className);
+        chatDiv.innerHTML = content;
+        return chatDiv;
+    }
+
+    const addChatToTextarea = (text) => {
+        chatInput.value += `${text}`; // Tambahkan pesan ke dalam textarea
+        chatInput.style.height = `${chatInput.scrollHeight}px`; // Atur tinggi textarea sesuai dengan kontennya
+        chatContainer.scrollTo(0, chatContainer.scrollHeight); // Scroll ke bawah untuk melihat pesan terbaru
+        // Tambahkan kode untuk mengubah warna latar belakang textarea
+        chatInput.style.backgroundColor = "#4A90E2"; // Ganti dengan warna yang Anda inginkan
+        setTimeout(() => {
+            chatInput.style.backgroundColor = "#1F2937"; // Kembalikan warna latar belakang ke warna semula setelah beberapa detik (ganti dengan warna latar belakang semula jika diperlukan)
+        }, 1000); // Ubah angka 1000 ke berapa detik yang Anda inginkan
+    }
+
+    const showLoadingText = () => {
+        addChatToTextarea("Tunggu yaa..."); // Tampilkan teks "Tunggu yaa" di textarea
+    }
+
+    const hideLoadingText = () => {
+        const lines = chatInput.value.trim().split('\n');
+        if (lines[lines.length - 1] === "Tunggu yaa...") {
+            // Hapus teks "Tunggu yaa..." dari textarea jika ada
+            chatInput.value = lines.slice(0, -1).join('\n');
+            chatInput.style.height = 'auto'; // Kembalikan tinggi textarea ke default
+        }
+    }
+
+    const getChatResponse = async () => {
+        showLoadingText(); // Panggil fungsi untuk menampilkan teks "Tunggu yaa"
+
+        const API_URL = "https://api.openai.com/v1/completions";
+
+        const requestOptions = {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": `Bearer ${API_KEY}`
+            },
+            body: JSON.stringify({
+                model: "text-davinci-003",
+                prompt: userText,
+                max_tokens: 2048,
+                temperature: 0.2,
+                n: 1,
+                stop: null
+            })
+        }
+
+        try {
+            const response = await (await fetch(API_URL, requestOptions)).json();
+            const chatResponse = response.choices[0].text.trim();
+            hideLoadingText(); // Panggil fungsi untuk menghilangkan teks "Tunggu yaa"
+            addChatToTextarea(`AI REY 🤖: \n ${chatResponse}`); // Tambahkan respons chatbot ke textarea
+        } catch (error) {
+            console.error(error);
+        }
+    }
+
+    chatInput.addEventListener("input", () => {
+        const lines = chatInput.value.trim().split('\n');
+        const lastLine = lines[lines.length - 1];
+        if (lastLine.includes(".ai")) {
+            userText = chatInput.value.trim();
+            chatInput.value = '';
+            chatInput.style.height = 'auto'; // Kembalikan tinggi textarea ke default
+            getChatResponse();
+        }
+    });
+
+</script>
+
+<!-- placeholder textarea
+<script>
+    const textarea78 = document.getElementById("utama");
+    const words = ["\nChatGPT REY\n.ai", "\nMenghitung Huruf Al-Qur'an", "\nMembuat Link WA\n.link",
+        "\nKalkulator\n.k", "\nMembuat QR Code\n.qr", "\nScan QR Code\n.scan"
+    ];
+    let wordIndex = 0;
+    let charIndex = 0;
+    let isDeleting = false;
+
+    const typeEffect = () => {
+        const currentWord = words[wordIndex];
+        const currentText = textarea78.getAttribute("placeholder");
+
+        if (!isDeleting && charIndex < currentWord.length) {
+            textarea78.setAttribute("placeholder", currentText + currentWord[charIndex]);
+            charIndex++;
+            setTimeout(typeEffect, 150); // Jeda sebelum menghapus cepat
+        } else if (isDeleting && charIndex > 0) {
+            textarea78.setAttribute("placeholder", currentText.slice(0, -1));
+            charIndex--;
+            setTimeout(typeEffect, 70); // Penghapusan cepat
+        } else {
+            isDeleting = !isDeleting;
+            wordIndex = isDeleting ? (wordIndex + 1) % words.length : wordIndex;
+            setTimeout(typeEffect, 1000); // Jeda setelah selesai
+        }
+    };
+
+    typeEffect();
+</script>
+  -->
+
+<div style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgb(0, 0, 0); z-index: 99;" id="overlay" onclick="tampilkanHitungan()">
+    <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); font-size: 6em; font-weight: bold; z-index: 999;" id="angkaHitungan"></div>
+    <div class="flex  justify-center items-center">
+    <button class="bg-gray-900 text-gray-200 px-4 py-2  text-sm  rounded-lg hover:bg-green-600" onclick="resetHitungan()" style="display: none; position: absolute; top: 80%; left: 40%; "><i class="fas fa-rotate-right fa-2xl text-red-500 "></i> </button>
+    <button class="bg-gray-900 text-gray-200 px-4 py-2  text-sm  rounded-lg hover:bg-green-600" onclick="reloadHalaman()" style="display: none; position: absolute; top: 80%; left: 55%; "><i class="fas fa-arrow-left fa-2xl text-blue-500 "></i></button>
+</div>
+</div>
+<script>
+    var hitungan = 0;
+    var textarea68 = document.getElementById("utama");
+
+    textarea68.addEventListener("input", deteksiTasbih);
+
+    function deteksiTasbih() {
+        var overlay = document.getElementById("overlay");
+        var resetButton = document.querySelector("#overlay button");
+        var reloadButton = document.querySelectorAll("#overlay button")[1];
+
+        if (textarea68.value.includes(".tasbih")) {
+            overlay.style.display = "block";
+            resetButton.style.display = "block";
+            reloadButton.style.display = "block"; // Tampilkan tombol reload
+            document.documentElement.requestFullscreen(); // Aktifkan layar mode penuh
+        } else {
+            overlay.style.display = "none";
+            resetButton.style.display = "none";
+            reloadButton.style.display = "none"; // Sembunyikan tombol reload
+            document.exitFullscreen(); // Keluar dari layar mode penuh
+            hitungan = 0;
+        }
+    }
+
+    function tampilkanHitungan() {
+        var angkaHitungan = document.getElementById("angkaHitungan");
+
+        if (hitungan > 0) {
+            hitungan++;
+        } else {
+            hitungan = 1;
+        }
+
+        angkaHitungan.textContent = hitungan;
+    }
+
+    function resetHitungan() {
+        hitungan = 0;
+        var angkaHitungan = document.getElementById("angkaHitungan");
+        angkaHitungan.textContent = hitungan;
+    }
+
+    function reloadHalaman() {
+        location.reload(); // Muat ulang halaman
+    }
+</script>
+
+<script>
+    const utamaTextarea39 = document.getElementById("utama");
+    
+    utamaTextarea39.addEventListener("keydown", function(event) {
+        // Cek apakah tombol Alt (kode 18) ditekan
+        if (event.keyCode === 18) {
+            // Hapus semua teks dalam textarea
+            utamaTextarea39.value = "";
+        }
+    });
+    </script>
+
+    
+<script>
+    let semuacodeVisible = false; // Tambahkan variabel ini
+
+    document.getElementById("utama").addEventListener("input", function () {
+        const utamaTextarea = document.getElementById("utama");
+        const semuacodeDiv = document.getElementById("semuacode");
+
+        // Mengambil teks dari textarea
+        let teks = utamaTextarea.value;
+
+        // Cek apakah teks mengandung ".code"
+        if (teks.includes(".code") && !semuacodeVisible) {
+            // Jika mengandung dan div belum muncul, tampilkan div semuacode
+            semuacodeDiv.classList.remove("hidden");
+            semuacodeVisible = true;
+
+            // Mengganti teks di textarea (menghilangkan ".code")
+            teks = teks.replace(".code", "");
+            utamaTextarea.value = teks;
+        } else if (!teks.includes(".code") && semuacodeVisible) {
+            // Jika tidak mengandung dan div sudah muncul, jangan menghilangkan div semuacode
+            // hanya ganti teks di textarea
+            utamaTextarea.value = teks;
+        }
+    });
+</script>
+
+
+
+
+
+<script>
+    function tampilkanSemuaCode() {
+        const semuacodeDiv = document.getElementById("semuacode");
+        semuacodeDiv.classList.remove("hidden");
+    }
+
+    function tutupSemuaCode() {
+        const semuacodeDiv = document.getElementById("semuacode");
+        semuacodeDiv.classList.add("hidden");
+    }
+</script>
+<script>
+    function convertText() {
+        let utama = document.querySelector("#utama").value;
+        utama = utama.trim();
+        let resultDots = "";
+        let resultEmoticons = "";
+
+        // Implementasi konversi teks ke tanda titik di sini
+        // ...
+
+        if (/[a-zA-Z]/.test(utama)) {
+            // Convert from Word to Number (Tanda Titik)
+            for (let i = 0; i < utama.length; i++) {
+                if (utama[i] === " ") {
+                    resultDots += "_ ";
+                } else {
+                    let letter = utama[i].toLowerCase();
+                    if (letter === "a") {
+                        resultDots += "__ ";
+                    } else if (letter === "b") {
+                        resultDots += "___ ";
+                    } else if (letter === "c") {
+                        resultDots += "____ ";
+                    } else if (letter === "d") {
+                        resultDots += "_____ ";
+                    } else if (letter === "e") {
+                        resultDots += "______ ";
+                    } else if (letter === "f") {
+                        resultDots += "_______ ";
+                    } else if (letter === "g") {
+                        resultDots += "________ ";
+                    } else if (letter === "h") {
+                        resultDots += "_________ ";
+                    } else if (letter === "i") {
+                        resultDots += "__________ ";
+                    } else if (letter === "j") {
+                        resultDots += "___________ ";
+                    } else if (letter === "k") {
+                        resultDots += "____________ ";
+                    } else if (letter === "l") {
+                        resultDots += "_____________ ";
+                    } else if (letter === "m") {
+                        resultDots += "______________ ";
+                    } else if (letter === "n") {
+                        resultDots += "_______________ ";
+                    } else if (letter === "o") {
+                        resultDots += "________________ ";
+                    } else if (letter === "p") {
+                        resultDots += "_________________ ";
+                    } else if (letter === "q") {
+                        resultDots += "__________________ ";
+                    } else if (letter === "r") {
+                        resultDots += "___________________ ";
+                    } else if (letter === "s") {
+                        resultDots += "____________________ ";
+                    } else if (letter === "t") {
+                        resultDots += "_____________________ ";
+                    } else if (letter === "u") {
+                        resultDots += "______________________ ";
+                    } else if (letter === "v") {
+                        resultDots += "_______________________ ";
+                    } else if (letter === "w") {
+                        resultDots += "________________________ ";
+                    } else if (letter === "x") {
+                        resultDots += "_________________________ ";
+                    } else if (letter === "y") {
+                        resultDots += "__________________________ ";
+                    } else if (letter === "z") {
+                        resultDots += "___________________________ ";
+                    } else {
+                        let number = letter.charCodeAt(0) - 96;
+                        resultDots += number + " ";
+                    }
+                }
+            }
+
+            // Convert from Word to Number (Emoticons)
+            for (let i = 0; i < utama.length; i++) {
+                if (utama[i] === " ") {
+                    resultEmoticons += "😀 ";
+                } else {
+                    let letter = utama[i].toLowerCase();
+                    if (letter === "a") {
+                        resultEmoticons += "✌️ ";
+                    } else if (letter === "b") {
+                        resultEmoticons += "😄 ";
+                    } else if (letter === "c") {
+                        resultEmoticons += "😁 ";
+                    } else if (letter === "d") {
+                        resultEmoticons += "😆 ";
+                    } else if (letter === "e") {
+                        resultEmoticons += "😅 ";
+                    } else if (letter === "f") {
+                        resultEmoticons += "🤣 ";
+                    } else if (letter === "g") {
+                        resultEmoticons += "😂 ";
+                    } else if (letter === "h") {
+                        resultEmoticons += "🙂 ";
+                    } else if (letter === "i") {
+                        resultEmoticons += "🙃 ";
+                    } else if (letter === "j") {
+                        resultEmoticons += "🙈 ";
+                    } else if (letter === "k") {
+                        resultEmoticons += "😉 ";
+                    } else if (letter === "l") {
+                        resultEmoticons += "😊 ";
+                    } else if (letter === "m") {
+                        resultEmoticons += "😇 ";
+                    } else if (letter === "n") {
+                        resultEmoticons += "🥰 ";
+                    } else if (letter === "o") {
+                        resultEmoticons += "😍 ";
+                    } else if (letter === "p") {
+                        resultEmoticons += "🤩 ";
+                    } else if (letter === "q") {
+                        resultEmoticons += "😘 ";
+                    } else if (letter === "r") {
+                        resultEmoticons += "😗 ";
+                    } else if (letter === "s") {
+                        resultEmoticons += "😚 ";
+                    } else if (letter === "t") {
+                        resultEmoticons += "😙 ";
+                    } else if (letter === "u") {
+                        resultEmoticons += "🥲 ";
+                    } else if (letter === "v") {
+                        resultEmoticons += "😋 ";
+                    } else if (letter === "w") {
+                        resultEmoticons += "😛 ";
+                    } else if (letter === "x") {
+                        resultEmoticons += "😜 ";
+                    } else if (letter === "y") {
+                        resultEmoticons += "🤪 ";
+                    } else if (letter === "z") {
+                        resultEmoticons += "😝 ";
+                    } else {
+                        let number = letter.charCodeAt(0) - 96;
+                        resultEmoticons += number + " ";
+                    }
+                }
+            }
+        } else {
+            // Convert from Number to Word (Tanda Titik)
+            const numbersDots = utama.split(" ");
+            resultDots = numbersDots.map(function (number) {
+                if (number === "_") {
+                    return " ";
+                } else if (number === "__") {
+                    return "a";
+                } else if (number === "___") {
+                    return "b";
+                } else if (number === "____") {
+                    return "c";
+                } else if (number === "_____") {
+                    return "d";
+                } else if (number === "______") {
+                    return "e";
+                } else if (number === "_______") {
+                    return "f";
+                } else if (number === "________") {
+                    return "g";
+                } else if (number === "_________") {
+                    return "h";
+                } else if (number === "__________") {
+                    return "i";
+                } else if (number === "___________") {
+                    return "j";
+                } else if (number === "____________") {
+                    return "k";
+                } else if (number === "_____________") {
+                    return "l";
+                } else if (number === "______________") {
+                    return "m";
+                } else if (number === "_______________") {
+                    return "n";
+                } else if (number === "________________") {
+                    return "o";
+                } else if (number === "_________________") {
+                    return "p";
+                } else if (number === "__________________") {
+                    return "q";
+                } else if (number === "___________________") {
+                    return "r";
+                } else if (number === "____________________") {
+                    return "s";
+                } else if (number === "_____________________") {
+                    return "t";
+                } else if (number === "______________________") {
+                    return "u";
+                } else if (number === "_______________________") {
+                    return "v";
+                } else if (number === "________________________") {
+                    return "w";
+                } else if (number === "_________________________") {
+                    return "x";
+                } else if (number === "__________________________") {
+                    return "y";
+                } else if (number === "___________________________") {
+                    return "z";
+                } else {
+                    return String.fromCharCode(96 + parseInt(number));
+                }
+            }).join("");
+
+            // Convert from Number to Word (Emoticons)
+            const numbersEmoticons = utama.split(" ");
+            resultEmoticons = numbersEmoticons.map(function (number) {
+                if (number === "😀") {
+                    return " ";
+                } else if (number === "✌️") {
+                    return "a";
+                } else if (number === "😄") {
+                    return "b";
+                } else if (number === "😁") {
+                    return "c";
+                } else if (number === "😆") {
+                    return "d";
+                } else if (number === "😅") {
+                    return "e";
+                } else if (number === "🤣") {
+                    return "f";
+                } else if (number === "😂") {
+                    return "g";
+                } else if (number === "🙂") {
+                    return "h";
+                } else if (number === "🙃") {
+                    return "i";
+                } else if (number === "🙈") {
+                    return "j";
+                } else if (number === "😉") {
+                    return "k";
+                } else if (number === "😊") {
+                    return "l";
+                } else if (number === "😇") {
+                    return "m";
+                } else if (number === "🥰") {
+                    return "n";
+                } else if (number === "😍") {
+                    return "o";
+                } else if (number === "🤩") {
+                    return "p";
+                } else if (number === "😘") {
+                    return "q";
+                } else if (number === "😗") {
+                    return "r";
+                } else if (number === "😚") {
+                    return "s";
+                } else if (number === "😙") {
+                    return "t";
+                } else if (number === "🥲") {
+                    return "u";
+                } else if (number === "😋") {
+                    return "v";
+                } else if (number === "😛") {
+                    return "w";
+                } else if (number === "😜") {
+                    return "x";
+                } else if (number === "🤪") {
+                    return "y";
+                } else if (number === "😝") {
+                    return "z";
+                } else {
+                    return String.fromCharCode(96 + parseInt(number));
+                }
+            }).join("");
+        }
+
+        let conversionResultDots = document.querySelector("#conversionResultDots");
+        conversionResultDots.textContent = resultDots;
+
+        let conversionResultEmoticons = document.querySelector("#conversionResultEmoticons");
+        conversionResultEmoticons.textContent = resultEmoticons;
+    }
+
+    document.getElementById("utama").addEventListener("input", function () {
+        convertText();
+    });
+
+    document.getElementById("resetDots").addEventListener("click", function () {
+        document.querySelector("#utama").value = "";
+        document.querySelector("#conversionResultDots").textContent = "";
+    });
+
+
+    document.getElementById("resetEmoticons").addEventListener("click", function () {
+        document.querySelector("#utama").value = "";
+        document.querySelector("#conversionResultEmoticons").textContent = "";
+    });
+
+    document.getElementById("copyDots").addEventListener("click", function () {
+        let conversionResultDots = document.querySelector("#conversionResultDots");
+        conversionResultDots.select();
+        document.execCommand("copy");
+    });
+
+    document.getElementById("copyEmoticons").addEventListener("click", function () {
+        let conversionResultEmoticons = document.querySelector("#conversionResultEmoticons");
+        conversionResultEmoticons.select();
+        document.execCommand("copy");
+    });
+</script>
+
+
+  
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/quagga/0.12.1/quagga.min.js"></script>
+
+    <script src="menu.js"></script>
+    <script src="k.js"></script>
+    <script src="penyimpanan.js"></script>
+</body>
+
+</html>  

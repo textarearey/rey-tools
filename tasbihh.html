@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TASBIH DIGITAL</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+    <style>
+        body {
+            -webkit-user-select: none; /* Safari */
+            -ms-user-select: none; /* IE 10+ and Edge */
+            user-select: none; /* Standard syntax */
+        }
+    </style>
+</head>
+<body class="bg-gray-900 text-white flex flex-col items-center justify-center min-h-screen" onclick="tampilkanHitungan(event)">
+
+    <div class="text-center mb-8">
+        <div id="angkaHitungan" class="text-8xl font-bold mb-80">0</div>
+        <div class="mt-4 grid grid-cols-2 sm:grid-cols-2 gap-4">
+            <button class="bg-red-500 text-white px-4 py-2 rounded-lg flex items-center justify-center" onclick="resetHitungan(event)">
+                <i class="fas fa-sync-alt fa-2xl mr-2"></i> Reset
+            </button>
+            <button class="bg-green-500 text-white px-4 py-2 rounded-lg flex items-center justify-center" onclick="simpanHitungan(event)">
+                <i class="fas fa-save fa-2xl mr-2"></i> Simpan
+            </button>
+            <button class="bg-blue-500 text-white px-4 py-2 rounded-lg flex items-center justify-center" onclick="toggleFullScreen(event)">
+                <i class="fas fa-expand fa-2xl mr-2"></i> Fullscreen
+            </button>
+            <button class="bg-yellow-500 text-white px-4 py-2 rounded-lg flex items-center justify-center" onclick="aturAlarm(event)">
+                <i class="fas fa-bell fa-2xl mr-2"></i> Alarm
+            </button>
+        </div>
+    </div>
+
+    <div id="savedTasbih" class="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 gap-4 w-full max-w-screen-lg px-4">
+        <!-- Saved tasbihs will appear here -->
+    </div>
+
+    <!-- Audio untuk alarm -->
+    <audio id="alarmSound" src="assets/tasbih.mp3" preload="auto"></audio>
+
+    <script>
+        var hitungan = 0;
+        var targetHitungan = null;
+
+        function tampilkanHitungan(event) {
+            if (!event.target.closest('#savedTasbih') && !event.target.closest('button')) {
+                var angkaHitungan = document.getElementById("angkaHitungan");
+                hitungan++;
+                angkaHitungan.textContent = hitungan;
+                if (targetHitungan && hitungan >= targetHitungan) {
+                    var alarmSound = document.getElementById("alarmSound");
+                    alarmSound.play().catch(error => {
+                        console.error("Audio playback failed:", error);
+                    });
+                    alert("Target hitungan tercapai!");
+                    targetHitungan = null;
+                }
+            }
+        }
+
+        function resetHitungan(event) {
+            event.stopPropagation();
+            hitungan = 0;
+            var angkaHitungan = document.getElementById("angkaHitungan");
+            angkaHitungan.textContent = hitungan;
+        }
+
+        function simpanHitungan(event) {
+            event.stopPropagation();
+            var tasbihList = JSON.parse(localStorage.getItem('tasbihList')) || [];
+            var tasbihTitle = prompt("Masukkan judul untuk hitungan tasbih ini:");
+            if (tasbihTitle) {
+                tasbihList.push({ title: tasbihTitle, count: hitungan });
+                localStorage.setItem('tasbihList', JSON.stringify(tasbihList));
+                tampilkanTasbihTersimpan();
+                resetHitungan(event);
+            }
+        }
+
+        function tampilkanTasbihTersimpan() {
+            var tasbihList = JSON.parse(localStorage.getItem('tasbihList')) || [];
+            var savedTasbihDiv = document.getElementById('savedTasbih');
+            savedTasbihDiv.innerHTML = '';
+            tasbihList.forEach((tasbih, index) => {
+                var tasbihElement = document.createElement('div');
+                tasbihElement.className = 'bg-gray-800 text-white p-4 rounded-lg shadow-lg flex justify-between items-center cursor-pointer';
+                tasbihElement.innerHTML = `
+                    <div onclick="lanjutkanHitungan(event, ${index})" class="w-full">
+                        <h3 class="text-xl font-bold">${tasbih.title}</h3>
+                        <p>Total: ${tasbih.count}</p>
+                    </div>
+                    <button class="bg-red-500 text-white px-2 py-1 rounded-lg" onclick="hapusHitungan(event, ${index})">
+                        <i class="fas fa-trash-alt"></i>
+                    </button>
+                `;
+                savedTasbihDiv.appendChild(tasbihElement);
+            });
+        }
+
+        function hapusHitungan(event, index) {
+            event.stopPropagation();
+            var tasbihList = JSON.parse(localStorage.getItem('tasbihList')) || [];
+            tasbihList.splice(index, 1);
+            localStorage.setItem('tasbihList', JSON.stringify(tasbihList));
+            tampilkanTasbihTersimpan();
+        }
+
+        function lanjutkanHitungan(event, index) {
+            event.stopPropagation();
+            var tasbihList = JSON.parse(localStorage.getItem('tasbihList')) || [];
+            if (tasbihList[index]) {
+                hitungan = tasbihList[index].count;
+                var angkaHitungan = document.getElementById("angkaHitungan");
+                angkaHitungan.textContent = hitungan;
+            }
+        }
+
+        function toggleFullScreen(event) {
+            event.stopPropagation();
+            if (!document.fullscreenElement) {
+                document.documentElement.requestFullscreen().catch(err => {
+                    console.log(`Error attempting to enable full-screen mode: ${err.message} (${err.name})`);
+                });
+            } else {
+                document.exitFullscreen();
+            }
+        }
+
+        function aturAlarm(event) {
+            event.stopPropagation();
+            var target = prompt("Masukkan target hitungan untuk alarm:");
+            if (target && !isNaN(target)) {
+                targetHitungan = parseInt(target, 10);
+                
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', tampilkanTasbihTersimpan);
+    </script>
+</body>
+</html>
