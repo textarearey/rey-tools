@@ -55,11 +55,20 @@
             padding: 15px;
             overflow: hidden; /* Menghilangkan scrollbar */
             resize: none; /* Mencegah pengubahan ukuran manual */
+            spellcheck: false; /* Nonaktifkan pengecekan ejaan untuk menghilangkan garis merah */
         }
 
         label i {
             margin-right: 10px;
-            color: #FF0000; /* Warna merah untuk ikon */
+            color: #9900ff;
+        }
+
+        .word-icon {
+            color: #3B82F6; /* Warna biru untuk ikon kata */
+        }
+
+        .char-icon {
+            color: #10B981; /* Warna hijau untuk ikon huruf */
         }
     </style>
 </head>
@@ -78,10 +87,10 @@
                     <textarea id="judul" rows="2" class="w-full p-3 bg-gray-800 border border-gray-700 rounded-md focus:outline-none focus:border-indigo-500" placeholder="Masukkan judul video" oninput="updateStats('judul', 100)"></textarea>
                     <div class="flex justify-between space-x-2 mt-2">
                         <div class="bg-gray-800 p-2 w-full rounded-md text-sm text-center">
-                            <span id="judulWords">Kata: 0</span>
+                            <i class="fas fa-file-word word-icon"></i> <span id="judulWords">Kata: 0</span>
                         </div>
                         <div class="bg-gray-800 p-2 w-full rounded-md text-sm text-center">
-                            <span id="judulChars">Huruf: 0</span>
+                            <i class="fas fa-font char-icon"></i> <span id="judulChars">Huruf: 0</span>
                         </div>
                     </div>
                     <div class="bg-gray-800 p-2 mt-2 rounded-md text-sm text-center text-yellow-400" id="judulSeo">Masukkan judul untuk evaluasi SEO</div>
@@ -95,10 +104,10 @@
                     <textarea id="naskah" rows="5" class="w-full p-3 bg-gray-800 border border-gray-700 rounded-md focus:outline-none focus:border-indigo-500" placeholder="Masukkan naskah video" oninput="updateStats('naskah')"></textarea>
                     <div class="flex justify-between space-x-2 mt-2">
                         <div class="bg-gray-800 p-2 w-full rounded-md text-sm text-center">
-                            <span id="naskahWords">Kata: 0</span>
+                            <i class="fas fa-file-word word-icon"></i> <span id="naskahWords">Kata: 0</span>
                         </div>
                         <div class="bg-gray-800 p-2 w-full rounded-md text-sm text-center">
-                            <span id="naskahChars">Huruf: 0</span>
+                            <i class="fas fa-font char-icon"></i> <span id="naskahChars">Huruf: 0</span>
                         </div>
                     </div>
                 </div>
@@ -111,10 +120,10 @@
                     <textarea id="deskripsi" rows="3" class="w-full p-3 bg-gray-800 border border-gray-700 rounded-md focus:outline-none focus:border-indigo-500" placeholder="Masukkan deskripsi video" oninput="updateStats('deskripsi', 5000)"></textarea>
                     <div class="flex justify-between space-x-2 mt-2">
                         <div class="bg-gray-800 p-2 w-full rounded-md text-sm text-center">
-                            <span id="deskripsiWords">Kata: 0</span>
+                            <i class="fas fa-file-word word-icon"></i> <span id="deskripsiWords">Kata: 0</span>
                         </div>
                         <div class="bg-gray-800 p-2 w-full rounded-md text-sm text-center">
-                            <span id="deskripsiChars">Huruf: 0</span>
+                            <i class="fas fa-font char-icon"></i> <span id="deskripsiChars">Huruf: 0</span>
                         </div>
                     </div>
                     <div class="bg-gray-800 p-2 mt-2 rounded-md text-sm text-center text-yellow-400" id="deskripsiSeo">Masukkan deskripsi untuk evaluasi SEO</div>
@@ -125,13 +134,13 @@
                     <label class="block text-lg font-medium mb-2">
                         <i class="fas fa-tags"></i> Tag Video
                     </label>
-                    <textarea id="tag" rows="2" class="w-full p-3 bg-gray-800 border border-gray-700 rounded-md focus:outline-none focus:border-indigo-500" placeholder="Masukkan tag video (dipisah koma)" oninput="updateStats('tag', 500)"></textarea>
+                    <textarea id="tag" rows="2" class="w-full p-3 bg-gray-800 border border-gray-700 rounded-md focus:outline-none focus:border-indigo-500" placeholder="Masukkan tag video" oninput="updateStats('tag', 500)"></textarea>
                     <div class="flex justify-between space-x-2 mt-2">
                         <div class="bg-gray-800 p-2 w-full rounded-md text-sm text-center">
-                            <span id="tagWords">Kata: 0</span>
+                            <i class="fas fa-file-word word-icon"></i> <span id="tagWords">Kata: 0</span>
                         </div>
                         <div class="bg-gray-800 p-2 w-full rounded-md text-sm text-center">
-                            <span id="tagChars">Huruf: 0</span>
+                            <i class="fas fa-font char-icon"></i> <span id="tagChars">Huruf: 0</span>
                         </div>
                     </div>
                     <div class="bg-gray-800 p-2 mt-2 rounded-md text-sm text-center text-yellow-400" id="tagSeo">Masukkan tag untuk evaluasi SEO</div>
@@ -226,4 +235,3 @@ Copyright Disclaimer Under Section 107 of the Copyright Act 1976, allowance is m
     </script>
 </body>
 </html>
-
