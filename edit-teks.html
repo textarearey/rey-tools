@@ -46,11 +46,6 @@
             margin-bottom: 20px;
         }
 
-        .input-box:nth-child(odd) {
-            background-color: #1F2937;
-            border-color: #10B981;
-        }
-
         textarea {
             padding: 15px;
             overflow: hidden; /* Menghilangkan scrollbar */
@@ -151,10 +146,21 @@
                     <button type="button" id="generateButton" class="w-full bg-indigo-600 p-3 rounded-md text-white font-semibold hover:bg-indigo-500 transition duration-300">
                         <i class="fas fa-file-download mr-2"></i>Buat File Teks
                     </button>
-                </div><br><br>
+                </div>
             </form>
+
+            
         </div>
     </div>
+<div class="p-6">
+    <div class="input-box ">
+        <label class="block text-lg font-medium mb-2">
+            <i class="fas fa-eye"></i> Prabaca
+        </label>
+        <pre id="previewArea" class="w-full p-3 bg-gray-800 border border-gray-700 rounded-md"></pre>
+    </div>
+</div>
+    
 
     <script>
         // Fungsi untuk menghitung jumlah kata, huruf, panjang rata-rata kata
@@ -168,6 +174,9 @@
             document.getElementById(`${id}Words`).textContent = `Kata: ${wordCount}`;
             document.getElementById(`${id}Chars`).textContent = `Huruf: ${charCount}`;
 
+            // Update preview
+            updatePreview();
+
             // Hitung statistik SEO
             if (id === 'judul') {
                 evaluateSeo(id, charCount, 100, "Maksimal 100 karakter untuk judul.");
@@ -176,6 +185,28 @@
             } else if (id === 'tag') {
                 evaluateSeo(id, charCount, 500, "Maksimal 500 karakter untuk tag.");
             }
+        }
+
+        // Fungsi untuk memperbarui prabaca
+        function updatePreview() {
+            const judul = document.getElementById('judul').value;
+            const naskah = document.getElementById('naskah').value;
+            const deskripsi = document.getElementById('deskripsi').value;
+            const tag = document.getElementById('tag').value;
+
+            const previewContent = `
+Judul: ${judul}
+
+Naskah:
+${naskah}
+
+Deskripsi:
+${deskripsi}
+
+Tags: ${tag}
+            `;
+
+            document.getElementById('previewArea').textContent = previewContent.trim();
         }
 
         // Fungsi evaluasi SEO untuk judul, deskripsi, dan tag
@@ -211,10 +242,14 @@ Disclaimer:
 Copyright Disclaimer Under Section 107 of the Copyright Act 1976, allowance is made for "fair use" for purposes such as criticism, comment, news reporting, teaching, scholarship, and research. Fair use is a use permitted by copyright statutes that might otherwise be infringing. Non-profit, educational, or personal use tips the balance in favor of fair use`;
 
             // Menghitung statistik
-            const judulStats = document.getElementById('judulWords').textContent + ', ' + document.getElementById('judulChars').textContent;
-            const naskahStats = document.getElementById('naskahWords').textContent + ', ' + document.getElementById('naskahChars').textContent;
-            const deskripsiStats = document.getElementById('deskripsiWords').textContent + ', ' + document.getElementById('deskripsiChars').textContent;
-            const tagStats = document.getElementById('tagWords').textContent + ', ' + document.getElementById('tagChars').textContent;
+            const judulWordCount = document.getElementById('judulWords').textContent.split(': ')[1];
+            const judulCharCount = document.getElementById('judulChars').textContent.split(': ')[1];
+            const naskahWordCount = document.getElementById('naskahWords').textContent.split(': ')[1];
+            const naskahCharCount = document.getElementById('naskahChars').textContent.split(': ')[1];
+            const deskripsiWordCount = document.getElementById('deskripsiWords').textContent.split(': ')[1];
+            const deskripsiCharCount = document.getElementById('deskripsiChars').textContent.split(': ')[1];
+            const tagWordCount = document.getElementById('tagWords').textContent.split(': ')[1];
+            const tagCharCount = document.getElementById('tagChars').textContent.split(': ')[1];
 
             // Membuat konten teks yang terformat dengan baik
             let content = `Judul: ${judul}\n\n`;
@@ -223,14 +258,21 @@ Copyright Disclaimer Under Section 107 of the Copyright Act 1976, allowance is m
             content += defaultFooter + `\n\n`;
             content += `Tags: ${tag}\n\n`;
             content += `---- Statistik ----\n`;
-            content += `Judul: ${judulStats}\n`;
-            content += `Naskah: ${naskahStats}\n`;
-            content += `Deskripsi: ${deskripsiStats}\n`;
-            content += `Tags: ${tagStats}`;
+            content += `Judul: ${judulWordCount} Kata, ${judulCharCount} Huruf\n`;
+            content += `Naskah: ${naskahWordCount} Kata, ${naskahCharCount} Huruf\n`;
+            content += `Deskripsi: ${deskripsiWordCount} Kata, ${deskripsiCharCount} Huruf\n`;
+            content += `Tags: ${tagWordCount} Kata, ${tagCharCount} Huruf`;
 
             // Membuat file teks dan mengunduhnya
             const blob = new Blob([content], { type: 'text/plain;charset=utf-8' });
             saveAs(blob, `${judul.replace(/[^a-z0-9]/gi, '_').toLowerCase()}_terformat.txt`);
+        });
+
+        // Attach event listeners to update preview on input
+        document.querySelectorAll('textarea').forEach(textarea => {
+            textarea.addEventListener('input', function() {
+                updateStats(this.id);
+            });
         });
     </script>
 </body>
