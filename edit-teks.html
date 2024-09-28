@@ -48,9 +48,9 @@
 
         textarea {
             padding: 15px;
-            overflow: hidden; /* Menghilangkan scrollbar */
-            resize: none; /* Mencegah pengubahan ukuran manual */
-            spellcheck: false; /* Nonaktifkan pengecekan ejaan untuk menghilangkan garis merah */
+            overflow: hidden;
+            resize: none;
+            spellcheck: false;
         }
 
         label i {
@@ -59,11 +59,11 @@
         }
 
         .word-icon {
-            color: #3B82F6; /* Warna biru untuk ikon kata */
+            color: #3B82F6;
         }
 
         .char-icon {
-            color: #10B981; /* Warna hijau untuk ikon huruf */
+            color: #10B981;
         }
     </style>
 </head>
@@ -141,6 +141,14 @@
                     <div class="bg-gray-800 p-2 mt-2 rounded-md text-sm text-center text-yellow-400" id="tagSeo">Masukkan tag untuk evaluasi SEO</div>
                 </div>
 
+                <!-- Sumber Video -->
+                <div class="input-box">
+                    <label class="block text-lg font-medium mb-2">
+                        <i class="fas fa-link"></i> Sumber Video
+                    </label>
+                    <textarea id="sumberVideo" rows="2" class="w-full p-3 bg-gray-800 border border-gray-700 rounded-md focus:outline-none focus:border-indigo-500" placeholder="Masukkan sumber video (URL)"></textarea>
+                </div>
+
                 <!-- Tombol -->
                 <div class="mt-6">
                     <button type="button" id="generateButton" class="w-full bg-indigo-600 p-3 rounded-md text-white font-semibold hover:bg-indigo-500 transition duration-300">
@@ -148,36 +156,31 @@
                     </button>
                 </div>
             </form>
-
-            
         </div>
     </div>
-<div class="p-6">
-    <div class="input-box ">
-        <label class="block text-lg font-medium mb-2">
-            <i class="fas fa-eye"></i> Prabaca
-        </label>
-        <pre id="previewArea" class="w-full p-3 bg-gray-800 border border-gray-700 rounded-md"></pre>
+
+    <div class="p-6">
+        <div class="input-box">
+            <label class="block text-lg font-medium mb-2">
+                <i class="fas fa-eye"></i> Prabaca
+            </label>
+            <pre id="previewArea" class="w-full p-3 bg-gray-800 border border-gray-700 rounded-md"></pre>
+        </div>
     </div>
-</div>
-    
 
     <script>
-        // Fungsi untuk menghitung jumlah kata, huruf, panjang rata-rata kata
+        // Fungsi untuk menghitung jumlah kata dan huruf
         function updateStats(id, maxChars = null) {
             const value = document.getElementById(id).value;
             const wordsArray = value.trim() === '' ? [] : value.trim().split(/\s+/);
             const wordCount = wordsArray.length;
             const charCount = value.length;
 
-            // Update statistik dasar
             document.getElementById(`${id}Words`).textContent = `Kata: ${wordCount}`;
             document.getElementById(`${id}Chars`).textContent = `Huruf: ${charCount}`;
 
-            // Update preview
             updatePreview();
 
-            // Hitung statistik SEO
             if (id === 'judul') {
                 evaluateSeo(id, charCount, 100, "Maksimal 100 karakter untuk judul.");
             } else if (id === 'deskripsi') {
@@ -193,6 +196,7 @@
             const naskah = document.getElementById('naskah').value;
             const deskripsi = document.getElementById('deskripsi').value;
             const tag = document.getElementById('tag').value;
+            const sumberVideo = document.getElementById('sumberVideo').value;
 
             const previewContent = `
 Judul: ${judul}
@@ -203,13 +207,14 @@ ${naskah}
 Deskripsi:
 ${deskripsi}
 
+Sumber Video: ${sumberVideo}
+
 Tags: ${tag}
             `;
 
             document.getElementById('previewArea').textContent = previewContent.trim();
         }
 
-        // Fungsi evaluasi SEO untuk judul, deskripsi, dan tag
         function evaluateSeo(id, charCount, maxChars, recommendation) {
             const seoElement = document.getElementById(`${id}Seo`);
             if (charCount === 0) {
@@ -228,47 +233,28 @@ Tags: ${tag}
         }
 
         document.getElementById('generateButton').addEventListener('click', function() {
-            // Mengambil nilai input
             const judul = document.getElementById('judul').value;
             const naskah = document.getElementById('naskah').value;
             const deskripsi = document.getElementById('deskripsi').value;
             const tag = document.getElementById('tag').value;
+            const sumberVideo = document.getElementById('sumberVideo').value;
 
-            // Teks tambahan untuk deskripsi yang tidak dihitung
             const defaultFooter = `
 Email me textarearey@gmail.com for any requests for removal of videos.
-
 Disclaimer: 
 Copyright Disclaimer Under Section 107 of the Copyright Act 1976, allowance is made for "fair use" for purposes such as criticism, comment, news reporting, teaching, scholarship, and research. Fair use is a use permitted by copyright statutes that might otherwise be infringing. Non-profit, educational, or personal use tips the balance in favor of fair use`;
 
-            // Menghitung statistik
-            const judulWordCount = document.getElementById('judulWords').textContent.split(': ')[1];
-            const judulCharCount = document.getElementById('judulChars').textContent.split(': ')[1];
-            const naskahWordCount = document.getElementById('naskahWords').textContent.split(': ')[1];
-            const naskahCharCount = document.getElementById('naskahChars').textContent.split(': ')[1];
-            const deskripsiWordCount = document.getElementById('deskripsiWords').textContent.split(': ')[1];
-            const deskripsiCharCount = document.getElementById('deskripsiChars').textContent.split(': ')[1];
-            const tagWordCount = document.getElementById('tagWords').textContent.split(': ')[1];
-            const tagCharCount = document.getElementById('tagChars').textContent.split(': ')[1];
-
-            // Membuat konten teks yang terformat dengan baik
             let content = `Judul: ${judul}\n\n`;
             content += `Naskah:\n${naskah}\n\n`;
-            content += `Deskripsi:\n${deskripsi}\n`;
+            content += `Deskripsi:\n${deskripsi}\n\n`;
+            content += `Sumber Video: ${sumberVideo}\n\n`;
             content += defaultFooter + `\n\n`;
             content += `Tags: ${tag}\n\n`;
-            content += `---- Statistik ----\n`;
-            content += `Judul: ${judulWordCount} Kata, ${judulCharCount} Huruf\n`;
-            content += `Naskah: ${naskahWordCount} Kata, ${naskahCharCount} Huruf\n`;
-            content += `Deskripsi: ${deskripsiWordCount} Kata, ${deskripsiCharCount} Huruf\n`;
-            content += `Tags: ${tagWordCount} Kata, ${tagCharCount} Huruf`;
 
-            // Membuat file teks dan mengunduhnya
             const blob = new Blob([content], { type: 'text/plain;charset=utf-8' });
             saveAs(blob, `${judul.replace(/[^a-z0-9]/gi, '_').toLowerCase()}_terformat.txt`);
         });
 
-        // Attach event listeners to update preview on input
         document.querySelectorAll('textarea').forEach(textarea => {
             textarea.addEventListener('input', function() {
                 updateStats(this.id);
