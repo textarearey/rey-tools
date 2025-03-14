@@ -114,8 +114,12 @@
     const clearStorageButton = document.getElementById('clear-storage');
     clearStorageButton.addEventListener('click', () => {
       localStorage.removeItem('userInput');
+      localStorage.removeItem('wordsToReplace');
+      localStorage.removeItem('replacementWords');
       localStorage.removeItem('output');
       userInput.value = '';
+      wordsToReplace.value = '';
+      replacementWords.value = '';
       outputContainer.innerHTML = '';
       Toastify({
         text: "Storage cleared!",
@@ -218,6 +222,8 @@
 
       // Store the input and output in localStorage
       localStorage.setItem('userInput', userInput.value);
+      localStorage.setItem('wordsToReplace', wordsToReplace.value);
+      localStorage.setItem('replacementWords', replacementWords.value);
       localStorage.setItem('output', outputContainer.innerHTML);
     }
 
@@ -228,6 +234,8 @@
 
     // Initial call for updating stats and input/output from localStorage
     userInput.value = localStorage.getItem('userInput') || '';
+    wordsToReplace.value = localStorage.getItem('wordsToReplace') || '';
+    replacementWords.value = localStorage.getItem('replacementWords') || '';
     outputContainer.innerHTML = localStorage.getItem('output') || '';
     updateTextStats();
   </script>
