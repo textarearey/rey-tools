@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Multiple Word Replacer</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdn.jsdelivr.net/npm/heroicons@1.0.6/outline/heroicons.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/framer-motion@2.9.6/dist/framer-motion.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
+  <style>
+    /* Custom Animations */
+    .fade-in {
+      animation: fadeIn 0.5s ease-in-out;
+    }
+    @keyframes fadeIn {
+      0% { opacity: 0; }
+      100% { opacity: 1; }
+    }
+  </style>
+</head>
+<body class="bg-gray-200 dark:bg-gray-900 flex justify-center items-center min-h-screen p-6 transition-all">
+
+  <!-- Wrapper Container -->
+  <div class="max-w-6xl w-full bg-white dark:bg-gray-800 p-8 rounded-3xl shadow-xl space-y-6 fade-in">
+
+    <h1 class="text-3xl font-extrabold text-center text-gray-800 dark:text-white mb-6">Ganti Kata dalam Cerita</h1>
+
+    <!-- Dark Mode Toggle -->
+    <button id="dark-mode-toggle" class="absolute hidden top-5 right-5 p-2 bg-gray-700 text-white rounded-full">
+      <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v18m9-9H3" />
+      </svg>
+    </button>
+
+    <!-- Flexbox Layout -->
+    <div class="flex gap-10 mb-6">
+
+      <!-- Input Teks di Kiri -->
+      <div class="w-1/2 bg-gray-100 dark:bg-gray-700 p-6 rounded-lg shadow-lg space-y-4">
+
+        <textarea
+          id="user-input"
+          class="mt-2 p-4 w-full border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all ease-in-out dark:bg-gray-600 dark:border-gray-500 dark:text-white"
+          placeholder="Tulis cerita Anda di sini"
+          rows="8"
+        ></textarea>
+
+        <!-- Output stats -->
+        <div class="flex gap-4">
+          <div class="w-1/3 text-center p-2 bg-gray-600 text-white rounded">
+            <span id="char-count">0 Huruf</span>
+          </div>
+          <div class="w-1/3 text-center p-2 bg-gray-600 text-white rounded">
+            <span id="word-count">0 Kata</span>
+          </div>
+          <div class="w-1/3 text-center p-2 bg-gray-600 text-white rounded">
+            <span id="sentence-count">0 Kalimat</span>
+          </div>
+        </div>
+
+      </div>
+      
+      <!-- Dua Input di Kanan -->
+      <div class="w-1/2 space-y-6">
+
+        <!-- Words to Replace -->
+        <div class="bg-gray-100 dark:bg-gray-700 p-6 rounded-lg shadow-lg space-y-4">
+          <input
+            type="text"
+            id="words-to-replace"
+            class="mt-2 p-4 w-full border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all ease-in-out dark:bg-gray-600 dark:border-gray-500 dark:text-white"
+            placeholder="Masukkan kata-kata yang ingin diganti"
+          />
+        </div>
+
+        <!-- Replacement Words (Menggunakan textarea) -->
+        <div class="bg-gray-100 dark:bg-gray-700 p-6 rounded-lg shadow-lg space-y-4">
+          <textarea
+            id="replacement-words"
+            class="mt-2 p-4 w-full border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all ease-in-out dark:bg-gray-600 dark:border-gray-500 dark:text-white"
+            placeholder="Masukkan kata penggantinya"
+            rows="8"
+          ></textarea>
+        </div>
+      </div>
+      
+    </div>
+
+    <!-- Output Section -->
+    <div class="bg-gray-100 dark:bg-gray-700 p-6 rounded-lg shadow-lg space-y-4">
+      <label for="text-display" class="block text-lg font-semibold text-gray-700 dark:text-gray-300">Hasil Penggantian:</label>
+      <div id="output-container" class="space-y-4">
+        <!-- Kotak-kotak hasil output akan muncul di sini -->
+      </div>
+    </div>
+
+  </div>
+
+  <script>
+    // Dark mode toggle
+    const darkModeToggle = document.getElementById('dark-mode-toggle');
+    darkModeToggle.addEventListener('click', () => {
+      document.body.classList.toggle('dark');
+    });
+
+    // Referensi elemen-elemen di HTML
+    const userInput = document.getElementById('user-input');
+    const wordsToReplace = document.getElementById('words-to-replace');
+    const replacementWords = document.getElementById('replacement-words');
+    const outputContainer = document.getElementById('output-container');
+    const charCount = document.getElementById('char-count');
+    const wordCount = document.getElementById('word-count');
+    const sentenceCount = document.getElementById('sentence-count');
+
+    // Warna yang berbeda untuk setiap kata yang diganti
+    const colors = ['text-teal-500', 'text-blue-500', 'text-green-500', 'text-yellow-500', 'text-purple-500'];
+
+    // Fungsi untuk menghitung statistik
+    function updateTextStats() {
+      const text = userInput.value.trim();
+      const numberOfChars = text.replace(/\s+/g, '').length;
+      const numberOfWords = text.split(/\s+/).filter(word => word.length > 0).length;
+      const numberOfSentences = text.split(/[.!?]+/).filter(sentence => sentence.trim().length > 0).length;
+
+      // Update elemen di HTML dengan hasil statistik
+      charCount.textContent = `${numberOfChars} Huruf`;
+      wordCount.textContent = `${numberOfWords} Kata`;
+      sentenceCount.textContent = `${numberOfSentences} Kalimat`;
+    }
+
+    // Fungsi untuk mengganti kata dan menampilkan hasil secara langsung
+    function updateOutput() {
+      const inputText = userInput.value.trim();
+      const words = wordsToReplace.value.trim().split('/').map(word => word.trim()); // Menggunakan '/' untuk memisahkan kata
+      const replacements = replacementWords.value.trim().split('/').map(word => word.trim()); // Menggunakan '/' untuk memisahkan kata pengganti
+
+      // Memisahkan teks berdasarkan garis baru dan garis bawah
+      const sections = inputText.split('\n').map(paragraph => paragraph.trim()).filter(paragraph => paragraph.length > 0);
+
+      // Hapus konten sebelumnya
+      outputContainer.innerHTML = '';
+
+      // Proses penggantian kata dengan warna
+      sections.forEach((section) => {
+        words.forEach((word, index) => {
+          const replacement = replacements[index];
+          const colorClass = colors[index % colors.length]; // Pilih warna secara berulang
+          const regex = new RegExp(`\\b${word}\\b`, 'gi'); // 'g' untuk mengganti semua kemunculan, 'i' untuk case-insensitive
+          
+          // Ganti kata dan beri warna pada kata yang diganti
+          section = section.replace(regex, match => {
+            return `<span class="${colorClass}">${replacement}</span>`;
+          });
+        });
+
+        // Buat kotak untuk setiap bagian teks
+        const box = document.createElement('div');
+        box.classList.add('p-6', 'bg-gray-100', 'rounded-xl', 'shadow-lg', 'cursor-pointer', 'transition', 'hover:shadow-xl', 'hover:bg-gray-200', 'text-xl', 'font-bold', 'text-gray-900');
+        box.innerHTML = section;  // Menggunakan innerHTML untuk memproses tag HTML hasil penggantian kata
+
+        // Buat kotak kecil A, B, C, D
+        const subBoxes = [
+          '',
+          'Kamera menangkapnya dari sudut samping.',
+          'Kamera menangkapnya dari sudut atas.',
+          'Kamera menangkapnya dari sudut belakang.',
+          'Kamera menangkapnya dari sudut jauh.'
+        ];
+        const subBoxesContainer = document.createElement('div');
+        subBoxesContainer.classList.add('flex', 'gap-4', 'text-lg', 'mt-4', 'justify-between');
+
+        // Membuat dan menata setiap kotak kecil
+        subBoxes.forEach((label, index) => {
+          const subBox = document.createElement('div');
+          subBox.classList.add(
+            'p-3',
+            'rounded-lg', 
+            'cursor-pointer',
+            'transition',
+            'text-white', 
+            'flex-grow-1',
+            'text-xs', // Ukuran teks lebih besar
+          );
+
+          // Menambahkan warna untuk kotak kecil kosong (KOTAK A)
+          if (label === '') {
+            // Ganti kotak merah dengan ikon salin
+            const copyIcon = document.createElement('div');
+            copyIcon.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 17L21 12L16 7"></path></svg>';
+            subBox.appendChild(copyIcon);
+            subBox.classList.add('bg-red-500');
+          } else {
+            subBox.classList.add('bg-blue-500', 'hover:bg-blue-600'); // Kotak lainnya dengan warna biru
+          }
+
+          subBox.textContent = label;
+
+          // Ketika kotak kecil diklik, salin teks + teks kotak kecil
+          subBox.addEventListener('click', () => {
+            const plainText = section.replace(/<[^>]*>/g, ''); // Hapus tag HTML sebelum menyalin
+            const newText = `${label} ${plainText}`; // Menambahkan label sebelum teks
+            navigator.clipboard.writeText(newText).then(() => {
+              // Menampilkan Toastify Popup berhasil disalin
+              Toastify({
+                text: "❤️",
+                backgroundColor: "transparant",
+                duration: 2000,
+                
+              }).showToast();
+            });
+          });
+
+          subBoxesContainer.appendChild(subBox);
+        });
+
+        // Menambahkan kotak kecil ke kotak utama
+        box.appendChild(subBoxesContainer);
+
+        // Tambahkan kotak ke output
+        outputContainer.appendChild(box);
+      });
+
+      // Update statistik setelah perubahan
+      updateTextStats();
+    }
+
+    // Menambahkan event listener untuk input setiap kali pengguna mengetik
+    userInput.addEventListener('input', updateOutput);
+    wordsToReplace.addEventListener('input', updateOutput);
+    replacementWords.addEventListener('input', updateOutput);
+
+    // Initial call untuk menghitung statistik saat halaman pertama kali dimuat
+    updateTextStats();
+  </script>
+
+</body>
+</html>
