@@ -34,6 +34,11 @@
       </svg>
     </button>
 
+    <!-- Clear Storage Button -->
+    <button id="clear-storage" class="absolute top-5 left-5 p-2 bg-red-600 text-white rounded-full">
+      Clear Storage
+    </button>
+
     <!-- Flexbox Layout -->
     <div class="flex gap-10 mb-6">
 
@@ -105,6 +110,20 @@
       document.body.classList.toggle('dark');
     });
 
+    // Clear Storage button
+    const clearStorageButton = document.getElementById('clear-storage');
+    clearStorageButton.addEventListener('click', () => {
+      localStorage.removeItem('userInput');
+      localStorage.removeItem('output');
+      userInput.value = '';
+      outputContainer.innerHTML = '';
+      Toastify({
+        text: "Storage cleared!",
+        backgroundColor: "green",
+        duration: 2000
+      }).showToast();
+    });
+
     // Referensi elemen-elemen di HTML
     const userInput = document.getElementById('user-input');
     const wordsToReplace = document.getElementById('words-to-replace');
@@ -133,8 +152,8 @@
     // Fungsi untuk mengganti kata dan menampilkan hasil secara langsung
     function updateOutput() {
       const inputText = userInput.value.trim();
-      const words = wordsToReplace.value.trim().split('/').map(word => word.trim()); // Menggunakan '/' untuk memisahkan kata
-      const replacements = replacementWords.value.trim().split('/').map(word => word.trim()); // Menggunakan '/' untuk memisahkan kata pengganti
+      const words = wordsToReplace.value.trim().split('/').map(word => word.trim());
+      const replacements = replacementWords.value.trim().split('/').map(word => word.trim());
 
       // Memisahkan teks berdasarkan garis baru dan garis bawah
       const sections = inputText.split('\n').map(paragraph => paragraph.trim()).filter(paragraph => paragraph.length > 0);
@@ -146,68 +165,43 @@
       sections.forEach((section) => {
         words.forEach((word, index) => {
           const replacement = replacements[index];
-          const colorClass = colors[index % colors.length]; // Pilih warna secara berulang
-          const regex = new RegExp(`\\b${word}\\b`, 'gi'); // 'g' untuk mengganti semua kemunculan, 'i' untuk case-insensitive
+          const colorClass = colors[index % colors.length]; 
+          const regex = new RegExp(`\\b${word}\\b`, 'gi');
           
-          // Ganti kata dan beri warna pada kata yang diganti
           section = section.replace(regex, match => {
             return `<span class="${colorClass}">${replacement}</span>`;
           });
         });
 
-        // Buat kotak untuk setiap bagian teks
         const box = document.createElement('div');
         box.classList.add('p-6', 'bg-gray-100', 'rounded-xl', 'shadow-lg', 'cursor-pointer', 'transition', 'hover:shadow-xl', 'hover:bg-gray-200', 'text-xl', 'font-bold', 'text-gray-900');
-        box.innerHTML = section;  // Menggunakan innerHTML untuk memproses tag HTML hasil penggantian kata
+        box.innerHTML = section;
 
-        // Buat kotak kecil A, B, C, D
-        const subBoxes = [
-          '',
-          'Kamera menangkapnya dari sudut samping.',
-          'Kamera menangkapnya dari sudut atas.',
-          'Kamera menangkapnya dari sudut belakang.',
-          'Kamera menangkapnya dari sudut jauh.'
-        ];
+        // Add subboxes for extra labels (A, B, C, D)
+        const subBoxes = ['', 'Kamera menangkapnya dari sudut samping.', 'Kamera menangkapnya dari sudut atas.', 'Kamera menangkapnya dari sudut belakang.', 'Kamera menangkapnya dari sudut jauh.'];
         const subBoxesContainer = document.createElement('div');
         subBoxesContainer.classList.add('flex', 'gap-4', 'text-lg', 'mt-4', 'justify-between');
 
-        // Membuat dan menata setiap kotak kecil
         subBoxes.forEach((label, index) => {
           const subBox = document.createElement('div');
-          subBox.classList.add(
-            'p-3',
-            'rounded-lg', 
-            'cursor-pointer',
-            'transition',
-            'text-white', 
-            'flex-grow-1',
-            'text-xs', // Ukuran teks lebih besar
-          );
-
-          // Menambahkan warna untuk kotak kecil kosong (KOTAK A)
+          subBox.classList.add('p-3', 'rounded-lg', 'cursor-pointer', 'transition', 'text-white', 'flex-grow-1', 'text-xs');
           if (label === '') {
-            // Ganti kotak merah dengan ikon salin
             const copyIcon = document.createElement('div');
             copyIcon.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 17L21 12L16 7"></path></svg>';
             subBox.appendChild(copyIcon);
             subBox.classList.add('bg-red-500');
           } else {
-            subBox.classList.add('bg-blue-500', 'hover:bg-blue-600'); // Kotak lainnya dengan warna biru
+            subBox.classList.add('bg-blue-500', 'hover:bg-blue-600');
           }
-
           subBox.textContent = label;
-
-          // Ketika kotak kecil diklik, salin teks + teks kotak kecil
           subBox.addEventListener('click', () => {
-            const plainText = section.replace(/<[^>]*>/g, ''); // Hapus tag HTML sebelum menyalin
-            const newText = `${label} ${plainText}`; // Menambahkan label sebelum teks
+            const plainText = section.replace(/<[^>]*>/g, '');
+            const newText = `${label} ${plainText}`;
             navigator.clipboard.writeText(newText).then(() => {
-              // Menampilkan Toastify Popup berhasil disalin
               Toastify({
                 text: "❤️",
-                backgroundColor: "transparant",
-                duration: 2000,
-                
+                backgroundColor: "transparent",
+                duration: 2000
               }).showToast();
             });
           });
@@ -215,15 +209,16 @@
           subBoxesContainer.appendChild(subBox);
         });
 
-        // Menambahkan kotak kecil ke kotak utama
         box.appendChild(subBoxesContainer);
-
-        // Tambahkan kotak ke output
         outputContainer.appendChild(box);
       });
 
-      // Update statistik setelah perubahan
+      // Update statistics after changes
       updateTextStats();
+
+      // Store the input and output in localStorage
+      localStorage.setItem('userInput', userInput.value);
+      localStorage.setItem('output', outputContainer.innerHTML);
     }
 
     // Menambahkan event listener untuk input setiap kali pengguna mengetik
@@ -231,7 +226,9 @@
     wordsToReplace.addEventListener('input', updateOutput);
     replacementWords.addEventListener('input', updateOutput);
 
-    // Initial call untuk menghitung statistik saat halaman pertama kali dimuat
+    // Initial call for updating stats and input/output from localStorage
+    userInput.value = localStorage.getItem('userInput') || '';
+    outputContainer.innerHTML = localStorage.getItem('output') || '';
     updateTextStats();
   </script>
 
