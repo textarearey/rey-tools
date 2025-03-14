@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>50 Audio Elements</title>
+  <!-- Link to Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    .audio-match {
+      animation: slide-up 0.5s ease-out forwards;
+    }
+
+    @keyframes slide-up {
+      0% {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+
+      100% {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+  </style>
+</head>
+
+<body class="bg-gray-100 text-gray-800">
+
+  <div class="container mx-auto py-10">
+  
+
+    <!-- Search Box -->
+    <div class="mb-6 flex justify-center">
+      <input type="text" id="searchInput" class="p-2 border rounded-lg w-1/2" placeholder="Search Audio..." />
+    </div>
+
+    <!-- Div untuk hasil pencarian (mulai tersembunyi) -->
+    <div id="searchResults" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 hidden">
+      <!-- Audio yang ditemukan berdasarkan pencarian akan ditampilkan di sini -->
+    </div>
+
+    <!-- Semua elemen audio -->
+    <div id="audioGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+      <!-- Loop to create 50 audio elements -->
+      <div class="bg-white p-4 rounded-lg shadow-md audio-box">
+        <audio controls class="w-full mb-4">
+          <source src="assetsmp3/bayi ketawa.MP3" type="audio/mp3">
+        </audio>
+        <p class="text-center" data-name="teriak ana">bayi ketawa</p>
+      </div>
+      <div class="bg-white p-4 rounded-lg shadow-md audio-box">
+        <audio controls class="w-full mb-4">
+          <source src="assetsmp3/bayi ketawaa.MP3" type="audio/mp3">
+        </audio>
+        <p class="text-center" data-name="terikan keras">bayi ketawaa</p>
+      </div>
+      <div class="bg-white p-4 rounded-lg shadow-md audio-box">
+        <audio controls class="w-full mb-4">
+          <source src="assetsmp3/cartoon-spin-7120.mp3" type="audio/mp3">
+        </audio>
+        <p class="text-center" data-name="dor">cartoon-spin</p>
+      </div>
+      <div class="bg-white p-4 rounded-lg shadow-md audio-box">
+        <audio controls class="w-full mb-4">
+          <source src="assetsmp3/heeum.MP3" type="audio/mp3">
+        </audio>
+        <p class="text-center" data-name="Audio 4">heeum</p>
+      </div>
+      <div class="bg-white p-4 rounded-lg shadow-md audio-box">
+        <audio controls class="w-full mb-4">
+          <source src="assetsmp3/ketawa anjing.MP3" type="audio/mp3">
+        </audio>
+        <p class="text-center" data-name="Audio 5">ketawa anjing</p>
+      </div>
+      <div class="bg-white p-4 rounded-lg shadow-md audio-box">
+        <audio controls class="w-full mb-4">
+          <source src="assetsmp3/meeng.MP3" type="audio/mp3">
+        </audio>
+        <p class="text-center" data-name="Audio 6">meeng</p>
+      </div>
+      <div class="bg-white p-4 rounded-lg shadow-md audio-box">
+        <audio controls class="w-full mb-4">
+          <source src="assetsmp3/nangis.MP3" type="audio/mp3">
+        </audio>
+        <p class="text-center" data-name="Audio 7">nangis</p>
+      </div>
+      <div class="bg-white p-4 rounded-lg shadow-md audio-box">
+        <audio controls class="w-full mb-4">
+          <source src="assetsmp3/reketek preketek.MP3" type="audio/mp3">
+        </audio>
+        <p class="text-center" data-name="Audio 8">reketek preketek</p>
+      </div>
+      <div class="bg-white p-4 rounded-lg shadow-md audio-box">
+        <audio controls class="w-full mb-4">
+          <source src="assetsmp3/tigujubur.MP3" type="audio/mp3">
+        </audio>
+        <p class="text-center" data-name="Audio 9">tigujubur</p>
+      </div>
+
+      <!-- Repeat until Audio 50 -->
+    </div>
+  </div>
+
+  <script>
+    const audioBoxes = document.querySelectorAll('.audio-box');
+    const audioGrid = document.getElementById('audioGrid');
+    const searchInput = document.getElementById('searchInput');
+    const searchResults = document.getElementById('searchResults');
+
+    // Menambahkan event listener untuk audio box
+    function addAudioEventListeners(box) {
+      const audio = box.querySelector('audio');
+
+      // Saat kursor diarahakan ke kotak, audio diputar otomatis
+      box.addEventListener('mouseenter', () => {
+        audio.play();
+      });
+
+      // Saat kursor meninggalkan kotak, audio dihentikan
+      box.addEventListener('mouseleave', () => {
+        audio.pause();
+        audio.currentTime = 0; // Reset audio ke awal
+      });
+
+      // Saat kotak diklik, audio diunduh
+      box.addEventListener('click', () => {
+        const audioSrc = audio.querySelector('source').src;
+        const a = document.createElement('a');
+        a.href = audioSrc;
+        a.download = audioSrc.split('/').pop(); // Nama file berdasarkan nama file di src
+        a.click();
+      });
+    }
+
+    // Untuk setiap kotak audio, tambahkan event listener
+    audioBoxes.forEach(box => {
+      addAudioEventListeners(box);
+    });
+
+    // Fungsi pencarian
+    searchInput.addEventListener('input', function () {
+      const searchTerm = searchInput.value.toLowerCase();
+
+      // Clear hasil pencarian sebelumnya
+      searchResults.innerHTML = '';
+
+      // Menyembunyikan audioGrid dan menampilkan searchResults
+      if (searchTerm) {
+        audioGrid.classList.add('hidden'); // Sembunyikan grid audio utama
+        searchResults.classList.remove('hidden'); // Tampilkan div hasil pencarian
+      } else {
+        audioGrid.classList.remove('hidden'); // Tampilkan grid audio utama
+        searchResults.classList.add('hidden'); // Sembunyikan div hasil pencarian
+        return; // Kembalikan jika pencarian kosong
+      }
+
+      // Loop untuk mencari audio yang cocok
+      let hasMatch = false;
+
+      audioBoxes.forEach(box => {
+        const name = box.querySelector('p').getAttribute('data-name').toLowerCase();
+
+        if (name.includes(searchTerm)) {
+          // Menyalin kotak audio yang cocok ke dalam div pencarian
+          const newBox = box.cloneNode(true);
+          newBox.classList.add('audio-match');
+          searchResults.appendChild(newBox);
+
+          // Tambahkan event listeners untuk kotak audio yang baru disalin
+          addAudioEventListeners(newBox);
+
+          // Tandai bahwa ada pencocokan
+          hasMatch = true;
+        }
+      });
+
+      // Tampilkan atau sembunyikan div pencarian
+      if (!hasMatch) {
+        searchResults.classList.add('hidden'); // Sembunyikan div hasil pencarian jika tidak ada yang cocok
+        audioGrid.classList.remove('hidden'); // Tampilkan grid audio utama kembali
+      }
+    });
+  </script>
+
+</body>
+
+</html>
