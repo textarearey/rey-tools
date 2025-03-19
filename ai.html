@@ -384,6 +384,22 @@
         font-size: 1.25rem !important;
       }
     }
+
+    /* Pastikan tombol selalu sejajar ke samping */
+.style-choice {
+  display: flex;
+  flex-direction: row; /* Selalu sejajar ke samping */
+  gap: 10px; /* Jarak antar tombol */
+  justify-content: center; /* Pusatkan tombol */
+}
+
+/* Agar tombol memiliki ukuran yang sama */
+.style-choice button {
+  flex: 1;
+  max-width: 120px; /* Batasi lebar tombol agar tetap rapi */
+}
+
+     
   </style>
 </head>
 
@@ -394,7 +410,7 @@
     <h1>REY GPT</h1>
     <div class="style-choice">
       <button id="gaul-btn" class="active">Gaul</button>
-      <button id="biasa-btn">Biasa</button>
+      <button id="Sopan-btn">Sopan</button>
     </div>
   </header>
 
@@ -407,7 +423,7 @@
     
       <div class="typing-textarea">
         
-        <textarea id="chat-input" spellcheck="false" placeholder="Enter a prompt here" required></textarea>
+        <textarea id="chat-input" spellcheck="false" placeholder="Tulis coy didieu . . ." required></textarea>
         <span id="send-btn" class="material-symbols-rounded">send</span>
       </div>
       <div class="typing-controls">
@@ -424,7 +440,7 @@
     const themeButton = document.querySelector("#theme-btn");
     const deleteButton = document.querySelector("#delete-btn");
     const gaulButton = document.querySelector("#gaul-btn");
-    const biasaButton = document.querySelector("#biasa-btn");
+    const SopanButton = document.querySelector("#Sopan-btn");
 
     let userText = null;
     let responseStyle = "gaul"; // Default style is now "gaul"
@@ -442,8 +458,8 @@
       themeButton.innerText = document.body.classList.contains("light-mode") ? "dark_mode" : "light_mode";
 
       const defaultText = `<div class="default-text">
-                            <h1>ChatGPT Clone</h1>
-                            <p>Start a conversation and explore the power of AI.<br> Your chat history will be displayed here.</p>
+                            <h1>REY GPT</h1>
+                            <h2>مَنِ اجْتَهَدَ وَبَذَلَ مَا فِي وُسْعِهِ فَلاَ ضَمَانَ عَلَيْهِ وَكُتِبَ لَهُ تَمَامَ سَعْيِهِ</h2>
                         </div>`
 
       chatContainer.innerHTML = localStorage.getItem("all-chats") || defaultText;
@@ -474,7 +490,7 @@
         if (message.role === "user") {
           prompt += `User: ${message.content}\n`;
         } else {
-          prompt += `Riyad: ${message.content}\n`;
+          prompt += ` ${message.content}\n`;
         }
       }
 
@@ -483,7 +499,7 @@
       if (responseStyle === "gaul") {
         prompt += `Riyad (dengan gaya bahasa gaul): Tolong jawab pertanyaan ini dengan gaya bahasa gaul, selalu sebut diri Anda sebagai Riyad: `;
       } else {
-        prompt += `Riyad (dengan gaya bahasa biasa): Tolong jawab pertanyaan ini dengan gaya bahasa biasa, selalu sebut diri Anda sebagai Riyad: `;
+        prompt += `Riyad (dengan gaya bahasa Sopan): Tolong jawab pertanyaan ini dengan gaya bahasa marah marah gak punya ahlak dan selalu pakai emotikon emotikon marah, selalu sebut diri Anda sebagai Riyad: `;
       }
 
       // Send the full prompt to the API
@@ -608,12 +624,12 @@
     gaulButton.addEventListener("click", () => {
       responseStyle = "gaul";
       gaulButton.classList.add("active");
-      biasaButton.classList.remove("active");
+      SopanButton.classList.remove("active");
     });
 
-    biasaButton.addEventListener("click", () => {
-      responseStyle = "biasa";
-      biasaButton.classList.add("active");
+    SopanButton.addEventListener("click", () => {
+      responseStyle = "Sopan";
+      SopanButton.classList.add("active");
       gaulButton.classList.remove("active");
     });
 
