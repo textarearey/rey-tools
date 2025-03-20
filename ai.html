@@ -180,11 +180,11 @@
     }
 
     .chat .chat-details img {
-      width: 35px;
-      height: 35px;
+      width: 45px;
+      height: 45px;
       align-self: flex-start;
       object-fit: cover;
-      border-radius: 2px;
+      border-radius: 50%;
     }
 
     .chat .chat-details p {
@@ -445,7 +445,7 @@
     let userText = null;
     let responseStyle = "gaul"; // Default style is now "gaul"
     const API_KEY = "AIzaSyCOcpBtEzKU2Wo-iDXkSTXpYf2SznC-tfA"; // Use the provided API Key
-    const botName = "Riyad";
+    const botName = "";
 
     // Store the conversation history here
     let conversationHistory = [];
@@ -497,9 +497,9 @@
       // Add instructions based on the selected style
 
       if (responseStyle === "gaul") {
-        prompt += `Riyad (dengan gaya bahasa gaul): Tolong jawab pertanyaan ini dengan gaya bahasa gaul, selalu sebut diri Anda sebagai Riyad: `;
+        prompt += ` (dengan gaya bahasa gaul): Tolong jawab pertanyaan ini dengan gaya bahasa gaul,selalu panggil dirinya riyad atau gue, tapi jangan sering sering , hanya sekali di awal saja, selebihnya menggunakan kata gue `;
       } else {
-        prompt += `Riyad (dengan gaya bahasa Sopan): Tolong jawab pertanyaan ini dengan gaya bahasa marah marah gak punya ahlak dan selalu pakai emotikon emotikon marah, selalu sebut diri Anda sebagai Riyad: `;
+        prompt += ` (dengan gaya bahasa Sopan): Tolong jawab pertanyaan ini dengan gaya bahasa marah marah gak punya ahlak dan selalu pakai emotikon emotikon marah,selalu panggil dirinya riyad atau gue, tapi jangan sering sering , hanya sekali di awal saja, selebihnya menggunakan kata gue `;
       }
 
       // Send the full prompt to the API
