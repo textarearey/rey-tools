@@ -466,6 +466,17 @@
       chatContainer.scrollTo(0, chatContainer.scrollHeight); // Scroll to bottom of the chat container
     }
 
+
+    chatInput.addEventListener("focus", () => {
+  // Opsi 1: Menggunakan window.scrollTo
+  window.scrollTo({
+    top: 0, // Geser ke bagian atas halaman
+    behavior: 'smooth' // Tambahkan animasi (opsional)
+  });
+
+  // Opsi 2: Menggunakan element.scrollIntoView
+  // chatInput.scrollIntoView({ behavior: 'smooth', block: 'start' });
+});
     const createChatElement = (content, className) => {
       // Create new div and apply chat, specified class and set html content of div
       const chatDiv = document.createElement("div");
