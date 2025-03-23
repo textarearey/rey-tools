@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Generator Baris Teks Berita</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lobster:wght@400;700&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/@jaames/iro@5"></script> <!-- Tambahkan iro.js -->
+    <style>
+        /* Gaya tambahan untuk tampilan color preview */
+        .color-preview {
+            width: 1.5rem; /* Ukuran lebih kecil */
+            height: 1.5rem; /* Ukuran lebih kecil */
+            border-radius: 50%; /* Membuat bulat */
+            border: 1px solid #ccc;
+            display: inline-block;
+            margin-right: 0.5rem;
+        }
+
+        /* Gaya untuk color picker */
+        #textColorPicker,
+        #backgroundColorPicker {
+            height: auto; /* Biarkan tinggi menyesuaikan */
+        }
+        
+
+        .container {
+            max-width: 100% !important; /* Lebar kontainer menjadi 100% */
+            padding-left: 0 !important; /* Menghapus padding kiri */
+            padding-right: 0 !important; /* Menghapus padding kanan */
+        }
+
+        .color-picker-container {
+          width: 100%; /* Memastikan container mengisi lebar */
+          max-width: 120px; /* Batasi lebar maksimum */
+        }
+
+     
+    </style>
+</head>
+<body class="font-sans antialiased bg-gray-900 text-white">
+    <div class="container mx-auto ">
+
+
+        <div class="flex flex-col p-8 lg:flex-row gap-8">
+
+            <!-- Panel Kontrol (Sebelah Kiri) -->
+            <div class="md:w-1/3 bg-gray-800 rounded-lg shadow-lg p-6">
+
+                <div class="mb-4">
+                    <label for="inputText" class="block text-sm font-bold mb-2">Teks:</label>
+                    <textarea id="inputText" rows="4" placeholder="Masukkan teks berita di sini"
+                              class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-100 leading-tight focus:outline-none focus:shadow-outline bg-gray-700"></textarea>
+                    <button id="boldButton" type="button" class="mt-2 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"><b>Bold</b></button>
+                </div>
+
+                <div class="mb-4">
+                    <label for="lineCount" class="block text-sm font-bold mb-2">Jumlah Baris:</label>
+                    <input type="range" id="lineCount" min="1" max="20" value="2"
+                           class="w-full h-2 bg-gray-700 rounded-lg appearance-none cursor-pointer">
+                    <span id="lineCountValue" class="text-sm text-gray-400">2</span>
+                </div>
+
+                <div class="mb-4">
+                    <label for="padding" class="block text-sm font-bold mb-2">Padding:</label>
+                    <input type="range" id="padding" min="0" max="200" value="20"
+                           class="w-full h-2 bg-gray-700 rounded-lg appearance-none cursor-pointer">
+                    <span id="paddingValue" class="text-sm text-gray-400">20</span>
+                </div>
+
+                <div class="mb-4">
+                    <label class="block text-sm font-bold mb-2">Jenis Font:</label>
+                    <div class="flex flex-wrap gap-2">
+                        <button type="button" data-font="Roboto" class="font-button bg-gray-700 hover:bg-gray-600 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">Roboto</button>
+                        <button type="button" data-font="Arial" class="font-button bg-gray-700 hover:bg-gray-600 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">Arial</button>
+                        <button type="button" data-font="Helvetica" class="font-button bg-gray-700 hover:bg-gray-600 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">Helvetica</button>
+                        <button type="button" data-font="Times New Roman" class="font-button bg-gray-700 hover:bg-gray-600 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">Times</button>
+                    </div>
+                </div>
+
+                <!-- Container Flex untuk Warna Teks dan Warna Latar Belakang -->
+                <div class="flex  gap-4">
+
+                  <div class="mb-4 mr-8">
+                    <label for="textColor" class="block text-sm font-bold mb-2">Warna Teks:</label>
+                    <div class="flex items-center">
+                      <span id="textColorPreview" class="color-preview hidden bg-white"></span>
+                      <div class="color-picker-container">
+                        <div id="textColorPicker"></div>
+                      </div>
+                      <input type="hidden" id="textColor" value="#ffffff">
+                    </div>
+                  </div>
+
+                  <div class="mb-4">
+                    <label for="backgroundColor" class="block text-sm font-bold mb-2">Warna Latar Belakang:</label>
+                    <div class="flex items-center">
+                      <span id="backgroundColorPreview" class="color-preview hidden bg-black"></span>
+                      <div class="color-picker-container">
+                        <div id="backgroundColorPicker"></div>
+                      </div>
+                      <input type="hidden" id="backgroundColor" value="#000000">
+                    </div>
+                  </div>
+
+                </div>
+
+            </div>
+
+            <!-- Canvas (Sebelah Kanan) -->
+            <div class="lg:w-2/3">
+                <div class="bg-gray-800 rounded-lg shadow-lg p-6">
+                    <h2 class="text-xl font-bold mb-4">Pratinjau</h2>
+                    <div id="textCanvasContainer" class="w-full rounded overflow-hidden">
+                        <canvas id="textCanvas" width="1920" height="1080" style="width: 100%; display: block;"></canvas>
+                    </div>
+                    <button id="downloadButton" disabled
+                            class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline mt-4 disabled:bg-gray-600 disabled:cursor-not-allowed">
+                        Unduh Gambar
+                    </button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const inputText = document.getElementById('inputText');
+            const lineCountInput = document.getElementById('lineCount');
+            const paddingInput = document.getElementById('padding');
+            const lineCountValue = document.getElementById('lineCountValue');
+            const paddingValue = document.getElementById('paddingValue');
+            const fontFamilyButtons = document.querySelectorAll('.font-button');
+            const textColorInput = document.getElementById('textColor');
+            const backgroundColorInput = document.getElementById('backgroundColor');
+            const textColorPreview = document.getElementById('textColorPreview');
+            const backgroundColorPreview = document.getElementById('backgroundColorPreview');
+            const titlePreview = document.getElementById('titlePreview');
+
+            const downloadButton = document.getElementById('downloadButton');
+            const textCanvas = document.getElementById('textCanvas');
+            const ctx = textCanvas.getContext('2d');
+            const boldButton = document.getElementById('boldButton');
+
+            const textColorPickerElement = document.getElementById('textColorPicker');
+            const backgroundColorPickerElement = document.getElementById('backgroundColorPicker');
+            let isBold = false;
+            let selectedFont = 'Roboto, sans-serif'; // Font default
+
+            // Tentukan ukuran color picker di sini
+            const colorPickerSize = 80; // Atur ukuran tetap di sini
+
+            // Inisialisasi iro.js untuk textColor
+            const textColorPicker = new iro.ColorPicker(textColorPickerElement, {
+                width: colorPickerSize,
+                color: textColorInput.value, // Inisialisasi dengan warna awal
+            });
+
+            // Inisialisasi iro.js untuk backgroundColor
+            const backgroundColorPicker = new iro.ColorPicker(backgroundColorPickerElement, {
+                width: colorPickerSize,
+                color: backgroundColorInput.value, // Inisialisasi dengan warna awal
+            });
+
+            // Event listener untuk textColorPicker
+            textColorPicker.on('color:change', function(color) {
+                textColorInput.value = color.hexString;
+                textColorPreview.style.backgroundColor = color.hexString;
+                drawTextOnCanvas();
+            });
+
+            // Event listener untuk backgroundColorPicker
+            backgroundColorPicker.on('color:change', function(color) {
+                backgroundColorInput.value = color.hexString;
+                backgroundColorPreview.style.backgroundColor = color.hexString;
+                drawTextOnCanvas();
+            });
+
+            // Fungsi untuk menggambar teks ke canvas
+            function drawTextOnCanvas() {
+                const text = inputText.value;
+                const lineCount = parseInt(lineCountInput.value);
+                const padding = parseInt(paddingInput.value);
+
+                const textColor = textColorInput.value;
+                const backgroundColor = backgroundColorInput.value;
+                const fontWeight = isBold ? 'bold' : 'normal';
+
+                const fontSize = 72;
+                ctx.font = `${fontWeight} ${fontSize}px ${selectedFont}`;
+
+                // Ukur tinggi teks berdasarkan font yang dipilih
+                const textHeight = ctx.measureText('M').width; // Menggunakan 'M' sebagai perkiraan tinggi
+
+                const availableWidth = textCanvas.width - (2 * padding);
+                let charactersPerLine = Math.floor((text.length * availableWidth) / ctx.measureText(text).width);
+
+                // Koreksi untuk kasus satu baris
+                if (lineCount === 1) {
+                    charactersPerLine = text.length; // Izinkan semua karakter dalam satu baris
+                }
+                 if (charactersPerLine <= 0) {
+                    charactersPerLine = 1; // Hindari pembagian dengan nol
+                  }
+
+                const lines = splitTextIntoLines(text, charactersPerLine, lineCount);
+
+                ctx.fillStyle = backgroundColor;
+                ctx.fillRect(0, 0, textCanvas.width, textCanvas.height);
+
+                ctx.fillStyle = textColor;
+                ctx.textBaseline = 'top';
+                let lineHeight = textHeight * 1.2;
+                let startY = (textCanvas.height - (lines.length * lineHeight)) / 2;
+
+                for (let i = 0; i < lines.length; i++) {
+                    const line = lines[i];
+                    const x = padding;
+                    const y = startY + (i * lineHeight);
+                    ctx.fillText(line, x, y);
+                }
+
+                downloadButton.disabled = false;
+            }
+
+            // Event listeners
+            inputText.addEventListener('input', drawTextOnCanvas);
+
+            lineCountInput.addEventListener('input', function() {
+                lineCountValue.textContent = this.value;
+                drawTextOnCanvas();
+            });
+
+            paddingInput.addEventListener('input', function() {
+                paddingValue.textContent = this.value;
+                drawTextOnCanvas();
+            });
+
+            fontFamilyButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    let font = this.dataset.font;
+                    if (font === 'Arial') {
+                        // Memastikan Arial tersedia, jika tidak gunakan Helvetica
+                        selectedFont = 'Arial, Helvetica, sans-serif';
+                    } else if (font === 'Helvetica') {
+                        selectedFont = 'Helvetica, Arial, sans-serif';
+                    }
+                    else {
+                        selectedFont = font + ', sans-serif'; // Menambahkan ", sans-serif"
+                    }
+                    console.log("Font terpilih:", selectedFont);
+                    drawTextOnCanvas();
+                });
+            });
+
+            boldButton.addEventListener('click', function() {
+                isBold = !isBold;
+                boldButton.classList.toggle('active');
+                drawTextOnCanvas();
+            });
+
+            downloadButton.addEventListener('click', function() {
+                const dataURL = textCanvas.toDataURL('image/jpeg', 0.9);
+                const a = document.createElement('a');
+                a.href = dataURL;
+                a.download = 'teks_berita_hd.jpg';
+                a.click();
+            });
+
+            function splitTextIntoLines(text, charactersPerLine, lineCount) {
+                const words = text.split(' ');
+                const lines = [];
+                let currentLine = '';
+
+                for (let i = 0; i < words.length; i++) {
+                    const word = words[i];
+                    if (currentLine.length + word.length + 1 <= charactersPerLine) {
+                        currentLine += (currentLine.length > 0 ? ' ' : '') + word;
+                    } else {
+                        lines.push(currentLine);
+                        currentLine = word;
+                    }
+                }
+                lines.push(currentLine);
+
+                while (lines.length < lineCount) {
+                    lines.push('');
+                }
+                return lines.slice(0, lineCount);
+            }
+
+            // Inisialisasi
+            textColorPreview.style.backgroundColor = textColorInput.value;
+            backgroundColorPreview.style.backgroundColor = backgroundColorInput.value;
+            drawTextOnCanvas();
+        });
+    </script>
+</body>
+</html>
